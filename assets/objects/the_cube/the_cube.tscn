@@ -13,6 +13,7 @@ inertia = Vector3(1, 1, 1)
 [node name="cube_texture" type="MeshInstance3D" parent="."]
 visibility_range_begin_margin = 100.0
 visibility_range_end = 250.0
+visibility_range_end_margin = 100.0
 visibility_range_fade_mode = 1
 mesh = SubResource("BoxMesh_eogva")
 skeleton = NodePath("../..")
