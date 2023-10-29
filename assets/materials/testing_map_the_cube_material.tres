@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bhh1ltsx7qtiw"]
+
+[ext_resource type="Texture2D" uid="uid://dvxwysvrs5omk" path="res://assets/textures/prototype_textures/Green/texture_10.png" id="1_3p4ht"]
+
+[resource]
+albedo_texture = ExtResource("1_3p4ht")
+ao_light_affect = 1.0
+uv1_scale = Vector3(0.195, 0.195, 0.195)
+uv1_triplanar = true
+distance_fade_max_distance = 0.0
