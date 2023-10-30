@@ -1,0 +1,166 @@
+[gd_scene load_steps=7 format=3 uid="uid://dder28jd6w58d"]
+
+[ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_i842p"]
+[ext_resource type="StyleBox" uid="uid://gjlm2ta03o8t" path="res://assets/materials/main_menu_learn_panel.tres" id="2_bhgh8"]
+[ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="2_myf7p"]
+[ext_resource type="FontFile" uid="uid://cuig6gwhj48ik" path="res://assets/font/lexend/Lexend-Bold.ttf" id="2_qi2qc"]
+[ext_resource type="StyleBox" uid="uid://dx2a4w1ooukaw" path="res://assets/materials/main_menu_simulate_panel.tres" id="4_lc2c1"]
+[ext_resource type="StyleBox" uid="uid://dsancdnccx3bk" path="res://assets/materials/main_menu_line_panel.tres" id="6_4sj8a"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i842p")
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+
+[node name="menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="body" type="Control" parent="menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="simulate_panel" type="Panel" parent="menu/body"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.167
+anchor_top = 0.178
+anchor_right = 0.837
+anchor_bottom = 0.83
+offset_left = -0.640015
+offset_top = -0.240005
+offset_right = 0.959961
+offset_bottom = -0.399963
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_lc2c1")
+
+[node name="simulate_text" type="Label" parent="menu/body/simulate_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.019
+anchor_top = 0.023
+anchor_right = 0.156
+anchor_bottom = 0.081
+offset_left = -0.472002
+offset_top = -0.192001
+offset_right = 0.071991
+offset_bottom = -0.0240021
+theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+theme_override_fonts/font = ExtResource("2_myf7p")
+theme_override_font_sizes/font_size = 30
+text = "Simulate
+"
+vertical_alignment = 1
+
+[node name="learn_panel" type="Panel" parent="menu/body/simulate_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.329
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.247925
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_bhgh8")
+
+[node name="learn_text" type="Label" parent="menu/body/simulate_panel/learn_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.023
+anchor_right = 0.233
+anchor_bottom = 0.08
+offset_left = -0.191904
+offset_top = -0.192001
+offset_right = -0.312042
+offset_bottom = 0.679996
+theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+theme_override_fonts/font = ExtResource("2_myf7p")
+theme_override_font_sizes/font_size = 30
+text = "Learn"
+vertical_alignment = 1
+
+[node name="header" type="Control" parent="menu"]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.052
+offset_bottom = -0.16
+grow_horizontal = 2
+
+[node name="title" type="Label" parent="menu/header"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 72.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_fonts/font = ExtResource("2_qi2qc")
+text = "VBlox"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="footer" type="Control" parent="menu"]
+layout_mode = 1
+anchor_top = 0.97
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.400024
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="line" type="Panel" parent="menu/footer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -17.0
+offset_right = -64.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("6_4sj8a")
+
+[node name="version" type="Label" parent="menu/footer"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -26.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_fonts/font = ExtResource("2_qi2qc")
+theme_override_font_sizes/font_size = 12
+text = "v 0.1"
+horizontal_alignment = 1
+vertical_alignment = 1

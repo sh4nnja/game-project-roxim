@@ -37,6 +37,40 @@
 extends Node
 
 # ******************************************************************************
+# USER INTERFACE THEME
+
+# Default user themes.
+var user_themes: Dictionary = {
+	# Can add new themes here via: user_themes["theme_name"] = [color_values]
+	# This is the default values. 
+	"dev_test": [
+		Color.html("FFFFFF"),                        # Background Color
+		Color.html("FFFFFF"),                        # Background Font Color
+		Color.html("FFFFFF"),                        # Learn Panel Color
+		Color.html("FFFFFF"),                        # Simulate Panel Color
+		Color.html("FFFFFF"),                        # Panel Font Color
+	],
+	
+	"Default Dark": [
+		Color.html("121212"),                        
+		Color.html("272727"),                        
+		Color.html("191919"),                        
+		Color.html("202020"),                        
+		Color.html("7f7f7f"),              
+	],
+	
+	"Default Light": [
+		Color.html("121212"),                        
+		Color.html("272727"),                        
+		Color.html("191919"),                        
+		Color.html("202020"),                        
+		Color.html("7f7f7f"),                
+	]
+}
+
+# ******************************************************************************
+
+# ******************************************************************************
 # FREE-CAMERA MOVEMENT CONFIGURATIONS
 
 # Camera movement multiplier.
@@ -52,16 +86,17 @@ var cam_clearance: Vector2 = Vector2(0.6, 500)
 
 # Camera movement keys.
 var cam_movement_keys: Dictionary = {   
-# The state that can only be overwritten is the 'keybind' value.          
-#   "camera_movement": [keybind,     state] 
-	"cam_up":          [KEY_Q,       false],
-	"cam_down":        [KEY_E,       false],
-	"cam_forward":     [KEY_W,       false],
-	"cam_backward":    [KEY_S,       false],
-	"cam_left":        [KEY_A,       false],
-	"cam_right":       [KEY_D,       false],
-	"cam_sprint":      [KEY_CTRL,    false],
-	"cam_crouch":      [KEY_ALT,     false]
+	# The state that can only be overwritten is the 'keybind' value.
+	# This is the default values.          
+	# "camera_movement": [keybind,     state] 
+	"cam_up":            [KEY_Q,       false],
+	"cam_down":          [KEY_E,       false],
+	"cam_forward":       [KEY_W,       false],
+	"cam_backward":      [KEY_S,       false],
+	"cam_left":          [KEY_A,       false],
+	"cam_right":         [KEY_D,       false],
+	"cam_sprint":        [KEY_CTRL,    false],
+	"cam_crouch":        [KEY_ALT,     false]
 }
 
 # ******************************************************************************

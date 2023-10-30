@@ -11,16 +11,37 @@ config_version=5
 [application]
 
 config/name="CAPSTONE - VBlox"
-run/main_scene="res://assets/scenes/testing_map/testing_map.tscn"
+run/main_scene="res://assets/scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
+boot_splash/bg_color=Color(0.0705882, 0.0705882, 0.0705882, 1)
+boot_splash/image="res://assets/dev/vblox_logo/logo_hero.png"
+boot_splash/fullsize=false
+boot_splash/minimum_display_time=2500
 
 [autoload]
 
 config="*res://assets/scripts/config.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=4
+window/size/borderless=true
+window/size/window_width_override=1024
+window/size/window_height_override=600
+window/vsync/vsync_mode=0
+
+[editor]
+
+naming/node_name_casing=2
+
+[physics]
+
+3d/run_on_separate_thread=true
+
 [rendering]
 
-renderer/rendering_method.mobile="gl_compatibility"
-anti_aliasing/quality/msaa_2d=1
-anti_aliasing/quality/msaa_3d=1
-anti_aliasing/quality/screen_space_aa=1
+occlusion_culling/bvh_build_quality=1
+renderer/rendering_method="mobile"
+environment/defaults/default_environment="res://assets/materials/testing_map_env.tres"

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cd86vkgynmcjm"]
+
+[ext_resource type="Environment" uid="uid://h8bnb2qacxo2" path="res://assets/materials/testing_map_env.tres" id="1_jmu0e"]
+[ext_resource type="BoxMesh" uid="uid://bwda3io5v3y3m" path="res://assets/materials/testing_map_platform_mesh.tres" id="2_6v705"]
+[ext_resource type="PackedScene" uid="uid://btwcn5425ye0f" path="res://assets/objects/floating_camera/camera.tscn" id="3_cpdo3"]
+[ext_resource type="PackedScene" uid="uid://kdxkrbwue8lb" path="res://assets/objects/the_cube/the_cube.tscn" id="4_8h61a"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_njmuf"]
+data = PackedVector3Array(-375, 0.5, 375, 375, 0.5, 375, -375, -0.5, 375, 375, 0.5, 375, 375, -0.5, 375, -375, -0.5, 375, 375, 0.5, -375, -375, 0.5, -375, 375, -0.5, -375, -375, 0.5, -375, -375, -0.5, -375, 375, -0.5, -375, 375, 0.5, 375, 375, 0.5, -375, 375, -0.5, 375, 375, 0.5, -375, 375, -0.5, -375, 375, -0.5, 375, -375, 0.5, -375, -375, 0.5, 375, -375, -0.5, -375, -375, 0.5, 375, -375, -0.5, 375, -375, -0.5, -375, 375, 0.5, 375, -375, 0.5, 375, 375, 0.5, -375, -375, 0.5, 375, -375, 0.5, -375, 375, 0.5, -375, -375, -0.5, 375, 375, -0.5, 375, -375, -0.5, -375, 375, -0.5, 375, 375, -0.5, -375, -375, -0.5, -375)
+
+[node name="virtual_environment" type="Node3D"]
+
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_jmu0e")
+
+[node name="light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.853448, 0.213772, -0.475319, -0.0316764, 0.931599, 0.362106, 0.520215, -0.293982, 0.801842, 0, 3.70621, 0)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.015
+shadow_opacity = 0.75
+shadow_blur = 2.0
+
+[node name="platform" type="StaticBody3D" parent="."]
+collision_mask = 0
+
+[node name="texture" type="MeshInstance3D" parent="platform"]
+mesh = ExtResource("2_6v705")
+
+[node name="shape" type="CollisionShape3D" parent="platform"]
+shape = SubResource("ConcavePolygonShape3D_njmuf")
+
+[node name="objects" type="Node3D" parent="."]
+
+[node name="camera" parent="objects" instance=ExtResource("3_cpdo3")]
+transform = Transform3D(0.747218, -0.259671, 0.611748, 0, 0.920505, 0.39073, -0.664578, -0.291961, 0.687818, 2.7663, 2.70493, 3.13174)
+cam_movement_enabled = true
+
+[node name="the_cube" parent="objects" instance=ExtResource("4_8h61a")]
+transform = Transform3D(0.976971, 0, 0.213371, 0, 1, 0, -0.213371, 0, 0.976971, 0, 1.02117, 0)
