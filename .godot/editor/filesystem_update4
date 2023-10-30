@@ -7,3 +7,5 @@ res://assets/scripts/config.gd
 res://assets/materials/testing_map_platform_material.tres
 res://assets/materials/testing_map_the_cube_material.tres
 res://assets/scripts/camera.gd
+res://assets/materials/main_menu_simulate_button.tres
+res://assets/materials/main_menu_simulate_button_dis.tres

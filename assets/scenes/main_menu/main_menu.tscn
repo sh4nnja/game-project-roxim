@@ -1,10 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://dder28jd6w58d"]
+[gd_scene load_steps=16 format=3 uid="uid://dder28jd6w58d"]
 
 [ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_i842p"]
 [ext_resource type="StyleBox" uid="uid://gjlm2ta03o8t" path="res://assets/materials/main_menu_learn_panel.tres" id="2_bhgh8"]
 [ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="2_myf7p"]
 [ext_resource type="FontFile" uid="uid://cuig6gwhj48ik" path="res://assets/font/lexend/Lexend-Bold.ttf" id="2_qi2qc"]
+[ext_resource type="FontFile" uid="uid://3qr0yqigfcse" path="res://assets/font/lexend/Lexend-Medium.ttf" id="3_gegsf"]
+[ext_resource type="StyleBox" uid="uid://c3ha5i26aa7i1" path="res://assets/materials/main_menu_simulate_button.tres" id="4_a02xw"]
 [ext_resource type="StyleBox" uid="uid://dx2a4w1ooukaw" path="res://assets/materials/main_menu_simulate_panel.tres" id="4_lc2c1"]
+[ext_resource type="StyleBox" uid="uid://cnlrxlfpkxh42" path="res://assets/materials/main_menu_simulate_button_hox.tres" id="5_7jko6"]
+[ext_resource type="StyleBox" uid="uid://5ihlhr2cphce" path="res://assets/materials/main_menu_simulate_button_dis.tres" id="5_m5gur"]
 [ext_resource type="StyleBox" uid="uid://dsancdnccx3bk" path="res://assets/materials/main_menu_line_panel.tres" id="6_4sj8a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onrxv"]
@@ -65,6 +69,32 @@ offset_bottom = -0.399963
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("4_lc2c1")
+
+[node name="simulate_button" type="Button" parent="menu/body/simulate_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.818
+anchor_right = 0.28
+anchor_bottom = 0.909
+offset_left = -0.400002
+offset_top = 0.127991
+offset_right = -0.640015
+offset_bottom = 1.06396
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.906493, 0.906493, 0.906493, 1)
+theme_override_colors/font_pressed_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.92549, 0.92549, 1)
+theme_override_colors/font_disabled_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_gegsf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("4_a02xw")
+theme_override_styles/hover = ExtResource("5_7jko6")
+theme_override_styles/pressed = ExtResource("5_m5gur")
+theme_override_styles/disabled = ExtResource("5_m5gur")
+theme_override_styles/focus = ExtResource("5_m5gur")
+text = "Create New Simulation"
 
 [node name="simulate_text" type="Label" parent="menu/body/simulate_panel"]
 layout_mode = 1
@@ -220,5 +250,6 @@ text = "v 0.1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="pressed" from="menu/body/simulate_panel/simulate_button" to="." method="_on_simulate_button_pressed"]
 [connection signal="pressed" from="menu/header/exit_button" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="menu/footer/theme_button" to="." method="_on_theme_button_pressed"]

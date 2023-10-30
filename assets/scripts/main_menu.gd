@@ -52,6 +52,7 @@ extends Control
 # Simulate interface.
 @onready var _sim_panel_res = preload("res://assets/materials/main_menu_simulate_panel.tres")
 @onready var _sim_panel_txt: Label = get_node("menu/body/simulate_panel/learn_panel/learn_text")
+@onready var _simulate_btn: Button = get_node("menu/body/simulate_panel/simulate_button")
 
 # Navigation interface.
 @onready var _exit_button = get_node("menu/header/exit_button")
@@ -73,6 +74,9 @@ func _ready() -> void:
 
 # Set interface theme logic.
 func _change_theme(_chosen_theme: int) -> void:
+	# Changes the text to the right theme.
+	_theme_button.text = config.user_themes.keys()[_chosen_theme]
+	
 	# Set theme on background interfaces.
 	_background.color = config.user_themes.values()[_chosen_theme][0]
 	_title.add_theme_color_override("font_color", config.user_themes.values()[_chosen_theme][1])
@@ -109,20 +113,29 @@ func _animate_panel() -> void:
 	var _duration: float = 0.5
 	_body.modulate = Color(1, 1, 1, 0)
 	_body.position = Vector2(0, 50)
+	
+	# Tween menu.
 	_anim_tween.tween_property(_body, "modulate", _final_color, 0.75).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	_anim_tween2.tween_property(_body, "position", _final_pos, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 
 # Signal from button to exit.
-func _on_exit_button_pressed():
+func _on_exit_button_pressed() -> void:
+	# Quit game. DUH.
 	get_tree().quit()
 
 # Signal from button to toggle themes.
-func _on_theme_button_pressed():
-	if _current_theme == 1:
-		_theme_button.text = "LIGHT"
-		_current_theme = 2
-		_change_theme(_current_theme)
-	else:
-		_theme_button.text = "DARK"
-		_current_theme = 1
-		_change_theme(_current_theme)
+func _on_theme_button_pressed() -> void:
+	# Cycle the themes. Allows for adding more themes without changing the code again and again.
+	_current_theme += 1
+	if _current_theme > config.user_themes.keys().size() - 1:
+		# Make sure not to toggle dev_test theme.
+		_current_theme = 1              
+	# Changes the theme and the text.
+	_change_theme(_current_theme)
+
+# Signal from button to go to simulation.
+func _on_simulate_button_pressed():
+	_simulate_btn.disabled = true
+	_simulate_btn.text = "Loading..."
+	await get_tree().create_timer(3).timeout
+	get_tree().change_scene_to_file("res://assets/scenes/virtual_environment_map/virtual_environment_map.tscn")

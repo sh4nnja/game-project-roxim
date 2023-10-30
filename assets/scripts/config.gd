@@ -37,13 +37,13 @@
 extends Node
 
 # ******************************************************************************
-# USER INTERFACE THEME
+# USER INTERFACE THEMES
 
 # Default user themes.
 var user_themes: Dictionary = {
 	# Can add new themes here via: user_themes["theme_name"] = [color_values]
 	# This is the default values. 
-	"dev_test": [
+	"example": [
 		Color.html("FFFFFF"),                        # Background Color
 		Color.html("FFFFFF"),                        # Background Font Color
 		Color.html("FFFFFF"),                        # Background Button Pressed Color
@@ -51,19 +51,23 @@ var user_themes: Dictionary = {
 		Color.html("FFFFFF"),                        # Simulate Panel Color
 		Color.html("FFFFFF"),                        # Learn Panel Color
 		Color.html("FFFFFF"),                        # Panel Font Color
+		Color.html("FFFFFF"),                        # Panel Button Pressed Color
+		Color.html("FFFFFF"),                        # Panel Button Hovered Color
 	],
 	
-	"Default Dark": [
+	"DARK": [
 		Color.html("121212"),                        
 		Color.html("272727"), 
 		Color.html("1c1c1c"),                       
-		Color.html("191919"),                                            
-		Color.html("191919"),                        
-		Color.html("202020"),                        
-		Color.html("7f7f7f"),              
+		Color.html("191919"),  
+		Color.html("202020"),                                          
+		Color.html("191919"),                           
+		Color.html("7f7f7f"),
+		Color.html("5c5c5c"),                        
+		Color.html("979797"),               
 	],
 	
-	"Default Light": [
+	"LIGHT": [
 		Color.html("e6e6e6"),                        
 		Color.html("d9d9d9"),      
 		Color.html("e1e1e1"),                       
@@ -73,8 +77,6 @@ var user_themes: Dictionary = {
 		Color.html("474747"),                
 	]
 }
-
-# ******************************************************************************
 
 # ******************************************************************************
 # FREE-CAMERA MOVEMENT CONFIGURATIONS
