@@ -4,3 +4,6 @@ res://assets/materials/main_menu_learn_panel.tres
 res://assets/materials/main_menu_simulate_panel.tres
 res://assets/scripts/main_menu.gd
 res://assets/scripts/config.gd
+res://assets/materials/testing_map_platform_material.tres
+res://assets/materials/testing_map_the_cube_material.tres
+res://assets/scripts/camera.gd

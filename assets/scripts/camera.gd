@@ -4,34 +4,34 @@
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
 # ******************************************************************************
-#  Copyright (c) 2023-present 12 ESTEMC-3 GROUP 6
-#  Aicelle Claro
-#  Shannja Ashley Malelang
-#  Monique Marcos
-#  Nica Shane Mijares
-#  Precious Nina Sarol
-#  *****************************************************************************
-#  MIT License
-#  Copyright (c) 2023 12 ESTEMC-3 GROUP 6
+# Copyright (c) 2023-present 12 ESTEMC-3 GROUP 6
+# Aicelle Claro
+# Shannja Ashley Malelang
+# Monique Marcos
+# Nica Shane Mijares
+# Precious Nina Sarol
+# ******************************************************************************
+# MIT License
+# Copyright (c) 2023 12 ESTEMC-3 GROUP 6
 #
-#  Permission is hereby granted, free of charge, to any person obtaining
-#  a copy of this software and associated documentation files (the
-#  "Software"), to deal in the Software without restriction, including
-#  without limitation the rights to use, copy, modify, merge, publish,
-#  distribute, sublicense, and/or sell copies of the Software, and to
-#  permit persons to whom the Software is furnished to do so, subject to
-#  the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
 #
-#  The above copyright notice and this permission notice shall be
-#  included in all copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
 #
-#  THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND,
-#  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-#  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-#  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-#  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-#  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-#  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+# THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ******************************************************************************
 
 extends Camera3D
@@ -48,6 +48,9 @@ var _dir: Vector3 = Vector3(0.0, 0.0, 0.0)
 # Mouse states.
 var _mouse_pos: Vector2 = Vector2(0.0, 0.0)
 var _total_pitch: float  = 0.0
+
+# ******************************************************************************
+# INPUT EVENTS
 
 # Mouse input logic.
 func _input(_event) -> void:
@@ -78,11 +81,17 @@ func _input(_event) -> void:
 			if _movement_key[0] == _event.keycode:
 				_movement_key[1] = _event.pressed
 
+# ******************************************************************************
+# PHYSICS and ITERATIONS
+
 # Updates camera free-look and camera movement every physics frame.
 func _physics_process(_delta) -> void:
 	if cam_movement_enabled:
 		_update_cam_free_look()
 		_update_cam_movement(_delta)
+
+# *****************************************************************************
+# CUSTOM METHODS AND SIGNALS
 
 # Camera free-look mechanic.
 func _update_cam_free_look() -> void:

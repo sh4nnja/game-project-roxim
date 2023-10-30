@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dder28jd6w58d"]
+[gd_scene load_steps=12 format=3 uid="uid://dder28jd6w58d"]
 
 [ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_i842p"]
 [ext_resource type="StyleBox" uid="uid://gjlm2ta03o8t" path="res://assets/materials/main_menu_learn_panel.tres" id="2_bhgh8"]
@@ -6,6 +6,16 @@
 [ext_resource type="FontFile" uid="uid://cuig6gwhj48ik" path="res://assets/font/lexend/Lexend-Bold.ttf" id="2_qi2qc"]
 [ext_resource type="StyleBox" uid="uid://dx2a4w1ooukaw" path="res://assets/materials/main_menu_simulate_panel.tres" id="4_lc2c1"]
 [ext_resource type="StyleBox" uid="uid://dsancdnccx3bk" path="res://assets/materials/main_menu_line_panel.tres" id="6_4sj8a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onrxv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bpbfw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_olumk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qkgjl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cwdx"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -122,6 +132,29 @@ text = "VBlox"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="exit_button" type="Button" parent="menu/header"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.975
+anchor_top = 0.286
+anchor_right = 0.987
+anchor_bottom = 0.786
+offset_top = -0.0160007
+offset_right = 0.959961
+offset_bottom = -0.0159988
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_colors/font_pressed_color = Color(0.109804, 0.109804, 0.109804, 1)
+theme_override_colors/font_hover_color = Color(0.217101, 0.217101, 0.217101, 1)
+theme_override_fonts/font = ExtResource("2_qi2qc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onrxv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bpbfw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_olumk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qkgjl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1cwdx")
+text = "x"
+flat = true
+
 [node name="footer" type="Control" parent="menu"]
 layout_mode = 1
 anchor_top = 0.97
@@ -131,13 +164,35 @@ offset_top = 0.400024
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="theme_button" type="Button" parent="menu/footer"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -28.0
+offset_right = 80.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_colors/font_pressed_color = Color(0.109804, 0.109804, 0.109804, 1)
+theme_override_colors/font_hover_color = Color(0.217101, 0.217101, 0.217101, 1)
+theme_override_fonts/font = ExtResource("2_qi2qc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onrxv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bpbfw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_olumk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qkgjl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1cwdx")
+text = "DARK"
+flat = true
+
 [node name="line" type="Panel" parent="menu/footer"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
+offset_left = 80.0
 offset_top = -17.0
 offset_right = -64.0
 offset_bottom = -16.0
@@ -164,3 +219,6 @@ theme_override_font_sizes/font_size = 12
 text = "v 0.1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="menu/header/exit_button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="menu/footer/theme_button" to="." method="_on_theme_button_pressed"]
