@@ -1,11 +1,11 @@
-Button
 Control
+Node3D
+Button
 Label
 TextureRect
 Panel
 Container
 ColorRect
-Node3D
 RigidBody3D
 CollisionShape3D
 StaticBody3D

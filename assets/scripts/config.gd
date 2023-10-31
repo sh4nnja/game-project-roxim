@@ -37,7 +37,24 @@
 extends Node
 
 # ******************************************************************************
+# RULES | DOCUMENTATION AND CODE
+
+# Comments // The comments describes the code BELOW it. Not above it.
+# Comments // Multi-Line isn't supported yet :>
+
+# Naming // Variables starts first with what they are for.
+
+# Subroutines // Don't use the word "initiate", "start"... Especially when startLoading,
+# Subroutines // Just use "load", "check"... 
+# Subroutines // For functions, verb must be the first word. It must whole.
+
+# Signals // Start with the word "on".
+
+# ******************************************************************************
 # USER INTERFACE THEMES
+
+# Current theme of the interface.
+var current_theme: int = 1
 
 # Default user themes.
 var user_themes: Dictionary = {

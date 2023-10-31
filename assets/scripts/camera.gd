@@ -55,20 +55,24 @@ var _total_pitch: float  = 0.0
 # Mouse input logic.
 func _input(_event) -> void:
 	# Camera free-lock catalyst and movement speed limiter.
-	if _event is InputEventMouseButton and cam_movement_enabled:
-		match _event.button_index:
-			MOUSE_BUTTON_RIGHT: 
-				# Only allows rotation if right mouse button is pressed.
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if _event.pressed else Input.MOUSE_MODE_VISIBLE)
+	if _event is InputEventMouseButton:
+		if cam_movement_enabled:
+			match _event.button_index:
+				MOUSE_BUTTON_RIGHT: 
+					# Only allows rotation if right mouse button is pressed.
+					Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if _event.pressed else Input.MOUSE_MODE_VISIBLE)
+				
+				MOUSE_BUTTON_WHEEL_UP: 
+					# Increases max velocity when scroll wheel is moved upwards.
+					_vel_mult = clamp(_vel_mult * config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
+				
+				MOUSE_BUTTON_WHEEL_DOWN: 
+					# Decereases max velocity when scroll wheel is moved downwards.
+					_vel_mult = clamp(_vel_mult / config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
 			
-			MOUSE_BUTTON_WHEEL_UP: 
-				# Increases max velocity when scroll wheel is moved upwards.
-				_vel_mult = clamp(_vel_mult * config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
-			
-			MOUSE_BUTTON_WHEEL_DOWN: 
-				# Decereases max velocity when scroll wheel is moved downwards.
-				_vel_mult = clamp(_vel_mult / config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
-	
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		
 	# Camera free-look snippet.
 	if _event is InputEventMouseMotion:
 		_mouse_pos = _event.relative
@@ -128,8 +132,11 @@ func _update_cam_movement(fDelta: float) -> void:
 	
 	# Compute modifiers' speed multiplier
 	var _speed: float = 1.0
-	if config.cam_movement_keys.values()[6][1]: _speed *= config.cam_sprint_mult
-	if config.cam_movement_keys.values()[7][1]: _speed *= config.cam_crouch_mult
+	if config.cam_movement_keys.values()[6][1]: 
+		_speed *= config.cam_sprint_mult
+	
+	if config.cam_movement_keys.values()[7][1]: 
+		_speed *= config.cam_crouch_mult
 	
 	# Checks if we should bother translating the camera
 	if _dir == Vector3.ZERO and _offset.length_squared() > _vel.length_squared():
