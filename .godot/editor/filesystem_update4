@@ -19,3 +19,8 @@ res://assets/materials/simulation/testing_map_env.tres
 res://assets/scenes/simulation_map/simulation_map.tscn
 res://assets/materials/simulation/simulation_map_env.tres
 res://assets/objects/camera/camera.tscn
+res://assets/objects/misc/vblox_logo/vblox_logo.tscn
+res://assets/scripts/interactables/interactables.gd
+res://assets/scripts/interactables/misc/the_cube.gd
+res://assets/scripts/simulation/interactor.gd
+res://assets/scripts/simulation/simulation_interface.gd

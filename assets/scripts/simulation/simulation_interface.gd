@@ -48,6 +48,7 @@ extends Control
 
 # Pause manager.
 var _is_paused: bool = false
+
 # ******************************************************************************
 # INITIATION
 

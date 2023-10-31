@@ -1,12 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://573dhpbs8qay"]
+[gd_scene load_steps=4 format=3 uid="uid://573dhpbs8qay"]
 
 [ext_resource type="ArrayMesh" uid="uid://dly7vafcmu2ro" path="res://assets/dev/vblox_logo/logo.obj" id="1_qvchk"]
-[ext_resource type="Texture2D" uid="uid://b5n45qnj4ci1c" path="res://assets/dev/vblox_logo/logo_texture.png" id="1_ujvok"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqnvg"]
-albedo_texture = ExtResource("1_ujvok")
-texture_filter = 2
-texture_repeat = false
+[ext_resource type="Material" uid="uid://b6dsjhtgehls6" path="res://assets/materials/interactables/misc/vblox_logo_material.tres" id="1_xvu3l"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vuldm"]
 points = PackedVector3Array(0.14647, 0.156255, 0.259077, -0.353816, 0, -0.353816, -0.353816, 0, 0.353816, 0.353816, 0, -0.353816, 0.353816, 0, 0.353816, -0.119029, 0.136881, -0.297514, -0.380878, 0.0654972, 0.380878, 0.380878, 0.0654972, -0.380878, -0.227865, 0.15334, 0.0433621, -0.380878, 0.0654972, -0.380878, 0.380878, 0.0654972, 0.380878, 0.202915, 0.1563, -0.169051, 0.122767, 0.155501, 0.256601, 0.199623, 0.15502, -0.0886421, -0.172216, 0.1312, -0.247584)
@@ -15,7 +10,7 @@ points = PackedVector3Array(0.14647, 0.156255, 0.259077, -0.353816, 0, -0.353816
 inertia = Vector3(1, 1, 1)
 
 [node name="vblox_texture" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_mqnvg")
+material_override = ExtResource("1_xvu3l")
 visibility_range_begin_margin = 100.0
 visibility_range_end = 250.0
 visibility_range_end_margin = 100.0

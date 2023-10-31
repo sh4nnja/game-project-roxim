@@ -53,8 +53,14 @@ extends Node
 # ******************************************************************************
 # USER INTERFACE THEMES
 
+# Themes.
+enum {
+	EXAMPLE = 0,               # Not included in the cycle. Just for example.
+	DARK = 1, 
+	LIGHT = 2
+}
 # Current theme of the interface.
-var current_theme: int = 1
+var current_theme: int = DARK
 
 # Default user themes.
 var user_themes: Dictionary = {

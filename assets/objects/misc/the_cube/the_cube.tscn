@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://kdxkrbwue8lb"]
+[gd_scene load_steps=5 format=3 uid="uid://cu8da702e8ti8"]
 
-[ext_resource type="Material" uid="uid://c54p3ymi4tjhb" path="res://assets/materials/interactables/interactable_selected.tres" id="1_usimk"]
-[ext_resource type="Material" uid="uid://bhh1ltsx7qtiw" path="res://assets/materials/interactables/misc/testing_map_the_cube_material.tres" id="2_6m3nm"]
+[ext_resource type="Material" uid="uid://bhh1ltsx7qtiw" path="res://assets/materials/interactables/misc/the_cube_material.tres" id="1_gvi14"]
+[ext_resource type="Script" path="res://assets/scripts/interactables/misc/the_cube.gd" id="1_swgyx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_eogva"]
-material = ExtResource("2_6m3nm")
+material = ExtResource("1_gvi14")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_20two"]
 
 [node name="the_cube" type="RigidBody3D"]
 inertia = Vector3(1, 1, 1)
+script = ExtResource("1_swgyx")
 
 [node name="cube_texture" type="MeshInstance3D" parent="."]
-material_overlay = ExtResource("1_usimk")
 visibility_range_begin_margin = 100.0
 visibility_range_end = 250.0
 visibility_range_end_margin = 100.0

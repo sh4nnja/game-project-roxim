@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bar845jxagtue"]
 
-[ext_resource type="Script" path="res://assets/scripts/main_menu_interface.gd" id="1_paa5f"]
+[ext_resource type="Script" path="res://assets/scripts/main_menu/main_menu_interface.gd" id="1_t7mf3"]
 [ext_resource type="StyleBox" uid="uid://dx2a4w1ooukaw" path="res://assets/materials/main_menu/main_menu_simulate_panel.tres" id="2_3wmeo"]
 [ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="2_myf7p"]
 [ext_resource type="FontFile" uid="uid://cuig6gwhj48ik" path="res://assets/font/lexend/Lexend-Bold.ttf" id="2_qi2qc"]
@@ -28,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_paa5f")
+script = ExtResource("1_t7mf3")
 
 [node name="background" type="ColorRect" parent="."]
 layout_mode = 1

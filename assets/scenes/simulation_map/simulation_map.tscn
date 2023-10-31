@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://cd86vkgynmcjm"]
 
-[ext_resource type="Script" path="res://assets/scripts/simulation_interface.gd" id="1_ss05d"]
+[ext_resource type="Script" path="res://assets/scripts/simulation/simulation_interface.gd" id="1_5eupj"]
 [ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="2_uuw30"]
 [ext_resource type="BoxMesh" uid="uid://bwda3io5v3y3m" path="res://assets/materials/simulation/simulation_map_platform_mesh.tres" id="3_yn1j6"]
 [ext_resource type="PackedScene" uid="uid://btwcn5425ye0f" path="res://assets/objects/camera/camera.tscn" id="4_y7ocw"]
-[ext_resource type="PackedScene" uid="uid://kdxkrbwue8lb" path="res://assets/objects/misc/the_cube/the_cube.tscn" id="5_jvy4d"]
+[ext_resource type="PackedScene" uid="uid://cu8da702e8ti8" path="res://assets/objects/misc/the_cube/the_cube.tscn" id="5_jvy4d"]
 [ext_resource type="PackedScene" uid="uid://573dhpbs8qay" path="res://assets/objects/misc/vblox_logo/vblox_logo.tscn" id="6_ind2l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_784js"]
@@ -52,7 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ss05d")
+script = ExtResource("1_5eupj")
 
 [node name="background" type="ColorRect" parent="user_interface"]
 layout_mode = 1

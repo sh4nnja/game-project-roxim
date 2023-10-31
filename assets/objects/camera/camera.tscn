@@ -1,7 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://btwcn5425ye0f"]
+[gd_scene load_steps=3 format=3 uid="uid://btwcn5425ye0f"]
 
-[ext_resource type="Script" path="res://assets/scripts/camera.gd" id="1_nk0tm"]
+[ext_resource type="Script" path="res://assets/scripts/simulation/camera.gd" id="1_l5ruq"]
+[ext_resource type="Script" path="res://assets/scripts/simulation/interactor.gd" id="2_cdyev"]
 
 [node name="camera" type="Camera3D"]
 current = true
-script = ExtResource("1_nk0tm")
+script = ExtResource("1_l5ruq")
+
+[node name="interactor" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -5)
+script = ExtResource("2_cdyev")
