@@ -94,7 +94,7 @@ theme_override_styles/hover = ExtResource("5_7jko6")
 theme_override_styles/pressed = ExtResource("5_m5gur")
 theme_override_styles/disabled = ExtResource("5_m5gur")
 theme_override_styles/focus = ExtResource("5_m5gur")
-text = "Create New Simulation"
+text = "Create & Simulate!"
 
 [node name="simulate_text" type="Label" parent="user_interface/body/simulate_panel"]
 layout_mode = 1
