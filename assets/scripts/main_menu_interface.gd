@@ -43,14 +43,14 @@ extends Control
 @onready var _background: ColorRect = get_node("background")
 @onready var _title: Label = get_node("user_interface/header/title")
 @onready var _version: Label = get_node("user_interface/footer/version")
-@onready var _line_panel_res = preload("res://assets/materials/main_menu_line_panel.tres")
+@onready var _line_panel_res = preload("res://assets/materials/main_menu/main_menu_line_panel.tres")
 
 # Learn interface.
-@onready var _learn_panel_res = preload("res://assets/materials/main_menu_learn_panel.tres")
+@onready var _learn_panel_res = preload("res://assets/materials/main_menu/main_menu_learn_panel.tres")
 @onready var _learn_panel_txt: Label = get_node("user_interface/body/simulate_panel/learn_panel/learn_text")
 
 # Simulate interface.
-@onready var _sim_panel_res = preload("res://assets/materials/main_menu_simulate_panel.tres")
+@onready var _sim_panel_res = preload("res://assets/materials/main_menu/main_menu_simulate_panel.tres")
 @onready var _sim_panel_txt: Label = get_node("user_interface/body/simulate_panel/learn_panel/learn_text")
 @onready var _simulate_btn: Button = get_node("user_interface/body/simulate_panel/simulate_button")
 
@@ -149,4 +149,4 @@ func _on_simulate_button_pressed():
 	await get_tree().create_timer(3).timeout
 	
 	# Change the scene.
-	get_tree().change_scene_to_file("res://assets/scenes/virtual_environment_map/virtual_environment_map.tscn")
+	get_tree().change_scene_to_file("res://assets/scenes/simulation_map/simulation_map.tscn")

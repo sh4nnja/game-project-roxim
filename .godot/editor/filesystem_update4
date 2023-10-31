@@ -12,3 +12,10 @@ res://assets/materials/main_menu_simulate_button_dis.tres
 res://assets/materials/main_menu_simulate_button.tres
 res://assets/scripts/config.gd
 res://assets/scripts/camera.gd
+res://assets/objects/vblox_logo/vblox_logo.tscn
+res://assets/objects/misc/the_cube/the_cube.tscn
+res://assets/materials/testing_map/testing_map_env.tres
+res://assets/materials/simulation/testing_map_env.tres
+res://assets/scenes/simulation_map/simulation_map.tscn
+res://assets/materials/simulation/simulation_map_env.tres
+res://assets/objects/camera/camera.tscn
