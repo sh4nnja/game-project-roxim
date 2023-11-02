@@ -43,16 +43,22 @@ extends Control
 @onready var _background: ColorRect = get_node("background")
 @onready var _title: Label = get_node("user_interface/header/title")
 @onready var _version: Label = get_node("user_interface/footer/version")
-@onready var _line_panel_res = preload("res://assets/materials/main_menu/main_menu_line_panel.tres")
+@onready var _line_panel_res: Resource = preload("res://assets/materials/main_menu/main_menu_line_panel.tres")
 
 # Learn interface.
-@onready var _learn_panel_res = preload("res://assets/materials/main_menu/main_menu_learn_panel.tres")
+@onready var _learn_panel_res: Resource = preload("res://assets/materials/main_menu/main_menu_learn_panel.tres")
 @onready var _learn_panel_txt: Label = get_node("user_interface/body/simulate_panel/learn_panel/learn_text")
+@onready var _learn_panel_desc: Label = get_node("user_interface/body/simulate_panel/learn_panel/learn_desc_text")
 
 # Simulate interface.
-@onready var _sim_panel_res = preload("res://assets/materials/main_menu/main_menu_simulate_panel.tres")
-@onready var _sim_panel_txt: Label = get_node("user_interface/body/simulate_panel/learn_panel/learn_text")
+@onready var _sim_panel_res: Resource = preload("res://assets/materials/main_menu/main_menu_simulate_panel.tres")
+@onready var _sim_panel_txt: Label = get_node("user_interface/body/simulate_panel/simulate_text")
+@onready var _sim_panel_desc: Label = get_node("user_interface/body/simulate_panel/simulate_desc_text")
 @onready var _simulate_btn: Button = get_node("user_interface/body/simulate_panel/simulate_button")
+
+# Info and credit interface.
+@onready var _about_panel_text: Label = get_node("user_interface/body/simulate_panel/about_panel/about_text")
+
 
 # Navigation interface.
 @onready var _exit_button = get_node("user_interface/header/exit_button")
@@ -89,7 +95,10 @@ func _change_theme() -> void:
 	
 	# Set theme on panel texts.
 	_sim_panel_txt.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	_sim_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
 	_learn_panel_txt.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	_learn_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	_about_panel_text.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
 	
 	# Set theme on navigation buttons.
 	_exit_button.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][1])
