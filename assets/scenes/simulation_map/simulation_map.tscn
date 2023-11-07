@@ -97,7 +97,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_ia8p3")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_t0ap7")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_4a42o")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_a4wq3")
-text = "Menu"
+text = "Back To Menu"
 flat = true
 alignment = 2
 

@@ -2,4 +2,3 @@ res://assets/materials/simulation/simulation_map_env.tres
 res://assets/scenes/main_menu/main_menu.tscn
 res://assets/materials/interactables/misc/vblox_logo_material.tres
 res://assets/scenes/simulation_map/simulation_map.tscn
-res://assets/scripts/main_menu/main_menu_interface.gd

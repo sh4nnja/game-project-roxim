@@ -96,9 +96,12 @@ func _change_theme() -> void:
 	# Set theme on panel texts.
 	_sim_panel_txt.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
 	_sim_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	
 	_learn_panel_txt.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
 	_learn_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	
 	_about_panel_text.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	
 	
 	# Set theme on navigation buttons.
 	_exit_button.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][1])

@@ -112,7 +112,7 @@ func _update_cam_free_look() -> void:
 		
 		# Rotate camera.
 		rotate_y(deg_to_rad(-_yaw))
-		rotate_object_local(Vector3(1,0,0), deg_to_rad(-_pitch))
+		rotate_object_local(Vector3.RIGHT, deg_to_rad(-_pitch))
 
 # Camera movement mechanic.
 func _update_cam_movement(fDelta: float) -> void:
