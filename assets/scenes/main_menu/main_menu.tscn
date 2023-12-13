@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bar845jxagtue"]
+[gd_scene load_steps=22 format=3 uid="uid://bar845jxagtue"]
 
 [ext_resource type="Script" path="res://assets/scripts/main_menu/main_menu_interface.gd" id="1_t7mf3"]
 [ext_resource type="StyleBox" uid="uid://dx2a4w1ooukaw" path="res://assets/materials/main_menu/main_menu_simulate_panel.tres" id="2_3wmeo"]
@@ -8,8 +8,19 @@
 [ext_resource type="StyleBox" uid="uid://c3ha5i26aa7i1" path="res://assets/materials/main_menu/main_menu_simulate_button.tres" id="4_7xo11"]
 [ext_resource type="StyleBox" uid="uid://cnlrxlfpkxh42" path="res://assets/materials/main_menu/main_menu_simulate_button_hox.tres" id="5_tvr58"]
 [ext_resource type="StyleBox" uid="uid://5ihlhr2cphce" path="res://assets/materials/main_menu/main_menu_simulate_button_dis.tres" id="6_wa3ml"]
+[ext_resource type="Texture2D" uid="uid://b3xosaldo3mnm" path="res://assets/textures/icon_textures/button_icon.png" id="8_6lwhq"]
 [ext_resource type="StyleBox" uid="uid://gjlm2ta03o8t" path="res://assets/materials/main_menu/main_menu_learn_panel.tres" id="8_af3bp"]
 [ext_resource type="StyleBox" uid="uid://dsancdnccx3bk" path="res://assets/materials/main_menu/main_menu_line_panel.tres" id="10_fftd5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x6fc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r8ch5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tivlv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wug8c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynao1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onrxv"]
 
@@ -123,10 +134,64 @@ text = "Create & Simulate!"
 
 [node name="about_panel" type="Control" parent="user_interface/body/simulate_panel"]
 layout_mode = 1
-anchors_preset = 0
-offset_right = 424.0
+anchor_right = 0.329
+offset_right = 0.247955
 offset_bottom = 704.0
 mouse_filter = 2
+
+[node name="about_the_team" type="Button" parent="user_interface/body/simulate_panel/about_panel"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 40.0
+offset_top = 616.0
+offset_right = 384.0
+offset_bottom = 648.0
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.12549, 0.705882, 0.796078, 1)
+theme_override_colors/font_pressed_color = Color(0.0784314, 0.517647, 0.588235, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.807843, 0.909804, 1)
+theme_override_colors/font_focus_color = Color(0.0784314, 0.517647, 0.588235, 1)
+theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
+theme_override_fonts/font = ExtResource("3_gegsf")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7x6fc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_r8ch5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tivlv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wug8c")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ynao1")
+text = "Know the project team"
+icon = ExtResource("8_6lwhq")
+flat = true
+alignment = 0
+icon_alignment = 2
+
+[node name="about_github" type="Button" parent="user_interface/body/simulate_panel/about_panel"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 40.0
+offset_top = 552.0
+offset_right = 384.0
+offset_bottom = 584.0
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.12549, 0.705882, 0.796078, 1)
+theme_override_colors/font_pressed_color = Color(0.0784314, 0.517647, 0.588235, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.807843, 0.909804, 1)
+theme_override_colors/font_focus_color = Color(0.0784314, 0.517647, 0.588235, 1)
+theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
+theme_override_fonts/font = ExtResource("3_gegsf")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7x6fc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_r8ch5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tivlv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wug8c")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ynao1")
+text = "Source code on Github "
+icon = ExtResource("8_6lwhq")
+flat = true
+alignment = 0
+icon_alignment = 2
 
 [node name="about_text" type="Label" parent="user_interface/body/simulate_panel/about_panel"]
 layout_mode = 1
@@ -140,6 +205,21 @@ theme_override_fonts/font = ExtResource("2_myf7p")
 theme_override_font_sizes/font_size = 45
 text = "About Us"
 vertical_alignment = 1
+
+[node name="about_desc_text" type="Label" parent="user_interface/body/simulate_panel/about_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 32.0
+offset_top = 448.0
+offset_right = -32.0
+offset_bottom = 560.0
+theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+theme_override_fonts/font = ExtResource("2_myf7p")
+theme_override_font_sizes/font_size = 25
+text = "Know more about our project via clicking these links!"
+autowrap_mode = 2
+clip_text = true
 
 [node name="learn_panel" type="Panel" parent="user_interface/body/simulate_panel"]
 layout_mode = 1
@@ -290,5 +370,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="user_interface/body/simulate_panel/simulate_button" to="." method="_on_simulate_button_pressed"]
+[connection signal="pressed" from="user_interface/body/simulate_panel/about_panel/about_the_team" to="." method="_on_about_the_team_pressed"]
+[connection signal="pressed" from="user_interface/body/simulate_panel/about_panel/about_github" to="." method="_on_about_github_pressed"]
 [connection signal="pressed" from="user_interface/header/exit_button" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="user_interface/footer/theme_button" to="." method="_on_theme_button_pressed"]

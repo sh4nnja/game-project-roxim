@@ -37,7 +37,7 @@
 extends RigidBody3D
 class_name Interactables
 
-# This class will be the root class of all 'interactables' in the simulation.
+# This class will be the base class of all 'interactables' in the simulation mechanics.
 # This script will be the base script of all instances of 'interactables'.
 #
 # For example:
@@ -50,7 +50,17 @@ class_name Interactables
 # Make sure that you don't DUPLICATE and REPEAT your codes across the project. PLEASE.
 # Use classes for the same script each objects you have.
 
+@onready var _interactable_selected_res: Resource = preload("res://assets/materials/interactables/interactable_selected.tres")
+
+# ******************************************************************************
+# PHYSICS
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
-
+func apply_selected_texture(apply: bool) -> void:
+	for child_node in get_children():
+		if child_node is MeshInstance3D:
+			if apply:
+				child_node.material_overlay = _interactable_selected_res
+			else:
+				child_node.material_overlay = null

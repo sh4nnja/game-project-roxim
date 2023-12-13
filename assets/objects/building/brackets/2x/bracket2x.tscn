@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://t0uckwn1kwkd"]
+
+[ext_resource type="Script" path="res://assets/scripts/simulation/brackets/bracket2x.gd" id="1_gk8p7"]
+[ext_resource type="Texture2D" uid="uid://bcalgxt2i401x" path="res://assets/objects/building/brackets/2x/texture.png" id="1_j2qxm"]
+[ext_resource type="ArrayMesh" uid="uid://dusgwmlh6iymp" path="res://assets/objects/building/brackets/2x/bracket2x.obj" id="2_if8dp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g16s6"]
+albedo_texture = ExtResource("1_j2qxm")
+texture_filter = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_srk55"]
+margin = 1.0
+size = Vector3(0.626466, 0.126118, 0.249688)
+
+[node name="bracket2x" type="RigidBody3D"]
+mass = 0.5
+continuous_cd = true
+script = ExtResource("1_gk8p7")
+
+[node name="brack_texture" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_g16s6")
+mesh = ExtResource("2_if8dp")
+
+[node name="brack_shape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_srk55")

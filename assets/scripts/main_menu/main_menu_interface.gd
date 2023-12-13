@@ -36,6 +36,9 @@
 
 extends Control
 
+# Simulation map scene file location.
+var _sim_scn_file: String = "res://assets/scenes/simulation_map/simulation_map.tscn"
+
 # Main interfaces.
 @onready var _body: Control = get_node("user_interface/body")
 
@@ -58,7 +61,7 @@ extends Control
 
 # Info and credit interface.
 @onready var _about_panel_text: Label = get_node("user_interface/body/simulate_panel/about_panel/about_text")
-
+@onready var _about_panel_desc: Label = get_node("user_interface/body/simulate_panel/about_panel/about_desc_text")
 
 # Navigation interface.
 @onready var _exit_button = get_node("user_interface/header/exit_button")
@@ -101,7 +104,7 @@ func _change_theme() -> void:
 	_learn_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
 	
 	_about_panel_text.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
-	
+	_about_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
 	
 	# Set theme on navigation buttons.
 	_exit_button.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][1])
@@ -161,4 +164,13 @@ func _on_simulate_button_pressed():
 	await get_tree().create_timer(3).timeout
 	
 	# Change the scene.
-	get_tree().change_scene_to_file("res://assets/scenes/simulation_map/simulation_map.tscn")
+	get_tree().change_scene_to_file(_sim_scn_file)
+
+# Signal from button to open a website of the source code.
+func _on_about_github_pressed():
+	# Use "OS.shell_open()" to open website.
+	OS.shell_open("https://github.com/sh4nnja/school-project-CAPSTONE-VBlox")
+
+# Signal from button to open a website of the team portfolio.
+func _on_about_the_team_pressed():
+	pass # Replace with function body.

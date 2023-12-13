@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://cd86vkgynmcjm"]
+[gd_scene load_steps=18 format=3 uid="uid://cd86vkgynmcjm"]
 
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_interface.gd" id="1_5eupj"]
 [ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="2_uuw30"]
+[ext_resource type="FontFile" uid="uid://b641eb41yeh4g" path="res://assets/font/lexend/Lexend-ExtraLight.ttf" id="2_w6nuo"]
 [ext_resource type="BoxMesh" uid="uid://bwda3io5v3y3m" path="res://assets/materials/simulation/simulation_map_platform_mesh.tres" id="3_yn1j6"]
 [ext_resource type="PackedScene" uid="uid://btwcn5425ye0f" path="res://assets/objects/camera/camera.tscn" id="4_y7ocw"]
 [ext_resource type="PackedScene" uid="uid://cu8da702e8ti8" path="res://assets/objects/misc/the_cube/the_cube.tscn" id="5_jvy4d"]
 [ext_resource type="PackedScene" uid="uid://573dhpbs8qay" path="res://assets/objects/misc/vblox_logo/vblox_logo.tscn" id="6_ind2l"]
+[ext_resource type="PackedScene" uid="uid://t0uckwn1kwkd" path="res://assets/objects/building/brackets/2x/bracket2x.tscn" id="7_t1msn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_784js"]
 
@@ -53,6 +55,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5eupj")
+
+[node name="debug_text" type="Label" parent="user_interface"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_w6nuo")
+theme_override_font_sizes/font_size = 25
+text = "Debug Text"
 
 [node name="background" type="ColorRect" parent="user_interface"]
 layout_mode = 1
@@ -130,6 +147,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="the_cube" parent="objects" instance=ExtResource("5_jvy4d")]
 transform = Transform3D(0.846082, -0.5, 0.184785, 0.488485, 0.866025, 0.106685, -0.213371, 0, 0.976971, 0, 1.02117, 0)
+
+[node name="bracket2x" parent="objects" instance=ExtResource("7_t1msn")]
+transform = Transform3D(1, 0, 0, 0, 0.927771, -0.37315, 0, 0.37315, 0.927771, 0, 5.89077, 0)
+
+[node name="bracket2x2" parent="objects" instance=ExtResource("7_t1msn")]
+transform = Transform3D(1, 0, 0, 0, 0.927771, -0.37315, 0, 0.37315, 0.927771, 0, 8.23986, 0)
+
+[node name="bracket2x3" parent="objects" instance=ExtResource("7_t1msn")]
+transform = Transform3D(0.281219, 0.89033, -0.358091, -0.959643, 0.260907, -0.104937, 0, 0.37315, 0.927771, 0, 11.0194, 0)
+
+[node name="bracket2x4" parent="objects" instance=ExtResource("7_t1msn")]
+transform = Transform3D(0.281219, 0.89033, -0.358091, -0.959643, 0.260907, -0.104937, 0, 0.37315, 0.927771, 0, 11.0194, 0)
 
 [node name="vblox_logo" parent="objects" instance=ExtResource("6_ind2l")]
 transform = Transform3D(0.539705, 0.258819, -0.801081, -0.144614, 0.965926, 0.214649, 0.82934, 0, 0.558744, -0.0654791, 2.05226, 0.112715)

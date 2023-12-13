@@ -56,11 +56,12 @@ extends Node
 # Themes.
 enum {
 	EXAMPLE = 0,               # Not included in the cycle. Just for example.
-	DARK = 1, 
-	LIGHT = 2
+	DARK_THEME = 1, 
+	LIGHT_THEME = 2
 }
+
 # Current theme of the interface.
-var current_theme: int = DARK
+var current_theme: int = DARK_THEME
 
 # Default user themes.
 var user_themes: Dictionary = {
@@ -131,3 +132,17 @@ var cam_movement_keys: Dictionary = {
 }
 
 # ******************************************************************************
+# SIMULATION ENGINE DEBUG
+var text_debug_report: String = ""
+
+# ******************************************************************************
+# TOOLS
+
+# Return a string 'null' if variable has null value.
+func print_null_string(_check_variable) -> String:
+	var output: String
+	if _check_variable == null:
+		output = "<null>"
+	else:
+		output = _check_variable.to_string()
+	return output

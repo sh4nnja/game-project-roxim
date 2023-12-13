@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dusgwmlh6iymp"
+path="res://.godot/imported/bracket2x.obj-27c9325c0d5fa4f3a6a94fa467aa1b7f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bracket2x.obj-27c9325c0d5fa4f3a6a94fa467aa1b7f.mesh"]
+
+source_file="res://assets/objects/building/brackets/2x/bracket2x.obj"
+dest_files=["res://.godot/imported/bracket2x.obj-27c9325c0d5fa4f3a6a94fa467aa1b7f.mesh", "res://.godot/imported/bracket2x.obj-27c9325c0d5fa4f3a6a94fa467aa1b7f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

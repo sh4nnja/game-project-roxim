@@ -36,6 +36,9 @@
 
 extends Control
 
+# Simulation map scene file location.
+var _main_menu_scn_file: String = "res://assets/scenes/main_menu/main_menu.tscn"
+
 # Interface nodes.
 @onready var _background: ColorRect = get_node("background")
 
@@ -56,6 +59,11 @@ var _is_paused: bool = false
 func _ready() -> void:
 	# Setting the theme and animating the panel for splash.
 	_change_theme()
+
+# ******************************************************************************
+# PHYSICS
+func _physics_process(_delta):
+	pass
 
 # ******************************************************************************
 # INPUT EVENTS
@@ -119,7 +127,7 @@ func _on_menu_button_pressed():
 	await get_tree().create_timer(3).timeout
 	
 	# Change the scene.
-	get_tree().change_scene_to_file("res://assets/scenes/main_menu/main_menu.tscn")
+	get_tree().change_scene_to_file(_main_menu_scn_file)
 
 # ******************************************************************************
 # OUTSIDE COMMUNICATIONS | Snippets that communicate to other nodes / scripts.

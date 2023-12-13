@@ -1,5 +1,13 @@
 res://assets/materials/simulation/simulation_map_env.tres
 res://assets/scenes/main_menu/main_menu.tscn
+res://assets/materials/interactables/interactable_selected.tres
 res://assets/materials/interactables/misc/vblox_logo_material.tres
 res://assets/scenes/simulation_map/simulation_map.tscn
+res://assets/objects/building/brackets/2x/bracket2x.tscn
+res://assets/objects/camera/camera.tscn
+res://assets/objects/misc/the_cube/the_cube.tscn
+res://assets/objects/misc/vblox_logo/vblox_logo.tscn
 res://assets/scripts/simulation/interactor.gd
+res://assets/scripts/simulation/simulation_interface.gd
+res://assets/scripts/simulation/camera.gd
+res://assets/scripts/simulation/brackets/bracket2x.gd
