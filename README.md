@@ -1,7 +1,7 @@
 # CAPSTONE PROJECT for Research in Daily Life II
 Source code for Vblox, a capstone project made by 12 ESTEMC-3 Group 6
 
-The Effectiveness of Utilizing a Programming Game with Simulation Mechanics for Learning Basic Programming among Grade 12 STEMC Students in University of Cabuyao
+The Effectiveness of Utilizing "Vblox" with Simulation Mechanics for Learning Basic Programming among Grade 12 STEMC Students in University of Cabuyao
 
 The researchers aim to make a game-based basic programming course with a goal of teaching students basic programming skills with an in depth application and hands-on. The game will immerse students by teaching programming in a game-like structure, which makes it fun and immersive. The researchers will test its effectiveness of such game-based learning to students and provide data accordingly.
 
