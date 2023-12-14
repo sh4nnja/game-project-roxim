@@ -49,6 +49,9 @@ var _main_menu_scn_file: String = "res://assets/scenes/main_menu/main_menu.tscn"
 # Virtual Environment objects.
 @onready var _environment_camera: Camera3D = get_parent().get_node("camera")
 
+# Debug
+@onready var _debug_report_text: Label = get_node("debug_text")
+
 # Pause manager.
 var _is_paused: bool = false
 
@@ -63,7 +66,8 @@ func _ready() -> void:
 # ******************************************************************************
 # PHYSICS
 func _physics_process(_delta):
-	pass
+	# Print the simulation engine's debug report.
+	_display_debug_report()
 
 # ******************************************************************************
 # INPUT EVENTS
@@ -136,3 +140,8 @@ func _on_menu_button_pressed():
 func _manage_simulation() -> void:
 	# Disables movement of camera when paused.
 	_environment_camera.cam_movement_enabled = !_is_paused
+
+# Display debug report on-screen.
+func _display_debug_report():
+	# Prints the debug report of the simulation engine.
+	_debug_report_text.text = config.debug_report()

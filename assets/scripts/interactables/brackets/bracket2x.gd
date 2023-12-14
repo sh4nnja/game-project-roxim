@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  interactables.gd
+#  bracket2x.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -34,41 +34,18 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ******************************************************************************
 
-extends RigidBody3D
-class_name Interactables
-
-# This class will be the base class of all 'interactables' in the simulation mechanics.
-# This script will be the base script of all instances of 'interactables'.
-#
-# For example:
-# Interactables class <- This script.
-#      -> Motor class
-#           -> Small Motor
-#           -> Big Motor
-#      -> Computing class
-#
-# Current Subclass that we have:
-#      -> Bracket class
-#
-# Make sure that you don't DUPLICATE and REPEAT your codes across the project. PLEASE.
-# Use classes for the same script each objects you have.
-
-@onready var _interactable_selected_res: Resource = preload("res://assets/materials/interactables/interactable_selected.tres")
-
-# ******************************************************************************
-# PHYSICS
+extends Brackets
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
+func _on_attach_1_entered(_area: Area3D):
+	pass # Replace with function body.
 
-# Applying a 'selected' texture in an 'interactable'.
-func apply_selected_texture(apply: bool) -> void:
-	# Loop through the children to find the main 'texture'.
-	for child_node in get_children():
-		if child_node is MeshInstance3D:
-			if apply:
-				child_node.material_overlay = _interactable_selected_res
-			else:
-				child_node.material_overlay = null
-			# Breaks the loop early so it saves time and memory.
-			break
+func _on_attach_1_exited(_area: Area3D):
+	pass # Replace with function body.
+
+func _on_attach_2_entered(_area: Area3D):
+	pass # Replace with function body.
+
+func _on_attach_2_exited(_area: Area3D):
+	pass # Replace with function body.

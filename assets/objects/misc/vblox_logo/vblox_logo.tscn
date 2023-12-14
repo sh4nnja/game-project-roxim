@@ -7,7 +7,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_qynf3"]
 size = Vector3(0.769333, 0.144919, 0.745862)
 
-[node name="vblox_logo" type="RigidBody3D" groups=["interactables"]]
+[node name="vblox_logo" type="RigidBody3D"]
 mass = 10.0
 inertia = Vector3(1, 1, 1)
 continuous_cd = true

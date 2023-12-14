@@ -64,6 +64,9 @@ func _physics_process(_delta):
 	_hover_and_select_interactables()
 	# Dragging physics.
 	_apply_physics_interactable()
+	
+	# Managing debug
+	_manage_debug()
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
@@ -130,3 +133,7 @@ func _apply_physics_interactable() -> void:
 		_interacted_object.set_linear_velocity((_interactor_pos - _interacted_object_pos) * _interacted_obj_grab_speed)
 
 # ******************************************************************************
+# DEBUG
+func _manage_debug() -> void:
+	config.append_debug("Current Hovered Object", _curr_hovered_interactable)
+	config.append_debug("Dragging Object", _interacted_object)

@@ -1,5 +1,6 @@
-Interactables
 CollisionShape3D
+Area3D
+Interactables
 MeshInstance3D
 TextureRect
 Control

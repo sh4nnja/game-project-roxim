@@ -132,12 +132,23 @@ var cam_movement_keys: Dictionary = {
 }
 
 # ******************************************************************************
-# SIMULATION ENGINE DEBUG
-var text_debug_report: String = ""
+# DEBUG
+var debug_enabled: bool = true
+var _debug_report: Dictionary
+
+# ******************************************************************************
+# VIRTUAL
+func _physics_process(_delta) -> void:
+	
+	
+	# Simulation Engine debug report.
+	_manage_debug()
+
+func _manage_debug() -> void:
+	append_debug("FPS", Engine.get_frames_per_second())
 
 # ******************************************************************************
 # TOOLS
-
 # Return a string 'null' if variable has null value.
 func print_null_string(_check_variable) -> String:
 	var output: String
@@ -146,3 +157,16 @@ func print_null_string(_check_variable) -> String:
 	else:
 		output = _check_variable.to_string()
 	return output
+
+# Tool for appending debug values.
+func append_debug(_identifier: String, _value: Variant) -> void:
+	_debug_report[_identifier] = _value
+
+# Clean the debug string for visuals.
+func debug_report() -> String:
+	var _str_debug_report: String = ""
+	if debug_enabled:
+		for _debug in _debug_report.size():
+			_str_debug_report += String("{} | {}\n").format([_debug_report.keys()[_debug], _debug_report.values()[_debug]], "{}")
+	return _str_debug_report
+
