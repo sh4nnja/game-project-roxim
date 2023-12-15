@@ -37,5 +37,25 @@
 extends Interactables
 class_name Brackets
 
+# This class will be the base class of all 'brackets' in the simulation mechanics.
+# This script will be the base script of all instances of 'brackets'.
+#
+# For example:
+# Brackets class <- This script.
+#      -> 2x Bracket
+#      -> 3x Bracket
+#      -> 4x Bracket
+#
+# And more...
+
+# Array of 'slots' of the bracket. Each index indicates the 'slot' occupied by a bracket.
+# It means that the size of 'slots' is based on the holes of a bracket.
+var slots: Array[bool]
+
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
+# Initiate 'slot' size function. This will vary by each bracket.
+# Setting up this function is a must for clean code I suppose.
+func initiate_bracket_size(bracket_size):
+	for _slot in range(bracket_size):
+		slots.append(false)

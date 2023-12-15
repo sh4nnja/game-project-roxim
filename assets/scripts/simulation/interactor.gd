@@ -55,7 +55,7 @@ var _last_hovered_interactable: RigidBody3D
 # INPUT EVENTS
 func _input(_event):
 	# Draggin / Moving 'interactable' mechanic.
-	_dragging_interactable(_event)
+	_drag_interactable(_event)
 
 # ******************************************************************************
 # PHYSICS
@@ -108,7 +108,7 @@ func _animate_crosshair(_hovered: bool) -> void:
 	_crosshair_tween.play()
 
 # Register 'interactables' to be dragged when mouse event occurs.
-func _dragging_interactable(_event) -> void:
+func _drag_interactable(_event) -> void:
 	if _event is InputEventMouseButton:
 		if is_colliding():
 			if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT"):

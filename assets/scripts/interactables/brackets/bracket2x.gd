@@ -36,8 +36,18 @@
 
 extends Brackets
 
+# Bracket size. Since this bracket is 2x, the bracket size is 2.
+var _slot_size: int = 2
+
+# ******************************************************************************
+# INITIATION
+func _ready() -> void:
+	# Initiate bracket size.
+	initiate_bracket_size(_slot_size)
+
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
+
 func _on_attach_1_entered(_area: Area3D):
 	pass # Replace with function body.
 

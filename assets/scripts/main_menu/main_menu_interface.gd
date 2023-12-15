@@ -73,14 +73,14 @@ var _sim_scn_file: String = "res://assets/scenes/simulation_map/simulation_map.t
 # Initiate logic.
 func _ready() -> void:
 	# Setting the theme and animating the panel for splash.
-	_change_theme()
+	_apply_theme()
 	_animate_panel()
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 
 # Set interface theme logic.
-func _change_theme() -> void:
+func _apply_theme() -> void:
 	# Changes the text to the right theme.
 	_theme_button.text = config.user_themes.keys()[config.current_theme]
 	
@@ -151,7 +151,7 @@ func _on_theme_button_pressed() -> void:
 		config.current_theme = 1              
 	
 	# Changes the theme and the text and play panel animation so it doesn't look flat.
-	_change_theme()
+	_apply_theme()
 	_animate_panel()
 
 # Signal from button to go to simulation.

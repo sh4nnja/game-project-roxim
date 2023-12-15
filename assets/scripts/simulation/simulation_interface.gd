@@ -61,7 +61,7 @@ var _is_paused: bool = false
 # Initiate logic.
 func _ready() -> void:
 	# Setting the theme and animating the panel for splash.
-	_change_theme()
+	_apply_theme()
 
 # ******************************************************************************
 # PHYSICS
@@ -84,7 +84,7 @@ func _input(_event) -> void:
 # CUSTOM METHODS AND SIGNALS
 
 # Change theme logic.
-func _change_theme() -> void:
+func _apply_theme() -> void:
 	# Set theme on background interfaces.
 	_background.color = config.user_themes.values()[config.current_theme][0]
 	_background.color.a = 0
