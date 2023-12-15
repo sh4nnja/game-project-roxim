@@ -81,15 +81,22 @@ func manage_mechanics(bracket: Brackets, enabled: bool) -> void:
 	# All statements must be under here so that it doesn't work whenever the bracket is not selected.
 	# This code should save performance by not doing unnecessary calculations when not selected.
 	if enabled:
-		# Bracket will disappear visually and revert whenever it hovers in another bracket.
-		# This attempts for the attaching mechanic.
-		if slots.has(true):
-			bracket.visible = false
-		else:
-			bracket.visible = true
+		# Manage bracket visibility when hovered.
+		_manage_bracket_visibility(bracket)
 		
-		# Bracket will create a placeholder in the place of the slots occupied for visuals.
-		
+		# Manage bracket placeholder for attaching.
+		_manage_bracket_placeholder(bracket, attaching_bracket) 
+
+# Bracket will disappear visually and revert whenever it hovers in another bracket.
+func _manage_bracket_visibility(_bracket: Brackets) -> void:
+	if slots.has(true):
+		_bracket.visible = false
+	else:
+		_bracket.visible = true
+
+# Bracket will create a placeholder in the place of the slots occupied for visuals.
+func _manage_bracket_placeholder(_bracket: Brackets, _attaching_bracket: Brackets) -> void:
+	pass
 
 # ******************************************************************************
 # DEBUG

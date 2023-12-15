@@ -10,3 +10,4 @@ res://assets/scripts/interactables/brackets/brackets.gd
 res://assets/scripts/simulation/camera.gd
 res://assets/scripts/simulation/interactor.gd
 res://assets/scripts/interactables/brackets/bracket2x.gd
+res://assets/scripts/config.gd

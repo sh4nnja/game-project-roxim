@@ -55,6 +55,7 @@ func _physics_process(_delta):
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
+# Changes respective slots on the 'slots' when in contact of another slot from a bracket.
 func _on_attach_1_entered(_area: Area3D):
 	slots[0] = true
 

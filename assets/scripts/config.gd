@@ -140,7 +140,6 @@ var _debug_report: Dictionary
 # VIRTUAL
 func _physics_process(_delta) -> void:
 	
-	
 	# Simulation Engine debug report.
 	_manage_debug()
 
