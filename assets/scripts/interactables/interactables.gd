@@ -80,6 +80,6 @@ func apply_selected_texture(apply: bool) -> void:
 			break
 
 # Enable selection.
-func manage_selection(selection: bool) -> void:
+func manage_selection(selection: bool = false) -> void:
 	is_selected = selection
 

@@ -42,6 +42,7 @@ extends RayCast3D
 # Current object being handled.
 var _interacted_object: RigidBody3D
 
+# Speed of the 'interactable' when dragging.
 var _interacted_obj_grab_speed: int = 3
 
 # Take note of 'interactables' being interacted / hovered.
@@ -62,6 +63,7 @@ func _input(_event):
 func _physics_process(_delta):
 	# Hover effect on 'interactables' mehanic.
 	_hover_and_select_interactables()
+	
 	# Dragging physics.
 	_apply_physics_interactable()
 	
@@ -83,6 +85,7 @@ func _hover_and_select_interactables() -> void:
 					_last_hovered_interactable.apply_selected_texture(false)
 				_last_hovered_interactable = _curr_hovered_interactable
 				_curr_hovered_interactable.apply_selected_texture(true)
+			
 			# Play crosshair animation.
 			_animate_crosshair(true)
 		else:
@@ -91,6 +94,7 @@ func _hover_and_select_interactables() -> void:
 				_last_hovered_interactable.apply_selected_texture(false)
 				_last_hovered_interactable = null
 			_curr_hovered_interactable = null
+			
 			# Play crosshair animation.
 			_animate_crosshair(false)
 	else:
@@ -116,6 +120,7 @@ func _drag_interactable(_event) -> void:
 				if get_collider() is RigidBody3D:
 					# Place the 'interactable' into a variable for ref. Once released, it reverts to null.
 					_interacted_object = get_collider()
+					
 					# Change interacted object state.
 					_interacted_object.manage_selection(true)
 			if Input.is_action_just_released("MOUSE_BUTTON_LEFT"):
@@ -133,6 +138,7 @@ func _apply_physics_interactable() -> void:
 		# Apply physics of being dragged.
 		var _interactor_pos: Vector3 = get_global_transform().origin
 		var _interacted_object_pos: Vector3 = _interacted_object.get_global_transform().origin
+		
 		# Makes the object be grabbed and dragged.
 		_interacted_object.set_linear_velocity((_interactor_pos - _interacted_object_pos) * _interacted_obj_grab_speed)
 

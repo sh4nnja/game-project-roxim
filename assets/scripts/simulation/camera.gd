@@ -120,8 +120,10 @@ func _update_cam_movement(fDelta: float) -> void:
 	_dir = Vector3(
 		# Key state of Right and Left
 		(config.cam_movement_keys.values()[5][1] as float) - (config.cam_movement_keys.values()[4][1] as float),
+		
 		# Key state of Down and Up
 		(config.cam_movement_keys.values()[1][1] as float) - (config.cam_movement_keys.values()[0][1] as float),
+		
 		# Key state of Back and Front
 		(config.cam_movement_keys.values()[3][1] as float) - (config.cam_movement_keys.values()[2][1] as float)
 	)

@@ -52,6 +52,10 @@ class_name Brackets
 # It means that the size of 'slots' is based on the holes of a bracket.
 var slots: Array[bool]
 
+# The bracket 'B' the current bracket 'A" you are interacting to.
+# This will help for connecting the brackets.
+var attaching_bracket: Brackets = null
+
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 # Initiate 'slot' size function. This will vary by each bracket.
@@ -60,15 +64,32 @@ func initiate_bracket_size(slot_array: Array, bracket_size: int) -> void:
 	for _slot in range(bracket_size):
 		slot_array.append(false)
 
-func manage_mechanics(node: Brackets, enabled: bool) -> void:
-	for child in node.get_children():
-		if child is Area3D:
+# Managing bracket mechanics such as attaching and disappearing.
+func manage_mechanics(bracket: Brackets, enabled: bool) -> void:
+	# Make the bracket active for attachment when selected.
+	# This will save performance for unnecessary detections.
+	for _child in bracket.get_children():
+		if _child is Area3D:
+			# Sets the collision and monitoring status to detect other brackets.
 			if enabled:
-				child.monitoring = true
-				child.set_collision_mask_value(1, true)
+				_child.monitoring = true
+				_child.set_collision_mask_value(1, true)
 			else:
-				child.monitoring = false
-				child.set_collision_mask_value(1, false)
+				_child.monitoring = false
+				_child.set_collision_mask_value(1, false)
+	
+	# All statements must be under here so that it doesn't work whenever the bracket is not selected.
+	# This code should save performance by not doing unnecessary calculations when not selected.
+	if enabled:
+		# Bracket will disappear visually and revert whenever it hovers in another bracket.
+		# This attempts for the attaching mechanic.
+		if slots.has(true):
+			bracket.visible = false
+		else:
+			bracket.visible = true
+		
+		# Bracket will create a placeholder in the place of the slots occupied for visuals.
+		
 
 # ******************************************************************************
 # DEBUG
