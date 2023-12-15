@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  bracket2x.gd
+#  bracket2x_clone.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -43,19 +43,27 @@ var _slot_size: int = 2
 # INITIATION
 func _ready() -> void:
 	# Initiate bracket size.
-	initiate_bracket_size(_slot_size)
+	initiate_bracket_size(slots, _slot_size)
+
+# ******************************************************************************
+# PHYSICS
+func _physics_process(_delta):
+	manage_mechanics(self, is_selected)
+	
+	# Simulation Engine debug report.
+	manage_debug()
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
-
 func _on_attach_1_entered(_area: Area3D):
-	pass # Replace with function body.
+	slots[0] = true
 
 func _on_attach_1_exited(_area: Area3D):
-	pass # Replace with function body.
+	slots[0] = false
 
 func _on_attach_2_entered(_area: Area3D):
-	pass # Replace with function body.
+	slots[1] = true
 
 func _on_attach_2_exited(_area: Area3D):
-	pass # Replace with function body.
+	slots[1] = false
+

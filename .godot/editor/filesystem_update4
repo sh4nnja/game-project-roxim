@@ -11,3 +11,8 @@ res://assets/scripts/interactables/brackets/bracket2x.gd
 res://assets/scripts/simulation/interactor.gd
 res://assets/scripts/main_menu/main_menu_interface.gd
 res://assets/scripts/simulation/simulation_interface.gd
+res://assets/scripts/interactables/interactables.gd
+res://assets/objects/building/brackets/2x/clone/bracket2x_clone.tscn
+res://assets/objects/building/brackets/2x/clone/bracket2x_clone.gd
+res://assets/objects/misc/vblox_logo/vblox_logo.tscn
+res://assets/objects/misc/the_cube/the_cube.tscn

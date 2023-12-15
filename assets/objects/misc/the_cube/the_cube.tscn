@@ -12,6 +12,7 @@ material = ExtResource("1_gvi14")
 mass = 5.0
 inertia = Vector3(1, 1, 1)
 continuous_cd = true
+can_sleep = false
 script = ExtResource("1_swgyx")
 
 [node name="cube_texture" type="MeshInstance3D" parent="."]

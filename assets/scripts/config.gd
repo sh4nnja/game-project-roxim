@@ -145,7 +145,7 @@ func _physics_process(_delta) -> void:
 	_manage_debug()
 
 func _manage_debug() -> void:
-	append_debug("FPS", Engine.get_frames_per_second())
+	add_debug_entry("FPS", Engine.get_frames_per_second())
 
 # ******************************************************************************
 # TOOLS
@@ -159,8 +159,12 @@ func print_null_string(_check_variable) -> String:
 	return output
 
 # Tool for appending debug values.
-func append_debug(_identifier: String, _value: Variant) -> void:
+func add_debug_entry(_identifier: String, _value: Variant) -> void:
 	_debug_report[_identifier] = _value
+
+# Tool for removing debug by its key.
+func remove_debug_entry(_identifier: String) -> void:
+	_debug_report.erase(_identifier)
 
 # Clean the debug string for visuals.
 func debug_report() -> String:

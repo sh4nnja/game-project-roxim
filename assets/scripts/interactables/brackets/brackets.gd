@@ -56,6 +56,25 @@ var slots: Array[bool]
 # CUSTOM METHODS AND SIGNALS
 # Initiate 'slot' size function. This will vary by each bracket.
 # Setting up this function is a must for clean code I suppose.
-func initiate_bracket_size(bracket_size):
+func initiate_bracket_size(slot_array: Array, bracket_size: int) -> void:
 	for _slot in range(bracket_size):
-		slots.append(false)
+		slot_array.append(false)
+
+func manage_mechanics(node: Brackets, enabled: bool) -> void:
+	for child in node.get_children():
+		if child is Area3D:
+			if enabled:
+				child.monitoring = true
+				child.set_collision_mask_value(1, true)
+			else:
+				child.monitoring = false
+				child.set_collision_mask_value(1, false)
+
+# ******************************************************************************
+# DEBUG
+func manage_debug() -> void:
+	# Removes the index of the debug so it doesn't clutter the interface. Only when hovered / selected.
+	if is_selected:
+		config.add_debug_entry(str("     Bracket Slot States of " + str(self.name)), str(slots))
+	else:
+		config.remove_debug_entry(str("     Bracket Slot States of " + str(self.name)))

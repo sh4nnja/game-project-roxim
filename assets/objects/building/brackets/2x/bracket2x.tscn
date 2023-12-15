@@ -17,6 +17,7 @@ radius = 0.101414
 
 [node name="bracket2x" type="RigidBody3D"]
 continuous_cd = true
+can_sleep = false
 script = ExtResource("1_lnmxq")
 
 [node name="brack_texture" type="MeshInstance3D" parent="."]

@@ -111,12 +111,16 @@ func _animate_crosshair(_hovered: bool) -> void:
 func _drag_interactable(_event) -> void:
 	if _event is InputEventMouseButton:
 		if is_colliding():
-			if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT"):
+			if Input.is_action_pressed("MOUSE_BUTTON_LEFT"):
 				# Check first if the collided 'interactable' is actually one.
 				if get_collider() is RigidBody3D:
 					# Place the 'interactable' into a variable for ref. Once released, it reverts to null.
 					_interacted_object = get_collider()
-			elif Input.is_action_just_released("MOUSE_BUTTON_LEFT"):
+					# Change interacted object state.
+					_interacted_object.manage_selection(true)
+			if Input.is_action_just_released("MOUSE_BUTTON_LEFT"):
+				if _interacted_object != null:
+					_interacted_object.manage_selection(false)
 				_interacted_object = null
 		else:
 			# Default to null when no object being interacted.
@@ -135,5 +139,8 @@ func _apply_physics_interactable() -> void:
 # ******************************************************************************
 # DEBUG
 func _manage_debug() -> void:
-	config.append_debug("Current Hovered Object", _curr_hovered_interactable)
-	config.append_debug("Dragging Object", _interacted_object)
+	# Series of ternary operators that will just display the name and if there's no name, print null.
+	@warning_ignore("incompatible_ternary")
+	config.add_debug_entry("Current Hovered Object", _curr_hovered_interactable.name if _curr_hovered_interactable else _curr_hovered_interactable)
+	@warning_ignore("incompatible_ternary")
+	config.add_debug_entry("Dragging Object", _interacted_object.name if _interacted_object else _interacted_object)

@@ -53,22 +53,33 @@ class_name Interactables
 # Make sure that you don't DUPLICATE and REPEAT your codes across the project. PLEASE.
 # Use classes for the same script each objects you have.
 
+# Resource for the selected effect.
 @onready var _interactable_selected_res: Resource = preload("res://assets/materials/interactables/interactable_selected.tres")
+
+# Selection state.
+var is_selected: bool = false
 
 # ******************************************************************************
 # PHYSICS
+func _physics_process(_delta):
+	pass
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
-
 # Applying a 'selected' texture in an 'interactable'.
 func apply_selected_texture(apply: bool) -> void:
 	# Loop through the children to find the main 'texture'.
 	for child_node in get_children():
 		if child_node is MeshInstance3D:
+			# Apply material
 			if apply:
 				child_node.material_overlay = _interactable_selected_res
 			else:
 				child_node.material_overlay = null
 			# Breaks the loop early so it saves time and memory.
 			break
+
+# Enable selection.
+func manage_selection(selection: bool) -> void:
+	is_selected = selection
+

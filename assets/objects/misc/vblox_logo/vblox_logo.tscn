@@ -11,6 +11,7 @@ size = Vector3(0.769333, 0.144919, 0.745862)
 mass = 10.0
 inertia = Vector3(1, 1, 1)
 continuous_cd = true
+can_sleep = false
 script = ExtResource("1_8hk0s")
 
 [node name="vblox_texture" type="MeshInstance3D" parent="."]
