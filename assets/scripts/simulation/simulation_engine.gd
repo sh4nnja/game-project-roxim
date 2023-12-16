@@ -35,10 +35,16 @@
 # ******************************************************************************
 
 extends Node3D
-class_name SimulationEngine
 
 # Base class of SIMULATION ENGINE.
 # All calculation of positions, random generations, and debugging etc will be located here.
+
+# ******************************************************************************
+# Snapping Mechanic
+var bracket_snap_threshold: float = 1.5
+
+# Speed of the 'interactable' when dragging.
+var interacted_obj_grab_speed: int = 3
 
 # ******************************************************************************
 # VIRTUAL
@@ -56,7 +62,7 @@ var debug_enabled: bool = true
 var _debug_report: Dictionary
 
 func _manage_debug() -> void:
-	add_debug_entry("FPS", Engine.get_frames_per_second())
+	manage_debug_entries("FPS", Engine.get_frames_per_second())
 
 # Return a string 'null' if variable has null value.
 func print_null_string(_check_variable) -> String:
@@ -68,12 +74,11 @@ func print_null_string(_check_variable) -> String:
 	return output
 
 # Tool for appending debug values.
-func add_debug_entry(_identifier: String, _value: Variant) -> void:
-	_debug_report[_identifier] = _value
-
-# Tool for removing debug by its key.
-func remove_debug_entry(_identifier: String) -> void:
-	_debug_report.erase(_identifier)
+func manage_debug_entries(_identifier: String, _value: Variant, _remove: bool = false) -> void:
+	if !_remove:
+		_debug_report[_identifier] = _value
+	else:
+		_debug_report.erase(_identifier)
 
 # Clean the debug string for visuals.
 func debug_report() -> String:

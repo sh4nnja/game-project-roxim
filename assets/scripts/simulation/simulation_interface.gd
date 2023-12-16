@@ -74,7 +74,7 @@ func _physics_process(_delta):
 
 func _input(_event) -> void:
 	if _event is InputEventKey:
-		if _event.keycode == config.interface_keys.values()[0] and _event.pressed:
+		if _event.keycode == Configuration.interface_keys.values()[0] and _event.pressed:
 			_animate_pause_menu()
 			
 			# Manages simulation nodes / objects.
@@ -86,7 +86,7 @@ func _input(_event) -> void:
 # Change theme logic.
 func _apply_theme() -> void:
 	# Set theme on background interfaces.
-	_background.color = config.user_themes.values()[config.current_theme][0]
+	_background.color = Configuration.user_themes.values()[Configuration.current_theme][0]
 	_background.color.a = 0
 
 # Animate pause menu.
@@ -129,7 +129,7 @@ func _on_menu_button_pressed():
 	_pause_menu_btn.text = "Loading..."
 	
 	# Creates a timer for 3s so to make sure the player know that its "changing the scene".
-	await get_tree().create_timer(config.loading_time).timeout
+	await get_tree().create_timer(Configuration.loading_time).timeout
 	
 	# Change the scene.
 	get_tree().change_scene_to_file(_main_menu_scn_file)
@@ -145,4 +145,4 @@ func _manage_simulation() -> void:
 # Display debug report on-screen.
 func _display_debug_report():
 	# Prints the debug report of the simulation engine.
-	_debug_report_text.text = simulation.debug_report()
+	_debug_report_text.text = SimulationEngine.debug_report()

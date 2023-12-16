@@ -43,9 +43,6 @@ class_name Interactor
 # Current object being handled.
 var _interacted_object: RigidBody3D
 
-# Speed of the 'interactable' when dragging.
-var _interacted_obj_grab_speed: int = 3
-
 # Take note of 'interactables' being interacted / hovered.
 var _curr_hovered_interactable: RigidBody3D
 var _last_hovered_interactable: RigidBody3D
@@ -116,7 +113,7 @@ func _animate_crosshair(_hovered: bool) -> void:
 func _drag_interactable(_event) -> void:
 	if _event is InputEventMouseButton:
 		if is_colliding():
-			if Input.is_action_pressed(config.interactor_keys.values()[3]):
+			if Input.is_action_pressed(Configuration.interactor_keys.values()[3]):
 				# Check first if the collided 'interactable' is actually one.
 				if get_collider() is RigidBody3D:
 					# Place the 'interactable' into a variable for ref. Once released, it reverts to null.
@@ -124,7 +121,7 @@ func _drag_interactable(_event) -> void:
 					
 					# Change interacted object state.
 					_interacted_object.manage_selection(true)
-			if Input.is_action_just_released(config.interactor_keys.values()[3]):
+			if Input.is_action_just_released(Configuration.interactor_keys.values()[3]):
 				if _interacted_object != null:
 					_interacted_object.manage_selection(false)
 				_interacted_object = null
@@ -141,13 +138,13 @@ func _apply_physics_interactable() -> void:
 		var _interacted_object_pos: Vector3 = _interacted_object.get_global_transform().origin
 		
 		# Makes the object be grabbed and dragged.
-		_interacted_object.set_linear_velocity((_interactor_pos - _interacted_object_pos) * _interacted_obj_grab_speed)
+		_interacted_object.set_linear_velocity((_interactor_pos - _interacted_object_pos) * SimulationEngine.interacted_obj_grab_speed)
 
 # ******************************************************************************
 # DEBUG
 func _manage_debug() -> void:
 	# Series of ternary operators that will just display the name and if there's no name, print null.
 	@warning_ignore("incompatible_ternary")
-	simulation.add_debug_entry("Current Hovered Object", _curr_hovered_interactable.name if _curr_hovered_interactable else _curr_hovered_interactable)
+	SimulationEngine.manage_debug_entries("Current Hovered Object", _curr_hovered_interactable.name if _curr_hovered_interactable else _curr_hovered_interactable)
 	@warning_ignore("incompatible_ternary")
-	simulation.add_debug_entry("Dragging Object", _interacted_object.name if _interacted_object else _interacted_object)
+	SimulationEngine.manage_debug_entries("Dragging Object", _interacted_object.name if _interacted_object else _interacted_object)

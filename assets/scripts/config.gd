@@ -150,3 +150,5 @@ var cam_sens: float = 0.25
 
 # Camera clearance.
 var cam_clearance: Vector2 = Vector2(0.6, 500)
+
+

@@ -34,7 +34,7 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ******************************************************************************
 
-extends SimulationEngine
+extends RigidBody3D
 class_name Interactables
 
 # This class will be the base class of all 'interactables' in the simulation engine class.

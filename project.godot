@@ -20,8 +20,8 @@ boot_splash/minimum_display_time=2500
 
 [autoload]
 
-config="*res://assets/scripts/config.gd"
-simulation="*res://assets/scripts/simulation/simulation_engine.gd"
+Configuration="*res://assets/scripts/config.gd"
+SimulationEngine="*res://assets/scripts/simulation/simulation_engine.gd"
 
 [display]
 

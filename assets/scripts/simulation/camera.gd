@@ -34,7 +34,7 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ******************************************************************************
 
-extends SimulationEngine
+extends Camera3D
 class_name Camera
 
 # Movement states.
@@ -58,17 +58,17 @@ func _input(_event) -> void:
 	# Camera free-lock catalyst and movement speed limiter.
 	if _event is InputEventMouseButton:
 		if cam_movement_enabled:
-			if _event.button_index == config.interactor_keys.values()[0]: 
+			if _event.button_index == Configuration.interactor_keys.values()[0]: 
 				# Only allows rotation if right mouse button is pressed.
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if _event.pressed else Input.MOUSE_MODE_VISIBLE)
 			
-			elif _event.button_index == config.interactor_keys.values()[1]: 
+			elif _event.button_index == Configuration.interactor_keys.values()[1]: 
 				# Increases max velocity when scroll wheel is moved upwards.
-				_vel_mult = clamp(_vel_mult * config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
+				_vel_mult = clamp(_vel_mult * Configuration.cam_vel_mult.x, Configuration.cam_vel_mult.y, Configuration.cam_vel_mult.z)
 				
-			elif _event.button_index == config.interactor_keys.values()[2]: 
+			elif _event.button_index == Configuration.interactor_keys.values()[2]: 
 				# Decereases max velocity when scroll wheel is moved downwards.
-				_vel_mult = clamp(_vel_mult / config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
+				_vel_mult = clamp(_vel_mult / Configuration.cam_vel_mult.x, Configuration.cam_vel_mult.y, Configuration.cam_vel_mult.z)
 			
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -80,7 +80,7 @@ func _input(_event) -> void:
 	# Camera movement snippet.
 	if _event is InputEventKey:
 		# Checks the cam_movement_key dictionary for the key pressed.
-		for _movement_key in config.cam_movement_keys.values():
+		for _movement_key in Configuration.cam_movement_keys.values():
 			# Updates the respective state of the key pressed.
 			if _movement_key[0] == _event.keycode:
 				_movement_key[1] = _event.pressed
@@ -101,7 +101,7 @@ func _physics_process(_delta) -> void:
 func _update_cam_free_look() -> void:
 	# Only rotates mouse if the mouse is captured
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		_mouse_pos *= config.cam_sens
+		_mouse_pos *= Configuration.cam_sens
 		var _yaw: float = _mouse_pos.x
 		var _pitch: float = _mouse_pos.y
 		_mouse_pos = Vector2.ZERO
@@ -119,13 +119,13 @@ func _update_cam_movement(fDelta: float) -> void:
 	# Computes desired direction from the key states.
 	_dir = Vector3(
 		# Key state of Right and Left
-		(config.cam_movement_keys.values()[5][1] as float) - (config.cam_movement_keys.values()[4][1] as float),
+		(Configuration.cam_movement_keys.values()[5][1] as float) - (Configuration.cam_movement_keys.values()[4][1] as float),
 		
 		# Key state of Down and Up
-		(config.cam_movement_keys.values()[1][1] as float) - (config.cam_movement_keys.values()[0][1] as float),
+		(Configuration.cam_movement_keys.values()[1][1] as float) - (Configuration.cam_movement_keys.values()[0][1] as float),
 		
 		# Key state of Back and Front
-		(config.cam_movement_keys.values()[3][1] as float) - (config.cam_movement_keys.values()[2][1] as float)
+		(Configuration.cam_movement_keys.values()[3][1] as float) - (Configuration.cam_movement_keys.values()[2][1] as float)
 	)
 	
 	# Computes the change in velocity due to desired direction and "drag"
@@ -134,11 +134,11 @@ func _update_cam_movement(fDelta: float) -> void:
 	
 	# Compute modifiers' speed multiplier
 	var _speed: float = 1.0
-	if config.cam_movement_keys.values()[6][1]: 
-		_speed *= config.cam_sprint_mult
+	if Configuration.cam_movement_keys.values()[6][1]: 
+		_speed *= Configuration.cam_sprint_mult
 	
-	if config.cam_movement_keys.values()[7][1]: 
-		_speed *= config.cam_crouch_mult
+	if Configuration.cam_movement_keys.values()[7][1]: 
+		_speed *= Configuration.cam_crouch_mult
 	
 	# Checks if we should bother translating the camera
 	if _dir == Vector3.ZERO and _offset.length_squared() > _vel.length_squared():
@@ -154,7 +154,7 @@ func _update_cam_movement(fDelta: float) -> void:
 		translate(_vel * fDelta * _speed)
 	
 	# Clamp camera movement so it doesn't go below or outside the platform.
-	position.x = clamp(position.x, -config.cam_clearance.y, config.cam_clearance.y)
-	position.y = clamp(position.y, config.cam_clearance.x, config.cam_clearance.y)
-	position.z = clamp(position.z, -config.cam_clearance.y, config.cam_clearance.y)
+	position.x = clamp(position.x, -Configuration.cam_clearance.y, Configuration.cam_clearance.y)
+	position.y = clamp(position.y, Configuration.cam_clearance.x, Configuration.cam_clearance.y)
+	position.z = clamp(position.z, -Configuration.cam_clearance.y, Configuration.cam_clearance.y)
 	

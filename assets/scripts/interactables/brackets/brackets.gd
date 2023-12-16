@@ -71,6 +71,7 @@ var slots: Array[Array]
 # The bracket 'B' the current bracket 'A" you are interacting to.
 # This will help for connecting the brackets.
 var attaching_bracket: Brackets = null
+var bracket: Brackets
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
@@ -84,10 +85,12 @@ func initiate_brackets(_bracket: Brackets, _slot_array: Array, _bracket_size: in
 		if _slot is Area3D:
 			# Append false, meaning the slot is not occupied.
 			# Append '_slot' position.
-			_slot_array.append([false, _slot.position.x])
+			_slot_array.append([false, _slot.global_transform.origin.x])
 	
 	# Changes what type of bracket currently have.
 	bracket_type = _bracket_size
+	# Update the bracket.
+	bracket = _bracket
 
 # Manage slot detection for the bracket signals.
 func manage_slot_detection(_idx: int, _is_bracket_detected: bool, _detected_bracket: Area3D) -> void:
@@ -137,8 +140,19 @@ func _manage_bracket_hover(_bracket: Brackets, _is_enabled: bool) -> void:
 # Bracket attaches into another bracket mechanic.
 func _manage_bracket_attachment(_bracket: Brackets) -> void:
 	for _slot in slots:
-		if _slot[0]:
-			_bracket.position.x = _slot[1]
+		if _slot[0] and attaching_bracket:
+			# Check if the drag speed is greater than the bracket break force to snap.
+			if !snapped(bracket.linear_velocity.length(), 0.1) > SimulationEngine.bracket_snap_threshold:
+				# Reset the linear velocity of the bracket after snapping.
+				_bracket.linear_velocity = Vector3(0, 0, 0)
+				_bracket.angular_velocity = Vector3(0, 0, 0)
+				
+				# Have the position as the attaching bracket.
+				# The values will vary depending on the slot it was placed.
+				_bracket.global_transform.origin = attaching_bracket.global_transform.origin + Vector3(0, 0.125, 0)
+				
+				# Have the rotation as the attaching bracket.
+				_bracket.rotation_degrees = attaching_bracket.rotation_degrees
 
 # Bracket detaches from another bracket mechanic.
 func _manage_bracket_detachment(_bracket: Brackets) -> void:
@@ -147,8 +161,5 @@ func _manage_bracket_detachment(_bracket: Brackets) -> void:
 # ******************************************************************************
 # DEBUG
 func manage_debug() -> void:
-	# Removes the index of the debug so it doesn't clutter the interface. Only when hovered / selected.
-	if is_selected:
-		simulation.add_debug_entry(str("     Bracket Slot States of " + str(self.name)), str(slots))
-	else:
-		simulation.remove_debug_entry(str("     Bracket Slot States of " + str(self.name)))
+	SimulationEngine.manage_debug_entries(str("     Bracket Slot States of " + str(self.name)), str(slots), is_selected)
+	SimulationEngine.manage_debug_entries("     Bracket Linear Velocity of " + str(self.name), snapped(bracket.linear_velocity.length(), 0.1), is_selected)
