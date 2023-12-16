@@ -34,7 +34,8 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ******************************************************************************
 
-extends Camera3D
+extends SimulationEngine
+class_name Camera
 
 # Movement states.
 @export var cam_movement_enabled: bool = false
@@ -57,18 +58,17 @@ func _input(_event) -> void:
 	# Camera free-lock catalyst and movement speed limiter.
 	if _event is InputEventMouseButton:
 		if cam_movement_enabled:
-			match _event.button_index:
-				MOUSE_BUTTON_RIGHT: 
-					# Only allows rotation if right mouse button is pressed.
-					Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if _event.pressed else Input.MOUSE_MODE_VISIBLE)
+			if _event.button_index == config.interactor_keys.values()[0]: 
+				# Only allows rotation if right mouse button is pressed.
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if _event.pressed else Input.MOUSE_MODE_VISIBLE)
+			
+			elif _event.button_index == config.interactor_keys.values()[1]: 
+				# Increases max velocity when scroll wheel is moved upwards.
+				_vel_mult = clamp(_vel_mult * config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
 				
-				MOUSE_BUTTON_WHEEL_UP: 
-					# Increases max velocity when scroll wheel is moved upwards.
-					_vel_mult = clamp(_vel_mult * config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
-				
-				MOUSE_BUTTON_WHEEL_DOWN: 
-					# Decereases max velocity when scroll wheel is moved downwards.
-					_vel_mult = clamp(_vel_mult / config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
+			elif _event.button_index == config.interactor_keys.values()[2]: 
+				# Decereases max velocity when scroll wheel is moved downwards.
+				_vel_mult = clamp(_vel_mult / config.cam_vel_mult.x, config.cam_vel_mult.y, config.cam_vel_mult.z)
 			
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -157,3 +157,4 @@ func _update_cam_movement(fDelta: float) -> void:
 	position.x = clamp(position.x, -config.cam_clearance.y, config.cam_clearance.y)
 	position.y = clamp(position.y, config.cam_clearance.x, config.cam_clearance.y)
 	position.z = clamp(position.z, -config.cam_clearance.y, config.cam_clearance.y)
+	

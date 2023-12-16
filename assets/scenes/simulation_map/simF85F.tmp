@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cd86vkgynmcjm"]
+[gd_scene load_steps=18 format=3 uid="uid://cd86vkgynmcjm"]
 
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_interface.gd" id="1_5eupj"]
-[ext_resource type="Script" path="res://assets/scripts/simulation/simulation_engine.gd" id="1_ilwan"]
 [ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="2_uuw30"]
 [ext_resource type="FontFile" uid="uid://b641eb41yeh4g" path="res://assets/font/lexend/Lexend-ExtraLight.ttf" id="2_w6nuo"]
 [ext_resource type="BoxMesh" uid="uid://bwda3io5v3y3m" path="res://assets/materials/simulation/simulation_map_platform_mesh.tres" id="3_yn1j6"]
@@ -47,7 +46,6 @@ adjustment_enabled = true
 data = PackedVector3Array(-375, 0.5, 375, 375, 0.5, 375, -375, -0.5, 375, 375, 0.5, 375, 375, -0.5, 375, -375, -0.5, 375, 375, 0.5, -375, -375, 0.5, -375, 375, -0.5, -375, -375, 0.5, -375, -375, -0.5, -375, 375, -0.5, -375, 375, 0.5, 375, 375, 0.5, -375, 375, -0.5, 375, 375, 0.5, -375, 375, -0.5, -375, 375, -0.5, 375, -375, 0.5, -375, -375, 0.5, 375, -375, -0.5, -375, -375, 0.5, 375, -375, -0.5, 375, -375, -0.5, -375, 375, 0.5, 375, -375, 0.5, 375, 375, 0.5, -375, -375, 0.5, 375, -375, 0.5, -375, 375, 0.5, -375, -375, -0.5, 375, 375, -0.5, 375, -375, -0.5, -375, 375, -0.5, 375, 375, -0.5, -375, -375, -0.5, -375)
 
 [node name="simulation_map" type="Node3D"]
-script = ExtResource("1_ilwan")
 
 [node name="user_interface" type="Control" parent="."]
 layout_mode = 3

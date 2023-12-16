@@ -35,6 +35,7 @@
 # ******************************************************************************
 
 extends RayCast3D
+class_name Interactor
 
 # Crosshair node for the crosshair texture.
 @onready var _crosshair: TextureRect = get_node("crosshair")
@@ -115,7 +116,7 @@ func _animate_crosshair(_hovered: bool) -> void:
 func _drag_interactable(_event) -> void:
 	if _event is InputEventMouseButton:
 		if is_colliding():
-			if Input.is_action_pressed("MOUSE_BUTTON_LEFT"):
+			if Input.is_action_pressed(config.interactor_keys.values()[3]):
 				# Check first if the collided 'interactable' is actually one.
 				if get_collider() is RigidBody3D:
 					# Place the 'interactable' into a variable for ref. Once released, it reverts to null.
@@ -123,7 +124,7 @@ func _drag_interactable(_event) -> void:
 					
 					# Change interacted object state.
 					_interacted_object.manage_selection(true)
-			if Input.is_action_just_released("MOUSE_BUTTON_LEFT"):
+			if Input.is_action_just_released(config.interactor_keys.values()[3]):
 				if _interacted_object != null:
 					_interacted_object.manage_selection(false)
 				_interacted_object = null
@@ -147,6 +148,6 @@ func _apply_physics_interactable() -> void:
 func _manage_debug() -> void:
 	# Series of ternary operators that will just display the name and if there's no name, print null.
 	@warning_ignore("incompatible_ternary")
-	config.add_debug_entry("Current Hovered Object", _curr_hovered_interactable.name if _curr_hovered_interactable else _curr_hovered_interactable)
+	simulation.add_debug_entry("Current Hovered Object", _curr_hovered_interactable.name if _curr_hovered_interactable else _curr_hovered_interactable)
 	@warning_ignore("incompatible_ternary")
-	config.add_debug_entry("Dragging Object", _interacted_object.name if _interacted_object else _interacted_object)
+	simulation.add_debug_entry("Dragging Object", _interacted_object.name if _interacted_object else _interacted_object)

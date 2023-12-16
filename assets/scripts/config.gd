@@ -51,6 +51,10 @@ extends Node
 # Signals // Start with the word "on".
 
 # ******************************************************************************
+# Supposed 'loading' time, just user experience.
+var loading_time: int = 3
+
+# ******************************************************************************
 # USER INTERFACE THEMES
 
 # Themes.
@@ -103,19 +107,7 @@ var user_themes: Dictionary = {
 }
 
 # ******************************************************************************
-# FREE-CAMERA MOVEMENT CONFIGURATIONS
-
-# Camera movement multiplier.
-var cam_sprint_mult: float = 2.0                   
-var cam_crouch_mult: float = 0.5
-var cam_vel_mult: Vector3 = Vector3(1.1, 0.2, 50) 
-
-# Camera sensitivity.
-var cam_sens: float = 0.25                 
-
-# Camera clearance.
-var cam_clearance: Vector2 = Vector2(0.6, 500)
-
+# KEY-BINDS CONFIGURATIONS
 # Camera movement keys.
 var cam_movement_keys: Dictionary = {   
 	# The state that can only be overwritten is the 'keybind' value.
@@ -131,45 +123,30 @@ var cam_movement_keys: Dictionary = {
 	"cam_crouch":        [KEY_ALT,     false]
 }
 
-# ******************************************************************************
-# DEBUG
-var debug_enabled: bool = true
-var _debug_report: Dictionary
-
-# ******************************************************************************
-# VIRTUAL
-func _physics_process(_delta) -> void:
+# Interactor keys.
+var interactor_keys: Dictionary = {
+	"interactor_panning":         MOUSE_BUTTON_RIGHT,
+	"interactor_speed_up":        MOUSE_BUTTON_WHEEL_UP,
+	"interactor_speed_down":      MOUSE_BUTTON_WHEEL_DOWN,
 	
-	# Simulation Engine debug report.
-	_manage_debug()
+	"interactor_dragging":        "MOUSE_BUTTON_LEFT"
+}
 
-func _manage_debug() -> void:
-	add_debug_entry("FPS", Engine.get_frames_per_second())
+# Interface keys.
+var interface_keys: Dictionary = {
+	"interface_escape/back":      KEY_ESCAPE
+}
 
 # ******************************************************************************
-# TOOLS
-# Return a string 'null' if variable has null value.
-func print_null_string(_check_variable) -> String:
-	var output: String
-	if _check_variable == null:
-		output = "<null>"
-	else:
-		output = _check_variable.to_string()
-	return output
+# FREE-CAMERA MOVEMENT CONFIGURATIONS
 
-# Tool for appending debug values.
-func add_debug_entry(_identifier: String, _value: Variant) -> void:
-	_debug_report[_identifier] = _value
+# Camera movement multiplier.
+var cam_sprint_mult: float = 2.0                   
+var cam_crouch_mult: float = 0.5
+var cam_vel_mult: Vector3 = Vector3(1.1, 0.2, 50) 
 
-# Tool for removing debug by its key.
-func remove_debug_entry(_identifier: String) -> void:
-	_debug_report.erase(_identifier)
+# Camera sensitivity.
+var cam_sens: float = 0.25                 
 
-# Clean the debug string for visuals.
-func debug_report() -> String:
-	var _str_debug_report: String = ""
-	if debug_enabled:
-		for _debug in _debug_report.size():
-			_str_debug_report += String("{} | {}\n").format([_debug_report.keys()[_debug], _debug_report.values()[_debug]], "{}")
-	return _str_debug_report
-
+# Camera clearance.
+var cam_clearance: Vector2 = Vector2(0.6, 500)

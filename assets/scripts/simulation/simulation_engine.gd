@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  bracket2x.gd
+#  simulation_engine.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -34,37 +34,52 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ******************************************************************************
 
-extends Brackets
+extends Node3D
+class_name SimulationEngine
 
-# Bracket size. Since this bracket is 2x, the bracket size is 2.
-var _slot_size: int = 2
-
-# ******************************************************************************
-# INITIATION
-func _ready() -> void:
-	# Initiate bracket size.
-	initiate_brackets(self, slots, _slot_size)
+# Base class of SIMULATION ENGINE.
+# All calculation of positions, random generations, and debugging etc will be located here.
 
 # ******************************************************************************
-# PHYSICS
-func _physics_process(_delta):
-	manage_mechanics(self, is_selected)
-	
+# VIRTUAL
+func _physics_process(_delta) -> void:
 	# Simulation Engine debug report.
-	manage_debug()
+	_manage_debug()
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
-# Changes respective slots on the 'slots' when in contact of another slot from a bracket.
-func _on_attach_1_entered(_area: Area3D):
-	manage_slot_detection(0, true, _area)
 
-func _on_attach_1_exited(_area: Area3D):
-	manage_slot_detection(0, false, _area)
 
-func _on_attach_2_entered(_area: Area3D):
-	manage_slot_detection(1, true, _area)
+# ******************************************************************************
+# DEBUGGINE ENGINE
+var debug_enabled: bool = true
+var _debug_report: Dictionary
 
-func _on_attach_2_exited(_area: Area3D):
-	manage_slot_detection(1, false, _area)
+func _manage_debug() -> void:
+	add_debug_entry("FPS", Engine.get_frames_per_second())
+
+# Return a string 'null' if variable has null value.
+func print_null_string(_check_variable) -> String:
+	var output: String
+	if _check_variable == null:
+		output = "<null>"
+	else:
+		output = _check_variable.to_string()
+	return output
+
+# Tool for appending debug values.
+func add_debug_entry(_identifier: String, _value: Variant) -> void:
+	_debug_report[_identifier] = _value
+
+# Tool for removing debug by its key.
+func remove_debug_entry(_identifier: String) -> void:
+	_debug_report.erase(_identifier)
+
+# Clean the debug string for visuals.
+func debug_report() -> String:
+	var _str_debug_report: String = ""
+	if debug_enabled:
+		for _debug in _debug_report.size():
+			_str_debug_report += String("{} | {}\n").format([_debug_report.keys()[_debug], _debug_report.values()[_debug]], "{}")
+	return _str_debug_report
 

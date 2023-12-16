@@ -161,7 +161,7 @@ func _on_simulate_button_pressed():
 	_simulate_btn.text = "Loading..."
 	
 	# Creates a timer for 3s so to make sure the player know that its "changing the scene".
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(config.loading_time).timeout
 	
 	# Change the scene.
 	get_tree().change_scene_to_file(_sim_scn_file)

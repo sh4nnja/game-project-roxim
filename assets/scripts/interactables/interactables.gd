@@ -34,10 +34,10 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ******************************************************************************
 
-extends RigidBody3D
+extends SimulationEngine
 class_name Interactables
 
-# This class will be the base class of all 'interactables' in the simulation mechanics.
+# This class will be the base class of all 'interactables' in the simulation engine class.
 # This script will be the base script of all instances of 'interactables'.
 #
 # For example:
@@ -54,7 +54,8 @@ class_name Interactables
 # Use classes for the same script each objects you have.
 
 # Resource for the selected effect.
-@onready var _interactable_selected_res: Resource = preload("res://assets/materials/interactables/interactable_selected.tres")
+@onready var interactable_selected_res: Resource = preload("res://assets/materials/interactables/interactable_selected.tres")
+@onready var interactable_to_attach_res: Resource = preload("res://assets/materials/interactables/interactable_to_attach.tres")
 
 # Selection state.
 var is_selected: bool = false
@@ -67,13 +68,13 @@ func _physics_process(_delta):
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 # Applying a 'selected' texture in an 'interactable'.
-func apply_selected_texture(apply: bool) -> void:
+func apply_selected_texture(apply: bool, _texture_override: Resource = interactable_selected_res) -> void:
 	# Loop through the children to find the main 'texture'.
 	for child_node in get_children():
 		if child_node is MeshInstance3D:
 			# Apply material
 			if apply:
-				child_node.material_overlay = _interactable_selected_res
+				child_node.material_overlay = _texture_override
 			else:
 				child_node.material_overlay = null
 			# Breaks the loop early so it saves time and memory.
