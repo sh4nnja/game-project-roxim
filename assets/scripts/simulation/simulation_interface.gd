@@ -37,7 +37,7 @@
 extends Control
 
 # Simulation map scene file location.
-var _main_menu_scn_file: String = "res://assets/scenes/main_menu/main_menu.tscn"
+const _MAIN_MENU_SCN_FILE: String = "res://assets/scenes/main_menu/main_menu.tscn"
 
 # Interface nodes.
 @onready var _background: ColorRect = get_node("background")
@@ -99,8 +99,8 @@ func _animate_pause_menu() -> void:
 	# Create parameters for tween.
 	var _final_color: float
 	var _final_pos: Vector2 = Vector2.ZERO
-	var _color_duration: float = 0.25
-	var _pos_duration: float = 0.5
+	const _COLOR_DURATION: float = 0.25
+	const _POS_DURATION: float = 0.5
 	
 	# When interface is paused, tween the menu.
 	if !_is_paused:
@@ -118,9 +118,9 @@ func _animate_pause_menu() -> void:
 		_pause_menu.position = Vector2(0, 0)
 	
 	# Play tween animations.
-	_anim_bg_opacity.tween_property(_background, "color:a", _final_color, _color_duration).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-	_anim_menu_opacity.tween_property(_pause_menu, "modulate:a", _final_color, _color_duration * 1.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-	_anim_menu_pos.tween_property(_pause_menu, "position", _final_pos, _pos_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	_anim_bg_opacity.tween_property(_background, "color:a", _final_color,  _COLOR_DURATION).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	_anim_menu_opacity.tween_property(_pause_menu, "modulate:a", _final_color,  _COLOR_DURATION * 1.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	_anim_menu_pos.tween_property(_pause_menu, "position", _final_pos, _POS_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 
 # Signal from button to go to menu.
 func _on_menu_button_pressed():
@@ -129,10 +129,10 @@ func _on_menu_button_pressed():
 	_pause_menu_btn.text = "Loading..."
 	
 	# Creates a timer for 3s so to make sure the player know that its "changing the scene".
-	await get_tree().create_timer(Configuration.loading_time).timeout
+	await get_tree().create_timer(Configuration.LOADING_TIME).timeout
 	
 	# Change the scene.
-	get_tree().change_scene_to_file(_main_menu_scn_file)
+	get_tree().change_scene_to_file(_MAIN_MENU_SCN_FILE)
 
 # ******************************************************************************
 # OUTSIDE COMMUNICATIONS | Snippets that communicate to other nodes / scripts.

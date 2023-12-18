@@ -48,6 +48,11 @@ var _curr_hovered_interactable: RigidBody3D
 var _last_hovered_interactable: RigidBody3D
 
 # ******************************************************************************
+# DRAGGING MECHANIC
+# Speed of the 'interactable' when dragging.
+const _INTERACTED_OBJ_GRAB_SPEED: float = 3
+
+# ******************************************************************************
 # INITIATION
 
 # ******************************************************************************
@@ -138,7 +143,7 @@ func _apply_physics_interactable() -> void:
 		var _interacted_object_pos: Vector3 = _interacted_object.get_global_transform().origin
 		
 		# Makes the object be grabbed and dragged.
-		_interacted_object.set_linear_velocity((_interactor_pos - _interacted_object_pos) * SimulationEngine.interacted_obj_grab_speed)
+		_interacted_object.set_linear_velocity((_interactor_pos - _interacted_object_pos) * _INTERACTED_OBJ_GRAB_SPEED)
 
 # ******************************************************************************
 # DEBUG

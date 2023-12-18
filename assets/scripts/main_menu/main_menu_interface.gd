@@ -37,7 +37,13 @@
 extends Control
 
 # Simulation map scene file location.
-var _sim_scn_file: String = "res://assets/scenes/simulation_map/simulation_map.tscn"
+const _SIMULATION_SCN_FILE: String = "res://assets/scenes/simulation_map/simulation_map.tscn"
+
+# Github Website of the capstone project.
+const _SIMULATION_SOURCE_CODE: String = "https://github.com/sh4nnja/school-project-CAPSTONE-VBlox"
+
+# Portfolio Website of the capstone developers.
+const _SIMULATION_TEAM: String = ""
 
 # Main interfaces.
 @onready var _body: Control = get_node("user_interface/body")
@@ -82,40 +88,40 @@ func _ready() -> void:
 # Set interface theme logic.
 func _apply_theme() -> void:
 	# Changes the text to the right theme.
-	_theme_button.text = config.user_themes.keys()[config.current_theme]
+	_theme_button.text = Configuration.user_themes.keys()[Configuration.current_theme]
 	
 	# Set theme on background interfaces.
-	_background.color = config.user_themes.values()[config.current_theme][0]
-	_title.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][1])
-	_version.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][1])
-	_line_panel_res.bg_color = config.user_themes.values()[config.current_theme][1]
+	_background.color = Configuration.user_themes.values()[Configuration.current_theme][0]
+	_title.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][1])
+	_version.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][1])
+	_line_panel_res.bg_color = Configuration.user_themes.values()[Configuration.current_theme][1]
 	
 	# Set theme on learn panel interfaces.
-	_sim_panel_res.bg_color = config.user_themes.values()[config.current_theme][5]
+	_sim_panel_res.bg_color = Configuration.user_themes.values()[Configuration.current_theme][5]
 	
 	# Set theme on simulate panel interfaces.
-	_learn_panel_res.bg_color = config.user_themes.values()[config.current_theme][4]
+	_learn_panel_res.bg_color = Configuration.user_themes.values()[Configuration.current_theme][4]
 	
 	# Set theme on panel texts.
-	_sim_panel_txt.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
-	_sim_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	_sim_panel_txt.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][6])
+	_sim_panel_desc.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][6])
 	
-	_learn_panel_txt.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
-	_learn_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	_learn_panel_txt.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][6])
+	_learn_panel_desc.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][6])
 	
-	_about_panel_text.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
-	_about_panel_desc.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][6])
+	_about_panel_text.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][6])
+	_about_panel_desc.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][6])
 	
 	# Set theme on navigation buttons.
-	_exit_button.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][1])
-	_exit_button.add_theme_color_override("font_pressed_color", config.user_themes.values()[config.current_theme][2])
-	_exit_button.add_theme_color_override("font_hover_color", config.user_themes.values()[config.current_theme][3])
-	_exit_button.add_theme_color_override("font_focus_color", config.user_themes.values()[config.current_theme][1])
+	_exit_button.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][1])
+	_exit_button.add_theme_color_override("font_pressed_color", Configuration.user_themes.values()[Configuration.current_theme][2])
+	_exit_button.add_theme_color_override("font_hover_color", Configuration.user_themes.values()[Configuration.current_theme][3])
+	_exit_button.add_theme_color_override("font_focus_color", Configuration.user_themes.values()[Configuration.current_theme][1])
 	
-	_theme_button.add_theme_color_override("font_color", config.user_themes.values()[config.current_theme][1])
-	_theme_button.add_theme_color_override("font_pressed_color", config.user_themes.values()[config.current_theme][2])
-	_theme_button.add_theme_color_override("font_hover_color", config.user_themes.values()[config.current_theme][3])
-	_theme_button.add_theme_color_override("font_focus_color", config.user_themes.values()[config.current_theme][1])
+	_theme_button.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][1])
+	_theme_button.add_theme_color_override("font_pressed_color", Configuration.user_themes.values()[Configuration.current_theme][2])
+	_theme_button.add_theme_color_override("font_hover_color", Configuration.user_themes.values()[Configuration.current_theme][3])
+	_theme_button.add_theme_color_override("font_focus_color", Configuration.user_themes.values()[Configuration.current_theme][1])
 
 # Animate panel via tweening.
 func _animate_panel() -> void:
@@ -124,18 +130,18 @@ func _animate_panel() -> void:
 	var _anim_panel_pos:  Tween = create_tween()
 	
 	# Create parameters for the tween.
-	var _final_color: float = 1.0
-	var _final_pos: Vector2 = Vector2.ZERO
-	var _color_duration: float = 0.75
-	var _pos_duration: float = 0.5
+	const _FINAL_COLOR: float = 1.0
+	const _FINAL_POS: Vector2 = Vector2.ZERO
+	const _COLOR_DURATION: float = 0.75
+	const _POS_DURATION: float = 0.5
 	
 	# Resets the position and modulate so that the tween can be played.
 	_body.modulate.a = 0
 	_body.position = Vector2(0, 50)
 	
 	# Play tween animations.
-	_anim_panel_opacity.tween_property(_body, "modulate:a", _final_color, _color_duration).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-	_anim_panel_pos.tween_property(_body, "position", _final_pos, _pos_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	_anim_panel_opacity.tween_property(_body, "modulate:a", _FINAL_COLOR, _COLOR_DURATION).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	_anim_panel_pos.tween_property(_body, "position", _FINAL_POS, _POS_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 
 # Signal from button to exit.
 func _on_exit_button_pressed() -> void:
@@ -145,10 +151,10 @@ func _on_exit_button_pressed() -> void:
 # Signal from button to toggle themes.
 func _on_theme_button_pressed() -> void:
 	# Cycle the themes. Allows for adding more themes without changing the code again.
-	config.current_theme += 1
-	if config.current_theme > config.user_themes.keys().size() - 1:
+	Configuration.current_theme += 1
+	if Configuration.current_theme > Configuration.user_themes.keys().size() - 1:
 		# Make sure not to toggle dev_test theme.
-		config.current_theme = 1              
+		Configuration.current_theme = 1              
 	
 	# Changes the theme and the text and play panel animation so it doesn't look flat.
 	_apply_theme()
@@ -161,16 +167,17 @@ func _on_simulate_button_pressed():
 	_simulate_btn.text = "Loading..."
 	
 	# Creates a timer for 3s so to make sure the player know that its "changing the scene".
-	await get_tree().create_timer(config.loading_time).timeout
+	await get_tree().create_timer(Configuration.LOADING_TIME).timeout
 	
 	# Change the scene.
-	get_tree().change_scene_to_file(_sim_scn_file)
+	get_tree().change_scene_to_file(_SIMULATION_SCN_FILE)
 
 # Signal from button to open a website of the source code.
 func _on_about_github_pressed():
 	# Use "OS.shell_open()" to open website.
-	OS.shell_open("https://github.com/sh4nnja/school-project-CAPSTONE-VBlox")
+	OS.shell_open(_SIMULATION_SOURCE_CODE)
 
 # Signal from button to open a website of the team portfolio.
 func _on_about_the_team_pressed():
-	pass # Replace with function body.
+	# Use "OS.shell_open()" to open website.
+	OS.shell_open(_SIMULATION_TEAM)

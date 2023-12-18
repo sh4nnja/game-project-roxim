@@ -147,10 +147,10 @@ cam_movement_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="bracket2x2" parent="objects" instance=ExtResource("7_t1msn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.20796, 0)
+transform = Transform3D(0.729936, 0, -0.683516, 0, 1, 0, 0.683516, 0, 0.729936, 5.92103, 5.20796, 0)
 
 [node name="bracket2x" parent="objects" instance=ExtResource("7_t1msn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.20796, 0)
+transform = Transform3D(0.643269, 0, 0.76564, 0, 1, 0, -0.76564, 0, 0.643269, 4.69366, 5.20796, 0)
 
 [node name="the_cube" parent="objects" instance=ExtResource("5_jvy4d")]
 transform = Transform3D(0.846082, -0.5, 0.184785, 0.488485, 0.866025, 0.106685, -0.213371, 0, 0.976971, 0, 1.02117, 0)

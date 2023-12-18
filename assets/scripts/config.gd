@@ -52,7 +52,7 @@ extends Node
 
 # ******************************************************************************
 # Supposed 'loading' time, just user experience.
-var loading_time: int = 3
+const LOADING_TIME: int = 3
 
 # ******************************************************************************
 # USER INTERFACE THEMES
@@ -139,16 +139,5 @@ var interface_keys: Dictionary = {
 
 # ******************************************************************************
 # FREE-CAMERA MOVEMENT CONFIGURATIONS
-
-# Camera movement multiplier.
-var cam_sprint_mult: float = 2.0                   
-var cam_crouch_mult: float = 0.5
-var cam_vel_mult: Vector3 = Vector3(1.1, 0.2, 50) 
-
 # Camera sensitivity.
 var cam_sens: float = 0.25                 
-
-# Camera clearance.
-var cam_clearance: Vector2 = Vector2(0.6, 500)
-
-

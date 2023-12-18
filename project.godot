@@ -63,6 +63,7 @@ MOUSE_BUTTON_WHEEL_DOWN={
 
 [physics]
 
+3d/run_on_separate_thread=true
 common/physics_ticks_per_second=144
 3d/solver/solver_iterations=32
 

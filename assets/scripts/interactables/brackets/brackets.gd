@@ -61,31 +61,48 @@ class_name Brackets
 # Detailed comments per variable are available.
 # ******************************************************************************
 
-# Type of bracket.
+# The bracket reference and what kind / type of bracket.
+var bracket: Brackets
 var bracket_type: int
 
 # Array of 'slots' of the bracket. Each index indicates the 'slot' occupied by a bracket.
 # It means that the size of 'slots' is based on the holes of a bracket.
-var slots: Array[Array]
+var _slot_positions: Array[float]
+var _slot_states: Array[bool]
+var _slot_detected_idx: int
 
 # The bracket 'B' the current bracket 'A" you are interacting to.
 # This will help for connecting the brackets.
-var attaching_bracket: Brackets = null
-var bracket: Brackets
+var _attaching_bracket: Brackets = null
+
+# ******************************************************************************
+# SNAPPING MECHANIC
+# Bracket Height constant. For the snap mechanic.
+const _BRACKET_SNAP_HEIGHT: float = 0.125
+
+# The bracket threshold before the snap is disabled.
+const _BRACKET_SNAP_THRESHOLD: float = 0.75
+
+# The bracket snap lerp weight.
+const _BRACKET_SNAP_LRP_WEIGHT: float = 0.15
+
+# Rotation when snapping.
+var _bracket_snap_rot_mode: int 
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 # Initiate 'slot' size function. This will vary by each bracket.
 # Setting up this function is a must for clean code I suppose.
-func initiate_brackets(_bracket: Brackets, _slot_array: Array, _bracket_size: int) -> void:
+func initiate_brackets(_bracket: Brackets, _bracket_size: int) -> void:
 	# Update the bracket, its slots, the slots position etc.
 	for _slot_idx in range(_bracket.get_child_count()):
 		var _slot: Node3D = _bracket.get_child(_slot_idx)
 		# Checks if the slot is an Area3D.
 		if _slot is Area3D:
-			# Append false, meaning the slot is not occupied.
+			# Append false, meaning the slot is not occupied. 
 			# Append '_slot' position.
-			_slot_array.append([false, _slot.global_transform.origin.x])
+			_slot_positions.append(-(_slot.transform.origin.x * 2))
+			_slot_states.append(false)
 	
 	# Changes what type of bracket currently have.
 	bracket_type = _bracket_size
@@ -95,13 +112,14 @@ func initiate_brackets(_bracket: Brackets, _slot_array: Array, _bracket_size: in
 # Manage slot detection for the bracket signals.
 func manage_slot_detection(_idx: int, _is_bracket_detected: bool, _detected_bracket: Area3D) -> void:
 	# Set the true or false of the slots array.
-	slots[_idx][0] = _is_bracket_detected
+	_slot_detected_idx = _idx
+	_slot_states[_slot_detected_idx] = _is_bracket_detected
 	if _is_bracket_detected:
 		# Sets the attaching bracket as the bracket the current bracket attempts to attach to.
 		# The Area3D parent 
-		attaching_bracket = _detected_bracket.get_parent()
+		_attaching_bracket = _detected_bracket.get_parent()
 	else:
-		attaching_bracket = null
+		_attaching_bracket = null
 
 # Managing bracket mechanics such as attaching and disappearing.
 func manage_mechanics(_bracket: Brackets, _is_enabled: bool) -> void:
@@ -133,33 +151,60 @@ func manage_mechanics(_bracket: Brackets, _is_enabled: bool) -> void:
 func _manage_bracket_hover(_bracket: Brackets, _is_enabled: bool) -> void:
 	# This just means that if a slot has detected a possible slot.
 	# Apply 'can_attach' texture.
-	for _slot in slots:
-		if _slot.has(true):
-			apply_selected_texture(true, interactable_to_attach_res)
+	if _slot_states.has(true):
+		apply_selected_texture(true, interactable_to_attach_res)
 
 # Bracket attaches into another bracket mechanic.
 func _manage_bracket_attachment(_bracket: Brackets) -> void:
-	for _slot in slots:
-		if _slot[0] and attaching_bracket:
-			# Check if the drag speed is greater than the bracket break force to snap.
-			if !snapped(bracket.linear_velocity.length(), 0.1) > SimulationEngine.bracket_snap_threshold:
-				# Reset the linear velocity of the bracket after snapping.
-				_bracket.linear_velocity = Vector3(0, 0, 0)
-				_bracket.angular_velocity = Vector3(0, 0, 0)
-				
-				# Have the position as the attaching bracket.
-				# The values will vary depending on the slot it was placed.
-				_bracket.global_transform.origin = attaching_bracket.global_transform.origin + Vector3(0, 0.125, 0)
-				
-				# Have the rotation as the attaching bracket.
-				_bracket.rotation_degrees = attaching_bracket.rotation_degrees
+	if _attaching_bracket:
+		if snapped(bracket.linear_velocity.length(), 0.1) < _BRACKET_SNAP_THRESHOLD:
+			# The offset of the bracket when snapped.
+			var _offset: Vector3 
+			
+			# If one slot has detected another slot.
+			if _slot_states.has(true) and _slot_states.has(false):
+				# Calculate the desired offset based on _slot[1].
+				_offset = Vector3(_slot_positions[_slot_detected_idx], _BRACKET_SNAP_HEIGHT, 0)
+			
+			# If two slots has detected another two slots.
+			elif _get_consecutive_true_index(_slot_states):
+				_offset = Vector3(0, _BRACKET_SNAP_HEIGHT, 0)
+			
+			# The values will vary depending on the slot it was placed.
+			_bracket.transform.origin = lerp(_bracket.transform.origin, _attaching_bracket.transform.origin + (_attaching_bracket.global_transform.basis * _offset), _BRACKET_SNAP_LRP_WEIGHT)
+			
+			# Have the rotation as the attaching bracket.
+			_bracket.global_rotation_degrees = _attaching_bracket.global_rotation_degrees
+			
+			# Reset the linear velocity of the bracket when snapping.
+			_bracket.linear_velocity = Vector3(0, 0, 0)
+			_bracket.angular_velocity = Vector3(0, 0, 0)
 
 # Bracket detaches from another bracket mechanic.
 func _manage_bracket_detachment(_bracket: Brackets) -> void:
 	pass
 
 # ******************************************************************************
+# TOOLS
+# Get two consecutive indexes. Useful for centering the bracket.
+func _get_consecutive_true_index(_slot_states_arr: Array):
+	var _result = []
+	var _consecutive_count = 0
+	for _idx in range(_slot_states_arr.size()):
+		if _slot_states[_idx]:
+			_consecutive_count += 1
+			if _consecutive_count == 2:
+				_result.append(_idx - 1)
+				_result.append(_idx)
+				break
+		else:
+			_consecutive_count = 0
+	return _result
+
+# ******************************************************************************
 # DEBUG
 func manage_debug() -> void:
-	SimulationEngine.manage_debug_entries(str("     Bracket Slot States of " + str(self.name)), str(slots), is_selected)
-	SimulationEngine.manage_debug_entries("     Bracket Linear Velocity of " + str(self.name), snapped(bracket.linear_velocity.length(), 0.1), is_selected)
+	SimulationEngine.manage_debug_entries(str("     Slot States of " + str(self.name)), str(_slot_states), !is_selected)
+#	SimulationEngine.manage_debug_entries("     Global Rotation of " + str(self.name), bracket.global_rotation_degrees.snapped(Vector3(0.1, 0.1, 0.1)), !is_selected)
+#	SimulationEngine.manage_debug_entries("     Global Position of " + str(self.name), bracket.global_position.snapped(Vector3(0.1, 0.1, 0.1)), !is_selected)
+#	SimulationEngine.manage_debug_entries("     Linear Velocity of " + str(self.name), snapped(bracket.linear_velocity.length(), 0.1), !is_selected)

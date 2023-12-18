@@ -40,13 +40,6 @@ extends Node3D
 # All calculation of positions, random generations, and debugging etc will be located here.
 
 # ******************************************************************************
-# Snapping Mechanic
-var bracket_snap_threshold: float = 1.5
-
-# Speed of the 'interactable' when dragging.
-var interacted_obj_grab_speed: int = 3
-
-# ******************************************************************************
 # VIRTUAL
 func _physics_process(_delta) -> void:
 	# Simulation Engine debug report.
@@ -75,10 +68,10 @@ func print_null_string(_check_variable) -> String:
 
 # Tool for appending debug values.
 func manage_debug_entries(_identifier: String, _value: Variant, _remove: bool = false) -> void:
-	if !_remove:
-		_debug_report[_identifier] = _value
-	else:
+	if _remove:
 		_debug_report.erase(_identifier)
+	else:
+		_debug_report[_identifier] = _value
 
 # Clean the debug string for visuals.
 func debug_report() -> String:

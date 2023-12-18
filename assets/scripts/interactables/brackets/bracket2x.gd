@@ -37,13 +37,13 @@
 extends Brackets
 
 # Bracket size. Since this bracket is 2x, the bracket size is 2.
-var _slot_size: int = 2
+const _SLOT_SIZE: int = 2
 
 # ******************************************************************************
 # INITIATION
 func _ready() -> void:
 	# Initiate bracket size.
-	initiate_brackets(self, slots, _slot_size)
+	initiate_brackets(self, _SLOT_SIZE)
 
 # ******************************************************************************
 # PHYSICS

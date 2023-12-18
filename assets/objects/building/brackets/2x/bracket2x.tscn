@@ -12,8 +12,8 @@ texture_filter = 2
 size = Vector3(0.626466, 0.126118, 0.249688)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4s2lq"]
-height = 0.300446
-radius = 0.101414
+height = 0.187665
+radius = 0.0778221
 
 [node name="bracket2x" type="RigidBody3D"]
 continuous_cd = true
@@ -28,7 +28,7 @@ mesh = ExtResource("2_if8dp")
 shape = SubResource("BoxShape3D_srk55")
 
 [node name="brack_attach_1" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.187246, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.187, 0, 0)
 collision_mask = 0
 monitoring = false
 
@@ -36,7 +36,7 @@ monitoring = false
 shape = SubResource("CylinderShape3D_4s2lq")
 
 [node name="brack_attach_2" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.191273, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.187, 0, 0)
 collision_mask = 0
 monitoring = false
 

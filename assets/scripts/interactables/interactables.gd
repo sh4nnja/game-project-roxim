@@ -61,11 +61,6 @@ class_name Interactables
 var is_selected: bool = false
 
 # ******************************************************************************
-# PHYSICS
-func _physics_process(_delta):
-	pass
-
-# ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 # Applying a 'selected' texture in an 'interactable'.
 func apply_selected_texture(apply: bool, _texture_override: Resource = interactable_selected_res) -> void:

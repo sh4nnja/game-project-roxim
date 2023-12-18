@@ -40,8 +40,9 @@ class_name Camera
 # Movement states.
 @export var cam_movement_enabled: bool = false
 
-var _accel: float = 30.0
-var _decel: float = -10.0
+# Camera movement physics.
+const _ACCEL: float = 30.0
+const _DECEL: float = -10.0
 var _vel: Vector3 = Vector3(0.0, 0.0, 0.0)
 var _vel_mult: float = 4.0
 var _dir: Vector3 = Vector3(0.0, 0.0, 0.0)
@@ -49,6 +50,14 @@ var _dir: Vector3 = Vector3(0.0, 0.0, 0.0)
 # Mouse states.
 var _mouse_pos: Vector2 = Vector2(0.0, 0.0)
 var _total_pitch: float  = 0.0
+
+# Camera movement multiplier.
+const _CAM_SPRINT_MULT: float = 2.0                   
+const _CAM_CROUCH_MULT: float = 0.5
+const _CAM_VEL_MULT: Vector3 = Vector3(1.1, 0.2, 50) 
+
+# Camera map clearance.
+const _CAM_CLEARANCE: Vector2 = Vector2(0.6, 500)
 
 # ******************************************************************************
 # INPUT EVENTS
@@ -130,15 +139,15 @@ func _update_cam_movement(fDelta: float) -> void:
 	
 	# Computes the change in velocity due to desired direction and "drag"
 	# The "drag" is a constant acceleration on the camera to bring it's velocity to 0
-	var _offset = _dir.normalized() * _accel * _vel_mult * fDelta + _vel.normalized() * _decel * _vel_mult * fDelta
+	var _offset = _dir.normalized() * _ACCEL * _vel_mult * fDelta + _vel.normalized() * _DECEL * _vel_mult * fDelta
 	
 	# Compute modifiers' speed multiplier
 	var _speed: float = 1.0
 	if Configuration.cam_movement_keys.values()[6][1]: 
-		_speed *= Configuration.cam_sprint_mult
+		_speed *= _CAM_SPRINT_MULT
 	
 	if Configuration.cam_movement_keys.values()[7][1]: 
-		_speed *= Configuration.cam_crouch_mult
+		_speed *= _CAM_SPRINT_MULT
 	
 	# Checks if we should bother translating the camera
 	if _dir == Vector3.ZERO and _offset.length_squared() > _vel.length_squared():
@@ -154,7 +163,6 @@ func _update_cam_movement(fDelta: float) -> void:
 		translate(_vel * fDelta * _speed)
 	
 	# Clamp camera movement so it doesn't go below or outside the platform.
-	position.x = clamp(position.x, -Configuration.cam_clearance.y, Configuration.cam_clearance.y)
-	position.y = clamp(position.y, Configuration.cam_clearance.x, Configuration.cam_clearance.y)
-	position.z = clamp(position.z, -Configuration.cam_clearance.y, Configuration.cam_clearance.y)
-	
+	position.x = clamp(position.x, -_CAM_CLEARANCE.y, _CAM_CLEARANCE.y)
+	position.y = clamp(position.y, _CAM_CLEARANCE.x, _CAM_CLEARANCE.y)
+	position.z = clamp(position.z, -_CAM_CLEARANCE.y, _CAM_CLEARANCE.y)
