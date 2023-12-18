@@ -118,18 +118,19 @@ func _animate_crosshair(_hovered: bool) -> void:
 func _drag_interactable(_event) -> void:
 	if _event is InputEventMouseButton:
 		if is_colliding():
-			if Input.is_action_pressed(Configuration.interactor_keys.values()[3]):
-				# Check first if the collided 'interactable' is actually one.
-				if get_collider() is RigidBody3D:
-					# Place the 'interactable' into a variable for ref. Once released, it reverts to null.
-					_interacted_object = get_collider()
-					
-					# Change interacted object state.
-					_interacted_object.manage_selection(true)
-			if Input.is_action_just_released(Configuration.interactor_keys.values()[3]):
-				if _interacted_object != null:
-					_interacted_object.manage_selection(false)
-				_interacted_object = null
+			if _event.button_index == Configuration.interactor_keys.values()[3]:
+				if _event.pressed:
+					# Check first if the collided 'interactable' is actually one.
+					if get_collider() is RigidBody3D:
+						# Place the 'interactable' into a variable for ref. Once released, it reverts to null.
+						_interacted_object = get_collider()
+						
+						# Change interacted object state.
+						_interacted_object.manage_selection(true)
+				else:
+					if _interacted_object:
+						_interacted_object.manage_selection(false)
+						_interacted_object = null
 		else:
 			# Default to null when no object being interacted.
 			_interacted_object = null

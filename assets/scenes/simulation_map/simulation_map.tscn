@@ -152,10 +152,10 @@ transform = Transform3D(0.729936, 0, -0.683516, 0, 1, 0, 0.683516, 0, 0.729936, 
 [node name="bracket2x" parent="objects" instance=ExtResource("7_t1msn")]
 transform = Transform3D(0.643269, 0, 0.76564, 0, 1, 0, -0.76564, 0, 0.643269, 4.69366, 5.20796, 0)
 
-[node name="the_cube" parent="objects" instance=ExtResource("5_jvy4d")]
-transform = Transform3D(0.846082, -0.5, 0.184785, 0.488485, 0.866025, 0.106685, -0.213371, 0, 0.976971, 0, 1.02117, 0)
-
 [node name="vblox_logo" parent="objects" instance=ExtResource("6_ind2l")]
 transform = Transform3D(0.539705, 0.258819, -0.801081, -0.144614, 0.965926, 0.214649, 0.82934, 0, 0.558744, -0.0654791, 2.05226, 0.112715)
+
+[node name="the_cube" parent="objects" instance=ExtResource("5_jvy4d")]
+transform = Transform3D(0.846082, -0.5, 0.184785, 0.488485, 0.866025, 0.106685, -0.213371, 0, 0.976971, 0, 1.02117, 0)
 
 [connection signal="pressed" from="user_interface/pause_menu/menu_button" to="user_interface" method="_on_menu_button_pressed"]

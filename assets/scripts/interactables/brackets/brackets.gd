@@ -87,7 +87,7 @@ const _BRACKET_SNAP_THRESHOLD: float = 0.75
 const _BRACKET_SNAP_LRP_WEIGHT: float = 0.15
 
 # Rotation when snapping.
-var _bracket_snap_rot_mode: int 
+const _BRACKET_SNAP_ROT_INCR: int = 15 
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
@@ -161,20 +161,23 @@ func _manage_bracket_attachment(_bracket: Brackets) -> void:
 			# The offset of the bracket when snapped.
 			var _offset: Vector3 
 			
+			# Snapping Mechanic snippet.
 			# If one slot has detected another slot.
 			if _slot_states.has(true) and _slot_states.has(false):
 				# Calculate the desired offset based on _slot[1].
 				_offset = Vector3(_slot_positions[_slot_detected_idx], _BRACKET_SNAP_HEIGHT, 0)
+				
+				
 			
 			# If two slots has detected another two slots.
 			elif _get_consecutive_true_index(_slot_states):
 				_offset = Vector3(0, _BRACKET_SNAP_HEIGHT, 0)
 			
-			# The values will vary depending on the slot it was placed.
-			_bracket.transform.origin = lerp(_bracket.transform.origin, _attaching_bracket.transform.origin + (_attaching_bracket.global_transform.basis * _offset), _BRACKET_SNAP_LRP_WEIGHT)
-			
 			# Have the rotation as the attaching bracket.
 			_bracket.global_rotation_degrees = _attaching_bracket.global_rotation_degrees
+			
+			# The values will vary depending on the slot it was placed.
+			_bracket.transform.origin = lerp(_bracket.transform.origin, _attaching_bracket.transform.origin + (_attaching_bracket.global_transform.basis * _offset), _BRACKET_SNAP_LRP_WEIGHT)
 			
 			# Reset the linear velocity of the bracket when snapping.
 			_bracket.linear_velocity = Vector3(0, 0, 0)
