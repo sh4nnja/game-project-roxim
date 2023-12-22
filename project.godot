@@ -70,5 +70,6 @@ common/physics_ticks_per_second=144
 [rendering]
 
 occlusion_culling/bvh_build_quality=1
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 environment/defaults/default_environment="res://assets/materials/simulation/simulation_map_env.tres"

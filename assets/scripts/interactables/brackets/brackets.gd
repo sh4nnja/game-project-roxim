@@ -67,13 +67,14 @@ var bracket_type: int
 
 # Array of 'slots' of the bracket. Each index indicates the 'slot' occupied by a bracket.
 # It means that the size of 'slots' is based on the holes of a bracket.
-var _slot_positions: Array[float]
+var _slot_positions: PackedFloat64Array
 var _slot_states: Array[bool]
 var _slot_detected_idx: int
 
 # The bracket 'B' the current bracket 'A" you are interacting to.
 # This will help for connecting the brackets.
-var _attaching_bracket: Brackets = null
+var _attaching_bracket: Brackets
+var _attaching_bracket_slot_pos: PackedFloat64Array
 
 # ******************************************************************************
 # SNAPPING MECHANIC
@@ -101,7 +102,7 @@ func initiate_brackets(_bracket: Brackets, _bracket_size: int) -> void:
 		if _slot is Area3D:
 			# Append false, meaning the slot is not occupied. 
 			# Append '_slot' position.
-			_slot_positions.append(-(_slot.transform.origin.x * 2))
+			_slot_positions.append(SimulationEngine.fsnap(_slot.transform.origin.x))
 			_slot_states.append(false)
 	
 	# Changes what type of bracket currently have.
@@ -118,7 +119,10 @@ func manage_slot_detection(_idx: int, _is_bracket_detected: bool, _detected_brac
 		# Sets the attaching bracket as the bracket the current bracket attempts to attach to.
 		# The Area3D parent 
 		_attaching_bracket = _detected_bracket.get_parent()
+		_attaching_bracket_slot_pos.append(SimulationEngine.fsnap(_detected_bracket.transform.origin.x))
+		_attaching_bracket_slot_pos.sort()
 	else:
+		_attaching_bracket_slot_pos.clear()
 		_attaching_bracket = null
 
 # Managing bracket mechanics such as attaching and disappearing.
@@ -154,60 +158,159 @@ func _manage_bracket_hover(_bracket: Brackets, _is_enabled: bool) -> void:
 	if _slot_states.has(true):
 		apply_selected_texture(true, interactable_to_attach_res)
 
+# ******************************************************************************
 # Bracket attaches into another bracket mechanic.
 func _manage_bracket_attachment(_bracket: Brackets) -> void:
+	# Snapping Mechanic snippet.
+	# Here lies the snapping mechanic for Vblox.
+	# God knows what I am doing here.
+	
+	# If there are currently brackets attempting to attach.
 	if _attaching_bracket:
-		if snapped(bracket.linear_velocity.length(), 0.1) < _BRACKET_SNAP_THRESHOLD:
-			# The offset of the bracket when snapped.
-			var _offset: Vector3 
-			
-			# Snapping Mechanic snippet.
-			# If one slot has detected another slot.
-			if _slot_states.has(true) and _slot_states.has(false):
-				# Calculate the desired offset based on _slot[1].
-				_offset = Vector3(_slot_positions[_slot_detected_idx], _BRACKET_SNAP_HEIGHT, 0)
-				
-				
-			
-			# If two slots has detected another two slots.
-			elif _get_consecutive_true_index(_slot_states):
-				_offset = Vector3(0, _BRACKET_SNAP_HEIGHT, 0)
-			
-			# Have the rotation as the attaching bracket.
-			_bracket.global_rotation_degrees = _attaching_bracket.global_rotation_degrees
-			
-			# The values will vary depending on the slot it was placed.
-			_bracket.transform.origin = lerp(_bracket.transform.origin, _attaching_bracket.transform.origin + (_attaching_bracket.global_transform.basis * _offset), _BRACKET_SNAP_LRP_WEIGHT)
-			
-			# Reset the linear velocity of the bracket when snapping.
-			_bracket.linear_velocity = Vector3(0, 0, 0)
-			_bracket.angular_velocity = Vector3(0, 0, 0)
+		# Check if the force of the bracket is lower than the threshold to hold snapping.
+		if _check_bracket_snap():
+			_snap_bracket(_bracket, _get_snap_offset())
 
+#			# Edge slot to edge slot snapping.
+#			if _attaching_bracket_slot_pos.size() == 1:
+#				_offset.x = _attaching_bracket_slot_pos[0] - _slot_positions[_slot_detected_idx]
+#
+#			# Full Slot to Partial Slot / Full Slot snapping logic.
+#			elif _attaching_bracket_slot_pos.size() % 2 == 0:
+#				if _attaching_bracket_slot_pos.size() > 2:
+#					# Get the middle slot of the odd bracket.
+#					var _mid_slot_idx: float = float(_attaching_bracket_slot_pos.size()) / 2
+#
+#					# Calculate the midpoint of those two slot positions for offset.
+#					_offset.x = (_attaching_bracket_slot_pos[int(_mid_slot_idx) - 1] +  _attaching_bracket_slot_pos[int(_mid_slot_idx)]) / 2  
+#				else:
+#					if !_slot_states.has(false):
+#						_offset.x = (_attaching_bracket_slot_pos[0] + _attaching_bracket_slot_pos[1]) / 2
+#					else:
+#						_offset.x = _attaching_bracket_slot_pos[0]
+#
+#			# Logic for odd slots snapping.
+#			else:
+#				# Get the middle slot of the odd bracket.
+#				var _mid_slot_idx: float = float(_attaching_bracket_slot_pos.size()) / 2
+#
+#				# Full Slot to Partial Slot / Full Slot snapping logic.
+#				if !_slot_states.has(false):
+#					_offset.x = _attaching_bracket_slot_pos[int(_mid_slot_idx)] 
+#				else:
+#					# Calculate the midpoint of those two slot positions for offset.
+#					_offset.x = (_attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 2] + _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1]) / 2
+#
+#			# Have the rotation as the attaching bracket.
+#			_bracket.global_rotation_degrees = _attaching_bracket.global_rotation_degrees
+#
+#			# The values will vary depending on the slot it was placed.
+#			# Lerp the snapping mechanic offset x.
+#			_bracket.global_transform.origin = lerp(
+#				_bracket.global_transform.origin, 
+#				_attaching_bracket.global_transform.origin + (_attaching_bracket.global_transform.basis * _offset), 
+#				_BRACKET_SNAP_LRP_WEIGHT)
+#
+#			# Lerp the constant 0.125 y offset.
+#			_bracket.global_transform.origin.y = lerp(
+#				_bracket.global_transform.origin.y, 
+#				_bracket.global_transform.origin.y + _BRACKET_SNAP_HEIGHT, 
+#				_BRACKET_SNAP_LRP_WEIGHT)
+#
+#			# Reset the linear velocity of the bracket when snapping.
+#			_bracket.linear_velocity = Vector3(0, 0, 0)
+#			_bracket.angular_velocity = Vector3(0, 0, 0)
+
+# The offset of the bracket when snapped.
+func _get_snap_offset() -> Vector3:
+	# The offset of the bracket when snapped.
+	var _offset: Vector3 = Vector3(0, 0, 0)
+	var _avg_slot_pos: float = 0
+	
+	# Calculate the bracket offset.
+	if !_slot_states.has(false):
+		_offset.x = (_attaching_bracket_slot_pos[0] + _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1]) / 2
+	else:
+		_offset.x 
+		print()
+		
+	return _offset
+
+	# Edge slot to edge slot snapping.
+#	if _attaching_bracket_slot_pos.size() == 1:
+#		return Vector3(_attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1] - _slot_positions[_slot_detected_idx], 0, 0)
+#
+#	# Even slot snapping.
+#	elif _attaching_bracket_slot_pos.size() % 2 == 0:
+#		return _get_midpoint_offset()
+#
+#	# Odd slot snapping.
+#	else:
+#		return _get_midpoint_offset()
+## Calculate the midpoint of those two slot positions for offset.
+#func _get_midpoint_offset() -> Vector3:
+#	var _mid_slot_idx: float = float(_attaching_bracket_slot_pos.size()) / 2
+#	var _midpoint_slot_pos: float = 0
+#
+#	# Full to Partial / Full snap logic.
+#	if !_slot_states.has(false):
+#		_midpoint_slot_pos = (_attaching_bracket_slot_pos[0] + _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1]) / 2
+#	# Partial to Partial / Full snap logic.
+#	else:
+#		if _slot_positions[_slot_detected_idx] < 0:
+#			_midpoint_slot_pos = _attaching_bracket_slot_pos[0] - _slot_positions[_attaching_bracket_slot_pos.size() - 1]
+##			print("HOtdog")
+#		elif _slot_positions[_slot_detected_idx] >= 0:
+#			_midpoint_slot_pos = _attaching_bracket_slot_pos[0] + (2 * _slot_positions[_slot_detected_idx])
+##			print("HAtdog")
+##
+##		_midpoint_slot_pos = _attaching_bracket_slot_pos[0] + (2 * _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1])
+##		print(_midpoint_slot_pos, "\n")
+#
+#	print((_attaching_bracket_slot_pos[0] + _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1]) / 2)
+#	print((_slot_positions[_slot_positions.size() - 1] + _slot_positions[_slot_detected_idx]) / 2, "\n")
+#	return Vector3(_midpoint_slot_pos, 0, 0)
+
+# Check if the force of the bracket is lower than the threshold to hold snapping
+func _check_bracket_snap() -> bool:
+	return SimulationEngine.fsnap(bracket.linear_velocity.length()) < _BRACKET_SNAP_THRESHOLD
+
+# Snaps the bracket in place.
+func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
+	# Have the rotation as the attaching bracket.
+	_bracket.global_rotation_degrees = _attaching_bracket.global_rotation_degrees
+			
+	# The values will vary depending on the slot it was placed.
+	# Lerp the snapping mechanic offset x.
+	_bracket.global_transform.origin = lerp(
+		_bracket.global_transform.origin, 
+		_attaching_bracket.global_transform.origin + (_attaching_bracket.global_transform.basis * _offset), 
+		_BRACKET_SNAP_LRP_WEIGHT)
+		
+	# Lerp the constant 0.125 y offset.
+	_bracket.global_transform.origin.y = lerp(
+		_bracket.global_transform.origin.y, 
+		_bracket.global_transform.origin.y + _BRACKET_SNAP_HEIGHT, 
+		_BRACKET_SNAP_LRP_WEIGHT)
+		
+	# Reset the linear velocity of the bracket when snapping.
+	_bracket.linear_velocity = Vector3(0, 0, 0)
+	_bracket.angular_velocity = Vector3(0, 0, 0)
+
+# ******************************************************************************
 # Bracket detaches from another bracket mechanic.
 func _manage_bracket_detachment(_bracket: Brackets) -> void:
 	pass
 
 # ******************************************************************************
-# TOOLS
-# Get two consecutive indexes. Useful for centering the bracket.
-func _get_consecutive_true_index(_slot_states_arr: Array):
-	var _result = []
-	var _consecutive_count = 0
-	for _idx in range(_slot_states_arr.size()):
-		if _slot_states[_idx]:
-			_consecutive_count += 1
-			if _consecutive_count == 2:
-				_result.append(_idx - 1)
-				_result.append(_idx)
-				break
-		else:
-			_consecutive_count = 0
-	return _result
-
-# ******************************************************************************
 # DEBUG
 func manage_debug() -> void:
-	SimulationEngine.manage_debug_entries(str("     Slot States of " + str(self.name)), str(_slot_states), !is_selected)
+	SimulationEngine.manage_debug_entries(str("     Slot States of " + str(self.name)), str(_slot_states), !self.is_selected)
+	SimulationEngine.manage_debug_entries(str("     Slot Positions of " + str(self.name)), str(_slot_positions), !self.is_selected)
+	@warning_ignore("incompatible_ternary")
+	SimulationEngine.manage_debug_entries(str("     Attaching Slots Detected of " + str(self.name)), str(_attaching_bracket.name if _attaching_bracket else _attaching_bracket) + " " + str(_attaching_bracket_slot_pos), !self._attaching_bracket)
+
 #	SimulationEngine.manage_debug_entries("     Global Rotation of " + str(self.name), bracket.global_rotation_degrees.snapped(Vector3(0.1, 0.1, 0.1)), !is_selected)
 #	SimulationEngine.manage_debug_entries("     Global Position of " + str(self.name), bracket.global_position.snapped(Vector3(0.1, 0.1, 0.1)), !is_selected)
 #	SimulationEngine.manage_debug_entries("     Linear Velocity of " + str(self.name), snapped(bracket.linear_velocity.length(), 0.1), !is_selected)
+

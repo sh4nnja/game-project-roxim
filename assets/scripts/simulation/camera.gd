@@ -116,7 +116,7 @@ func _update_cam_free_look() -> void:
 		_mouse_pos = Vector2.ZERO
 		
 		# Prevents camera from looking up/down too far
-		_pitch = clamp(_pitch, -90 - _total_pitch, 90 - _total_pitch)
+		_pitch = clamp(_pitch, -120 - _total_pitch, 65 - _total_pitch)
 		_total_pitch += _pitch
 		
 		# Rotate camera.

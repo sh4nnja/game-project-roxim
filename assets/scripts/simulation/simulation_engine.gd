@@ -38,6 +38,7 @@ extends Node3D
 
 # Base class of SIMULATION ENGINE.
 # All calculation of positions, random generations, and debugging etc will be located here.
+var _float_step: float = 0.001
 
 # ******************************************************************************
 # VIRTUAL
@@ -48,9 +49,15 @@ func _physics_process(_delta) -> void:
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 
+# ******************************************************************************
+# TOOLS
+func fsnap(_value: float) -> float:
+	return snappedf(_value, _float_step)
+
+
 
 # ******************************************************************************
-# DEBUGGINE ENGINE
+# DEBUGGING ENGINE
 var debug_enabled: bool = true
 var _debug_report: Dictionary
 
