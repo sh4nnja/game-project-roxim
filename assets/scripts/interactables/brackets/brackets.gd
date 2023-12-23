@@ -185,10 +185,13 @@ func _get_snap_offset() -> Vector3:
 	# Calculate the bracket offset.
 	# Full to full and full to partial slot logic.
 	if !_slot_states.has(false):
+		# It gets the midpoint position of the first slot attached and the last slot attached.
+		# It should work at any bracket as the '_attaching_bracket_slot_pos' array can be used to get the midpoint.
 		_offset.x = (_attaching_bracket_slot_pos[0] + _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1]) / 2
 	
 	# Partial to full and partial to partial slot logic.
 	else:
+		
 		_offset.x = _attaching_bracket_slot_pos[0] - _slot_positions[_slot_detected_idx]
 	
 	return _offset
