@@ -119,7 +119,7 @@ func _drag_interactable(_event) -> void:
 	if _event is InputEventMouseButton:
 		if is_colliding():
 			if _event.button_index == Configuration.interactor_keys.values()[3]:
-				if _event.pressed:
+				if _event.is_pressed():
 					# Check first if the collided 'interactable' is actually one.
 					if get_collider() is RigidBody3D:
 						# Place the 'interactable' into a variable for ref. Once released, it reverts to null.
@@ -130,6 +130,8 @@ func _drag_interactable(_event) -> void:
 				else:
 					if _interacted_object:
 						_interacted_object.manage_selection(false)
+						_interacted_object = null
+					else:
 						_interacted_object = null
 		else:
 			# Default to null when no object being interacted.

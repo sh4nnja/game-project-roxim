@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://doa1xyi5m6hn7"]
 
 [ext_resource type="Script" path="res://assets/scripts/interactables/brackets/bracket2x.gd" id="1_31o5r"]
-[ext_resource type="Texture2D" uid="uid://bcalgxt2i401x" path="res://assets/objects/building/brackets/2x/texture-2x.png" id="2_phbxk"]
+[ext_resource type="Texture2D" uid="uid://bcalgxt2i401x" path="res://assets/objects/building/brackets/3x/texture-3x.png" id="2_phbxk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlh1w"]
 albedo_texture = ExtResource("2_phbxk")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/scripts/interactables/brackets/bracket3x.gd" id="1_v17m1"]
 [ext_resource type="ArrayMesh" uid="uid://dusgwmlh6iymp" path="res://assets/objects/building/brackets/3x/bracket3x.obj" id="2_if8dp"]
-[ext_resource type="Texture2D" uid="uid://bcalgxt2i401x" path="res://assets/objects/building/brackets/2x/texture-2x.png" id="2_koe3r"]
+[ext_resource type="Texture2D" uid="uid://bcalgxt2i401x" path="res://assets/objects/building/brackets/3x/texture-3x.png" id="2_koe3r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jlq5p"]
 albedo_texture = ExtResource("2_koe3r")
