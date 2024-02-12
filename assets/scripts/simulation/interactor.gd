@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  interactor.gd
+# interactor.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -60,6 +60,9 @@ const _INTERACTED_OBJ_GRAB_SPEED: float = 3
 func _input(_event):
 	# Draggin / Moving 'interactable' mechanic.
 	_drag_interactable(_event)
+	
+	# Configure interactable.
+	_manage_interactable(_event)
 
 # ******************************************************************************
 # PHYSICS
@@ -147,6 +150,18 @@ func _apply_physics_interactable() -> void:
 		
 		# Makes the object be grabbed and dragged.
 		_interacted_object.set_linear_velocity((_interactor_pos - _interacted_object_pos) * _INTERACTED_OBJ_GRAB_SPEED)
+
+# Allows user to configure states on an interactable when selected.
+func _manage_interactable(_event) -> void:
+	# If object interacted.
+	if _interacted_object:
+		if _event is InputEventKey and _event.pressed:
+			# If interacted object is in Bracket Class.
+			if _interacted_object is Brackets:
+				if _event.keycode == Configuration.interactor_keys.values()[4]:
+					_interacted_object.rotate_bracket_snap(_event.shift_pressed)
+				elif _event.keycode == Configuration.interactor_keys.values()[5]:
+					_interacted_object.toggle_snap()
 
 # ******************************************************************************
 # DEBUG

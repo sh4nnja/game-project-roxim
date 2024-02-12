@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  simulation_engine.gd
+# simulation_engine.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -54,8 +54,6 @@ func _physics_process(_delta) -> void:
 func fsnap(_value: float) -> float:
 	return snappedf(_value, _float_step)
 
-
-
 # ******************************************************************************
 # DEBUGGING ENGINE
 var debug_enabled: bool = true
@@ -87,4 +85,3 @@ func debug_report() -> String:
 		for _debug in _debug_report.size():
 			_str_debug_report += String("{} | {}\n").format([_debug_report.keys()[_debug], _debug_report.values()[_debug]], "{}")
 	return _str_debug_report
-

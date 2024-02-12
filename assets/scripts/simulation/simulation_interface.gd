@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  virtual_env_interface.gd
+# simulation_interface.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox

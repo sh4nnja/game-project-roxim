@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  main_menu_interface.gd
+# main_menu_interface.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox

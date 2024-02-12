@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  interactables.gd
+# interactables.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -73,6 +73,7 @@ func apply_selected_texture(apply: bool, _texture_override: Resource = interacta
 			else:
 				child_node.material_overlay = null
 			# Breaks the loop early so it saves time and memory.
+			# There's only a single mesh per object in this framework.
 			break
 
 # Enable selection.

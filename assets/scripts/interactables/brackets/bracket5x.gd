@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  bracket5x.gd
+# bracket5x.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -36,8 +36,8 @@
 
 extends Brackets
 
-# Bracket size. Since this bracket is 3x, the bracket size is 3.
-const _SLOT_SIZE: int = 3
+# Bracket size. Since this bracket is 5x, the bracket size is 5.
+const _SLOT_SIZE: int = 5
 
 # ******************************************************************************
 # INITIATION

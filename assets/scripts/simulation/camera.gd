@@ -1,5 +1,5 @@
 # ******************************************************************************
-#  camera.gd
+# camera.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -73,11 +73,11 @@ func _input(_event) -> void:
 			
 			elif _event.button_index == Configuration.interactor_keys.values()[1]: 
 				# Increases max velocity when scroll wheel is moved upwards.
-				_vel_mult = clamp(_vel_mult * Configuration.cam_vel_mult.x, Configuration.cam_vel_mult.y, Configuration.cam_vel_mult.z)
+				_vel_mult = clamp(_vel_mult * _CAM_VEL_MULT.x, _CAM_VEL_MULT.y, _CAM_VEL_MULT.z)
 				
 			elif _event.button_index == Configuration.interactor_keys.values()[2]: 
 				# Decereases max velocity when scroll wheel is moved downwards.
-				_vel_mult = clamp(_vel_mult / Configuration.cam_vel_mult.x, Configuration.cam_vel_mult.y, Configuration.cam_vel_mult.z)
+				_vel_mult = clamp(_vel_mult / _CAM_VEL_MULT.x, _CAM_VEL_MULT.y, _CAM_VEL_MULT.z)
 			
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
