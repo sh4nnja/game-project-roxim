@@ -214,6 +214,8 @@ func _get_snap_offset() -> Vector3:
 # Take note the current rotation of the current bracket.
 # So when attaching, there's options for rotation.
 func _get_rotated_slot_pos(_pos: Vector3, _rotation_degrees: float, _pivot: Vector3) -> Vector3:
+	var _output: Array[Vector3] = []
+	
 	# Transforms the rotation from degrees to radians.
 	var _rot_rad: float = deg_to_rad(_rotation_degrees)
 	# Adjust the position relative to the pivot point.
@@ -222,6 +224,8 @@ func _get_rotated_slot_pos(_pos: Vector3, _rotation_degrees: float, _pivot: Vect
 	var _rot_pos: Vector3 = _adjusted_pos.rotated(Vector3.UP,  _rot_rad)
 	# Adjust back to the original coordinate system.
 	_rot_pos += _pivot
+	
+	# Update values to be returned and used.
 	return _rot_pos
 
 # Snaps the bracket in place.
@@ -235,9 +239,7 @@ func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
 		# Check if the brackets doesn't have the same rotation.
 		if SimulationEngine.fsnap(_bracket.rotation_degrees.y) != SimulationEngine.fsnap(_attaching_bracket.rotation_degrees.y):
 			# Apply Origin | Rotation | Transform Logic here.
-			print("Before: ", _offset)
-			_offset = _get_rotated_slot_pos(_offset, _bracket.rotation_degrees.y, _offset - Vector3(_attaching_bracket_slot_pos[0], 0, 0))
-			print("After: ", _offset)
+			_offset = _get_rotated_slot_pos(_offset, _bracket.rotation_degrees.y, Vector3(_attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1], 0, 0))
 	
 	# Snaps the bracket's rotation except y-axis.
 		_bracket.rotation_degrees.x = lerp(
@@ -277,8 +279,9 @@ func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
 # Bracket Tools.
 # Rotate the bracket and relay its rotation to recalculate the offset.
 func rotate_bracket_snap(_invert: bool) -> void:
-	# Increment / Decrement the bracket's rotation.
-	bracket.angular_velocity.y += _BRACKET_SNAP_ROT_INCR if _invert else -_BRACKET_SNAP_ROT_INCR
+	if !_toggle_snap or _slot_states.has(false):
+		# Increment / Decrement the bracket's rotation.
+		bracket.angular_velocity.y += _BRACKET_SNAP_ROT_INCR if _invert else -_BRACKET_SNAP_ROT_INCR
 
 func toggle_snap():
 	if !_toggle_snap:

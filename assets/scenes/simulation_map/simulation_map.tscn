@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cd86vkgynmcjm"]
+[gd_scene load_steps=23 format=3 uid="uid://cd86vkgynmcjm"]
 
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_interface.gd" id="1_5eupj"]
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_engine.gd" id="1_ilwan"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://btwcn5425ye0f" path="res://assets/objects/camera/camera.tscn" id="4_y7ocw"]
 [ext_resource type="PackedScene" uid="uid://cu8da702e8ti8" path="res://assets/objects/misc/the_cube/the_cube.tscn" id="5_jvy4d"]
 [ext_resource type="PackedScene" uid="uid://573dhpbs8qay" path="res://assets/objects/misc/vblox_logo/vblox_logo.tscn" id="6_ind2l"]
+[ext_resource type="PackedScene" uid="uid://dj6mlh0yus1j8" path="res://assets/objects/building/brackets/5x/bracket5x.tscn" id="7_a3gyk"]
+[ext_resource type="PackedScene" uid="uid://ckh2ayfqteyor" path="res://assets/objects/building/brackets/1x/bracket1x.tscn" id="7_jkbt1"]
+[ext_resource type="PackedScene" uid="uid://t0uckwn1kwkd" path="res://assets/objects/building/brackets/4x/bracket4x.tscn" id="7_jw842"]
+[ext_resource type="PackedScene" uid="uid://dnf0wy5lwkpc" path="res://assets/objects/building/brackets/3x/bracket3x.tscn" id="7_ovtqh"]
 [ext_resource type="PackedScene" uid="uid://doa1xyi5m6hn7" path="res://assets/objects/building/brackets/2x/bracket2x.tscn" id="7_vp5t6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_784js"]
@@ -148,8 +152,32 @@ cam_movement_enabled = true
 [node name="objects" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
+[node name="bracket5x" parent="objects" instance=ExtResource("7_a3gyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.46327, 0, 0)
+
+[node name="bracket5x2" parent="objects" instance=ExtResource("7_a3gyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.46327, 0, -0.693364)
+
+[node name="bracket4x" parent="objects" instance=ExtResource("7_jw842")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52655, 0, 0)
+
+[node name="bracket4x2" parent="objects" instance=ExtResource("7_jw842")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52655, 0, -0.677692)
+
+[node name="bracket3x" parent="objects" instance=ExtResource("7_ovtqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90958, 0, 0)
+
+[node name="bracket3x2" parent="objects" instance=ExtResource("7_ovtqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90958, 0, -0.726555)
+
+[node name="bracket1x" parent="objects" instance=ExtResource("7_jkbt1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66692, 0, 0)
+
+[node name="bracket1x2" parent="objects" instance=ExtResource("7_jkbt1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66692, 0, -0.681313)
+
 [node name="bracket2x2" parent="objects" instance=ExtResource("7_vp5t6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.92602, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.76002, 0, -0.723503)
 
 [node name="bracket2x" parent="objects" instance=ExtResource("7_vp5t6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75874, 0, 0)
