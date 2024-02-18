@@ -170,33 +170,6 @@ func _manage_bracket_hover(_bracket: Brackets) -> void:
 func _check_bracket_snap() -> bool:
 	return SimulationEngine.fsnap(bracket.linear_velocity.length()) < _BRACKET_SNAP_THRESHOLD
 
-# The offset of the bracket when snapped.
-func _get_snap_offset() -> Vector3:
-	# The offset of the bracket when snapped.
-	var _offset: Vector3 = Vector3(0, 0, 0)
-	
-	# Calculate the bracket offset.
-	# Full to full and full to partial slot logic.
-	if !_slot_states.has(false):
-		# It gets the midpoint position of the first slot attached and the last slot attached.
-		# It should work at any bracket as the '_attaching_bracket_slot_pos' array can be used to get the midpoint.
-		_offset.x = (_attaching_bracket_slot_pos[0] + _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1]) / 2
-
-	# Partial to full and partial to partial slot logic. 
-	else:
-		# Have the output of the first slot of the attaching bracket and the slot detected in the current bracket.
-		_offset.x = _attaching_bracket_slot_pos[0] - _slot_positions[_slot_detected_idx]
-	
-	return _offset
-
-# Take note the current rotation of the current bracket.
-# So when attaching, there's options for rotation.
-func _get_rotated_slot_pos(_pos: float, _rotation_degrees: float) -> float:
-	var _rot_rad: float = deg_to_rad(_rotation_degrees)
-	var _output: Vector3
-	
-	return _output.x
-
 # Bracket attaches into another bracket mechanic.
 func _manage_bracket_snapping(_bracket: Brackets) -> void:
 	# Snapping Mechanic snippet.
@@ -219,6 +192,38 @@ func _manage_bracket_snapping(_bracket: Brackets) -> void:
 	else:
 		_snapped_once = false
 
+# The offset of the bracket when snapped.
+func _get_snap_offset() -> Vector3:
+	# The offset of the bracket when snapped.
+	var _offset: Vector3 = Vector3(0, 0, 0)
+	
+	# Calculate the bracket offset.
+	# Full to full and full to partial slot logic.
+	if !_slot_states.has(false):
+		# It gets the midpoint position of the first slot attached and the last slot attached.
+		# It should work at any bracket as the '_attaching_bracket_slot_pos' array can be used to get the midpoint.
+		_offset.x = (_attaching_bracket_slot_pos[0] + _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1]) / 2
+
+	# Partial to full and partial to partial slot logic. 
+	else:
+		# Have the output of the first slot of the attaching bracket and the slot detected in the current bracket.
+		_offset.x = _attaching_bracket_slot_pos[0] - _slot_positions[_slot_detected_idx]
+	
+	return _offset
+
+# Take note the current rotation of the current bracket.
+# So when attaching, there's options for rotation.
+func _get_rotated_slot_pos(_pos: Vector3, _rotation_degrees: float, _pivot: Vector3) -> Vector3:
+	# Transforms the rotation from degrees to radians.
+	var _rot_rad: float = deg_to_rad(_rotation_degrees)
+	# Adjust the position relative to the pivot point.
+	var _adjusted_pos: Vector3 = _pos - _pivot
+	# Updates the position by the angle.
+	var _rot_pos: Vector3 = _adjusted_pos.rotated(Vector3.UP,  _rot_rad)
+	# Adjust back to the original coordinate system.
+	_rot_pos += _pivot
+	return _rot_pos
+
 # Snaps the bracket in place.
 func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
 	if _toggle_snap:
@@ -227,7 +232,12 @@ func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
 			_bracket.rotation_degrees.y = _attaching_bracket.rotation_degrees.y
 			_snapped_once = true
 	else:
-		pass
+		# Check if the brackets doesn't have the same rotation.
+		if SimulationEngine.fsnap(_bracket.rotation_degrees.y) != SimulationEngine.fsnap(_attaching_bracket.rotation_degrees.y):
+			# Apply Origin | Rotation | Transform Logic here.
+			print("Before: ", _offset)
+			_offset = _get_rotated_slot_pos(_offset, _bracket.rotation_degrees.y, _offset - Vector3(_attaching_bracket_slot_pos[0], 0, 0))
+			print("After: ", _offset)
 	
 	# Snaps the bracket's rotation except y-axis.
 		_bracket.rotation_degrees.x = lerp(
@@ -281,6 +291,7 @@ func toggle_snap():
 func manage_debug() -> void:
 	SimulationEngine.manage_debug_entries(str("     Slot States of " + str(self.name)), str(_slot_states), !self.is_selected)
 	SimulationEngine.manage_debug_entries(str("     Slot Positions of " + str(self.name)), str(_slot_positions), !self.is_selected)
+	SimulationEngine.manage_debug_entries(str("     Toggle Mode of " + str(self.name)), str(_toggle_snap), !self.is_selected)
 	@warning_ignore("incompatible_ternary")
 	SimulationEngine.manage_debug_entries(str("     Attaching Slots Detected of " + str(self.name)), str(_attaching_bracket.name if _attaching_bracket else _attaching_bracket) + " " + str(_attaching_bracket_slot_pos), !self._attaching_bracket)
 	
