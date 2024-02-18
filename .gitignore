@@ -1,2 +1,5 @@
-.godot/
 *.cfg
+*.mesh
+*.md5
+*.ctex
+*.cache
