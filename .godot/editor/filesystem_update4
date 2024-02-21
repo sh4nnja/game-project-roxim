@@ -1,6 +1,5 @@
 res://assets/materials/simulation/simulation_map_env.tres
 res://assets/scenes/simulation_map/simulation_map.tscn
-res://assets/materials/simulation/simulation_map_platform.tres
 res://assets/scenes/main_menu/main_menu.tscn
 res://assets/objects/building/brackets/2x/bracket2x.tscn
 res://assets/objects/building/brackets/3x/bracket3x.tscn
@@ -9,4 +8,5 @@ res://assets/objects/building/brackets/1x/bracket1x.tscn
 res://assets/objects/building/brackets/5x/bracket5x.tscn
 res://assets/objects/camera/camera.tscn
 res://assets/scripts/interactables/brackets/brackets.gd
-res://assets/scripts/simulation/interactor.gd
+res://assets/scripts/interactables/brackets/bracket2x.gd
+res://assets/scripts/simulation/simulation_engine.gd

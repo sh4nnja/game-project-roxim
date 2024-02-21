@@ -76,10 +76,6 @@ var _slot_detected_idx: int
 var _attaching_bracket: Brackets
 var _attaching_bracket_slot_pos: PackedFloat64Array
 
-# Checks the bracket if it snaps once. So that the brackets are aligned unless user wants to rotate.
-var _toggle_snap: bool = false
-var _snapped_once: bool = false
-
 # ******************************************************************************
 # SNAPPING MECHANIC
 # Bracket Height constant. For the snap mechanic.
@@ -94,8 +90,42 @@ const _BRACKET_SNAP_LRP_WEIGHT: float = 0.15
 # Rotation when snapping.
 const _BRACKET_SNAP_ROT_INCR: float = 0.5 
 
+# Checks the bracket if it snaps once. So that the brackets are aligned unless user wants to rotate.
+var _toggle_snap: bool = false
+var _snapped_once: bool = false
+
+# ******************************************************************************
+# ATTACHMENT AND DETACHMENT MECHANIC
+# Joint Bias or force to pull together.
+const _JOINT_BIAS: float = 0.99
+
+# Check if bracket is currently attached to another one.
+var _attach_bracket: bool = false
+
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
+# Managing bracket mechanics such as attaching and disappearing.
+func manage_mechanics(_bracket: Brackets, _is_enabled: bool) -> void:
+	# Make the bracket active for attachment when selected.
+	# This will save performance for unnecessary detections.
+	for _child in _bracket.get_children():
+		if _child is Area3D:
+			# Sets the collision and monitoring status to detect other brackets.
+			_child.monitoring = _is_enabled
+			_child.set_collision_mask_value(1, _is_enabled)
+	
+	# All statements must be under here so that it doesn't work whenever the bracket is not selected.
+	# This code should save performance by not doing unnecessary calculations when not selected.
+	if _is_enabled:
+		# Manage bracket visibility when hovered.
+		_manage_bracket_hover(_bracket)
+		
+		# Manage snapping of brackets.
+		_manage_bracket_snapping(_bracket)
+		
+		# Attempting to attach bracket to another bracket logic.
+		_manage_bracket_attachment(_bracket)
+
 # Initiate 'slot' size function. This will vary by each bracket.
 # Setting up this function is a must for clean code I suppose.
 func initiate_brackets(_bracket: Brackets, _bracket_size: int) -> void:
@@ -136,34 +166,17 @@ func manage_slot_detection(_idx: int, _is_bracket_detected: bool, _detected_brac
 		# Sorts the bracket position in order to make sure that the positions are correct.
 		_attaching_bracket_slot_pos.sort()
 	else:
-		_attaching_bracket_slot_pos.clear()
-		_attaching_bracket = null
-
-# Managing bracket mechanics such as attaching and disappearing.
-func manage_mechanics(_bracket: Brackets, _is_enabled: bool) -> void:
-	# Make the bracket active for attachment when selected.
-	# This will save performance for unnecessary detections.
-	for _child in _bracket.get_children():
-		if _child is Area3D:
-			# Sets the collision and monitoring status to detect other brackets.
-			_child.monitoring = _is_enabled
-			_child.set_collision_mask_value(1, _is_enabled)
-	
-	# All statements must be under here so that it doesn't work whenever the bracket is not selected.
-	# This code should save performance by not doing unnecessary calculations when not selected.
-	if _is_enabled:
-		# Manage bracket visibility when hovered.
-		_manage_bracket_hover(_bracket)
-		
-		# Manage snapping of brackets.
-		_manage_bracket_snapping(_bracket)
+		# Checks if currect bracket is currently connected to the bracket.
+		if !_attach_bracket:
+			_attaching_bracket_slot_pos.clear()
+			_attaching_bracket = null
 
 # Bracket will change overlay color and revert whenever it hovers in another bracket.
 func _manage_bracket_hover(_bracket: Brackets) -> void:
 	# This just means that if a slot has detected a possible slot.
 	# Apply 'can_attach' texture.
 	if _slot_states.has(true):
-		apply_selected_texture(true, interactable_to_attach_res)
+		apply_selected_texture(!_attach_bracket, interactable_to_attach_res)
 
 # ******************************************************************************
 # Check if the force of the bracket is lower than the threshold to hold snapping
@@ -171,7 +184,7 @@ func _check_bracket_snap() -> bool:
 	return SimulationEngine.fsnap(bracket.linear_velocity.length()) < _BRACKET_SNAP_THRESHOLD
 
 # Bracket attaches into another bracket mechanic.
-func _manage_bracket_snapping(_bracket: Brackets) -> void:
+func _manage_bracket_snapping(_bracket: Brackets) ->  void:
 	# Snapping Mechanic snippet.
 	# Here lies the snapping mechanic for Vblox.
 	# God knows what I am doing here.
@@ -185,7 +198,7 @@ func _manage_bracket_snapping(_bracket: Brackets) -> void:
 	# Check if there are currently brackets attempting to attach.
 	if _attaching_bracket:
 		# Check if the force of the bracket is lower than the threshold to hold snapping.
-		if _check_bracket_snap():
+		if _check_bracket_snap() and !_attach_bracket:
 			_snap_bracket(_bracket, _get_snap_offset())
 		else:
 			_snapped_once = false
@@ -214,14 +227,16 @@ func _get_snap_offset() -> Vector3:
 # Take note the current rotation of the current bracket.
 # So when attaching, there's options for rotation.
 func _get_rotated_slot_pos(_pos: Vector3, _rotation_degrees: float, _pivot: Vector3) -> Vector3:
-	var _output: Array[Vector3] = []
-	
 	# Transforms the rotation from degrees to radians.
 	var _rot_rad: float = deg_to_rad(_rotation_degrees)
+	
 	# Adjust the position relative to the pivot point.
 	var _adjusted_pos: Vector3 = _pos - _pivot
+	
 	# Updates the position by the angle.
-	var _rot_pos: Vector3 = _adjusted_pos.rotated(Vector3.UP,  _rot_rad)
+	# It takes note of the rotation of the attaching bracket so that it will not overshoot.
+	var _rot_pos: Vector3 = _adjusted_pos.rotated(Vector3.UP,  _rot_rad - _attaching_bracket.rotation.y)
+	
 	# Adjust back to the original coordinate system.
 	_rot_pos += _pivot
 	
@@ -242,59 +257,100 @@ func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
 			_offset = _get_rotated_slot_pos(_offset, _bracket.rotation_degrees.y, Vector3(_attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1], 0, 0))
 	
 	# Snaps the bracket's rotation except y-axis.
-		_bracket.rotation_degrees.x = lerp(
-		_bracket.rotation_degrees.x, 
-		_attaching_bracket.rotation_degrees.x,
-		_BRACKET_SNAP_LRP_WEIGHT)
-	_bracket.rotation_degrees.z = lerp(
-		_bracket.rotation_degrees.z, 
-		_attaching_bracket.rotation_degrees.z,
-		_BRACKET_SNAP_LRP_WEIGHT)
+	_bracket.global_rotation_degrees.x = lerp(
+		_bracket.global_rotation_degrees.x, 
+		_attaching_bracket.global_rotation_degrees.x,
+		_BRACKET_SNAP_LRP_WEIGHT
+	)
+	
+	_bracket.global_rotation_degrees.z = lerp(
+		_bracket.global_rotation_degrees.z, 
+		_attaching_bracket.global_rotation_degrees.z,
+		_BRACKET_SNAP_LRP_WEIGHT
+	)
 	
 	# The values will vary depending on the slot it was placed.
 	# Lerp the snapping mechanic offset x.
 	_bracket.global_transform.origin = lerp(
 		_bracket.global_transform.origin, 
 		_attaching_bracket.global_transform.origin + (_attaching_bracket.global_transform.basis * _offset), 
-		_BRACKET_SNAP_LRP_WEIGHT)
+		_BRACKET_SNAP_LRP_WEIGHT
+	)
 	
 	# Lerp the constant 0.125 y offset.
 	_bracket.global_transform.origin.y = lerp(
 		_bracket.global_transform.origin.y, 
 		_bracket.global_transform.origin.y + _BRACKET_SNAP_HEIGHT, 
-		_BRACKET_SNAP_LRP_WEIGHT)
+		_BRACKET_SNAP_LRP_WEIGHT
+	)
 	
 	# Reset the linear velocity of the bracket when snapping.
 	_bracket.linear_velocity = Vector3(0, 0, 0)
 
 # ******************************************************************************
-# Attach the bracket.
+# Manage bracket attachment mechanicd.
+func _manage_bracket_attachment(_bracket: Brackets):
+	if _attaching_bracket:
+		# Creates a joint, attempting to connect the brackets.
+		if _attach_bracket:
+			_attach_brackets(_slot_positions[_slot_detected_idx], _bracket)
+		# Removes the joint, disconnecting the brackets.
+		else:
+			pass
 
+func _check_bracket_joint(_bracket_to_check: Brackets) -> bool:
+	var _output: bool = false
+	# Iterates the child nodes to check if one is a joint.
+	for _child in _bracket_to_check.get_children():
+		if _child is HingeJoint3D:
+			_output = true
+	return _output
 
-# ******************************************************************************
-# Bracket detaches from another bracket mechanic.
-
+func _attach_brackets(_offset: float, _bracket: Brackets) -> void:
+	if !_check_bracket_joint(_attaching_bracket):
+		# Create the Hinge Joint Node.
+		var _joint: HingeJoint3D = HingeJoint3D.new()
+		var _joint_pos: Vector3 = Vector3.ZERO
+		
+		# Attach it to the bracket.
+		_attaching_bracket.add_child(_joint)
+		
+		# Adjust positions.
+		_joint_pos.x = _offset
+		_joint.set_position(_joint_pos)
+		
+		# Reparent the other bracket under the joint so the tree will be clean.
+		_bracket.reparent(_joint, true)
+		
+		# Adjust joint configuration.
+		_joint.node_a = _bracket.get_path()
+		_joint.node_b = _attaching_bracket.get_path()
+		_joint.set_param(HingeJoint3D.PARAM_BIAS, _JOINT_BIAS)
+		_joint.set_flag(HingeJoint3D.FLAG_USE_LIMIT, true)
+		_joint.set_param(HingeJoint3D.PARAM_LIMIT_UPPER, 0)
+		_joint.set_param(HingeJoint3D.PARAM_LIMIT_LOWER, 0)
 
 # ******************************************************************************
 # Bracket Tools.
 # Rotate the bracket and relay its rotation to recalculate the offset.
 func rotate_bracket_snap(_invert: bool) -> void:
-	if !_toggle_snap or _slot_states.has(false):
+	if !_toggle_snap and _slot_states.has(false):
 		# Increment / Decrement the bracket's rotation.
 		bracket.angular_velocity.y += _BRACKET_SNAP_ROT_INCR if _invert else -_BRACKET_SNAP_ROT_INCR
 
-func toggle_snap():
+func toggle_snap() -> void:
 	if !_toggle_snap:
 		_toggle_snap = true
 	else:
 		_toggle_snap = false
 
+func toggle_bracket_attachment() -> void:
+	if !_attach_bracket:
+		_attach_bracket = true
+	else:
+		_attach_bracket = false
+
 # ******************************************************************************
 # DEBUG
 func manage_debug() -> void:
-	SimulationEngine.manage_debug_entries(str("     Slot States of " + str(self.name)), str(_slot_states), !self.is_selected)
-	SimulationEngine.manage_debug_entries(str("     Slot Positions of " + str(self.name)), str(_slot_positions), !self.is_selected)
-	SimulationEngine.manage_debug_entries(str("     Toggle Mode of " + str(self.name)), str(_toggle_snap), !self.is_selected)
-	@warning_ignore("incompatible_ternary")
-	SimulationEngine.manage_debug_entries(str("     Attaching Slots Detected of " + str(self.name)), str(_attaching_bracket.name if _attaching_bracket else _attaching_bracket) + " " + str(_attaching_bracket_slot_pos), !self._attaching_bracket)
-	
+	pass

@@ -37,6 +37,12 @@
 extends Node3D
 
 # Base class of SIMULATION ENGINE.
+# Simulation Engine Tree.
+@onready var simulation_engine: Node = self
+
+# Objects tree (Where you put the simulation objects)
+@onready var simulation_objects: Node = get_node("/root/simulation_map/objects")
+
 # All calculation of positions, random generations, and debugging etc will be located here.
 var _float_step: float = 0.001
 

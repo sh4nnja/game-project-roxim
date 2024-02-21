@@ -162,6 +162,12 @@ func _manage_interactable(_event) -> void:
 					_interacted_object.rotate_bracket_snap(_event.shift_pressed)
 				elif _event.keycode == Configuration.interactor_keys.values()[5]:
 					_interacted_object.toggle_snap()
+				elif _event.keycode == Configuration.interactor_keys.values()[6]:
+					_interacted_object.toggle_bracket_attachment()
+			
+			# If interacted object is in Computing Class.
+			# If interacted object is in Motor Class.
+			# If interacted object is in Sensor Class.
 
 # ******************************************************************************
 # DEBUG

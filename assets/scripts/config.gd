@@ -132,7 +132,8 @@ var interactor_keys: Dictionary = {
 	"interactor_dragging":        MOUSE_BUTTON_LEFT,
 	
 	"bracket_rotate":             KEY_R,
-	"bracket_snap":               KEY_B
+	"bracket_snap":               KEY_B,
+	"bracket_attach":             KEY_T
 }
 
 # Interface keys.
