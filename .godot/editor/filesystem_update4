@@ -7,6 +7,3 @@ res://assets/objects/building/brackets/4x/bracket4x.tscn
 res://assets/objects/building/brackets/1x/bracket1x.tscn
 res://assets/objects/building/brackets/5x/bracket5x.tscn
 res://assets/objects/camera/camera.tscn
-res://assets/scripts/interactables/brackets/brackets.gd
-res://assets/scripts/interactables/brackets/bracket2x.gd
-res://assets/scripts/simulation/simulation_engine.gd
