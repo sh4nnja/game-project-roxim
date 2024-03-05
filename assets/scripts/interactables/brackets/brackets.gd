@@ -224,6 +224,7 @@ func _get_snap_offset() -> Vector3:
 	
 	return _offset
 
+# ******************************************************************************
 # Take note the current rotation of the current bracket.
 # So when attaching, there's options for rotation.
 func _get_rotated_slot_pos(_pos: Vector3, _rotation_degrees: float, _pivot: Vector3) -> Vector3:

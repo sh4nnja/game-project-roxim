@@ -22,6 +22,7 @@ boot_splash/minimum_display_time=2500
 
 Configuration="*res://assets/scripts/config.gd"
 SimulationEngine="*res://assets/scripts/simulation/simulation_engine.gd"
+CompilerEngine="*res://assets/scripts/coding_area/compiler_engine.gd"
 
 [display]
 

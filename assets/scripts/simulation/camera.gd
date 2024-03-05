@@ -35,7 +35,7 @@
 # ******************************************************************************
 
 extends Camera3D
-class_name Camera
+class_name CameraSimulation
 
 # Movement states.
 @export var cam_movement_enabled: bool = false
@@ -61,42 +61,22 @@ const _CAM_CLEARANCE: Vector2 = Vector2(0.6, 500)
 
 # ******************************************************************************
 # INPUT EVENTS
-
 # Mouse input logic.
 func _input(_event) -> void:
 	# Camera free-lock catalyst and movement speed limiter.
 	if _event is InputEventMouseButton:
-		if cam_movement_enabled:
-			if _event.button_index == Configuration.interactor_keys.values()[0]: 
-				# Only allows rotation if right mouse button is pressed.
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if _event.pressed else Input.MOUSE_MODE_VISIBLE)
-			
-			elif _event.button_index == Configuration.interactor_keys.values()[1]: 
-				# Increases max velocity when scroll wheel is moved upwards.
-				_vel_mult = clamp(_vel_mult * _CAM_VEL_MULT.x, _CAM_VEL_MULT.y, _CAM_VEL_MULT.z)
-				
-			elif _event.button_index == Configuration.interactor_keys.values()[2]: 
-				# Decereases max velocity when scroll wheel is moved downwards.
-				_vel_mult = clamp(_vel_mult / _CAM_VEL_MULT.x, _CAM_VEL_MULT.y, _CAM_VEL_MULT.z)
-			
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		_focus_camera(_event)
 		
 	# Camera free-look snippet.
-	if _event is InputEventMouseMotion:
-		_mouse_pos = _event.relative
+	elif _event is InputEventMouseMotion:
+		_look_camera(_event)
 	
 	# Camera movement snippet.
-	if _event is InputEventKey:
-		# Checks the cam_movement_key dictionary for the key pressed.
-		for _movement_key in Configuration.cam_movement_keys.values():
-			# Updates the respective state of the key pressed.
-			if _movement_key[0] == _event.keycode:
-				_movement_key[1] = _event.pressed
+	elif _event is InputEventKey:
+		_move_camera(_event)
 
 # ******************************************************************************
 # PHYSICS and ITERATIONS
-
 # Updates camera free-look and camera movement every physics frame.
 func _physics_process(_delta) -> void:
 	if cam_movement_enabled:
@@ -105,6 +85,35 @@ func _physics_process(_delta) -> void:
 
 # *****************************************************************************
 # CUSTOM METHODS AND SIGNALS
+# Focus camera in order to make it move and look. Also adjust its speed.
+func _focus_camera(_event: InputEventMouseButton) -> void:
+	if cam_movement_enabled:
+		if _event.button_index == Configuration.interactor_keys.values()[0]: 
+			# Only allows rotation if right mouse button is pressed.
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if _event.pressed else Input.MOUSE_MODE_VISIBLE)
+			
+		elif _event.button_index == Configuration.interactor_keys.values()[1]: 
+			# Increases max velocity when scroll wheel is moved upwards.
+			_vel_mult = clamp(_vel_mult * _CAM_VEL_MULT.x, _CAM_VEL_MULT.y, _CAM_VEL_MULT.z)
+			
+		elif _event.button_index == Configuration.interactor_keys.values()[2]: 
+			# Decereases max velocity when scroll wheel is moved downwards.
+			_vel_mult = clamp(_vel_mult / _CAM_VEL_MULT.x, _CAM_VEL_MULT.y, _CAM_VEL_MULT.z)
+		
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+# Look with camera using mouse motion.
+func _look_camera(_event: InputEventMouseMotion) -> void:
+	_mouse_pos = _event.relative
+
+# Move camera with keys.
+func _move_camera(_event: InputEventKey) -> void:
+	# Checks the cam_movement_key dictionary for the key pressed.
+	for _movement_key in Configuration.cam_movement_keys.values():
+		# Updates the respective state of the key pressed.
+		if _movement_key[0] == _event.keycode:
+			_movement_key[1] = _event.pressed
 
 # Camera free-look mechanic.
 func _update_cam_free_look() -> void:

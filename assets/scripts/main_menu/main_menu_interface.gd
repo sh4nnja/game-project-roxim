@@ -39,6 +39,9 @@ extends Control
 # Simulation map scene file location.
 const _SIMULATION_SCN_FILE: String = "res://assets/scenes/simulation_map/simulation_map.tscn"
 
+# Coding area scene file location.
+const _CODING_AREA_SCN_FILE: String = "res://assets/scenes/coding_area/coding_area.tscn"
+
 # Github Website of the capstone project.
 const _SIMULATION_SOURCE_CODE: String = "https://github.com/sh4nnja/school-project-CAPSTONE-VBlox"
 
@@ -58,6 +61,8 @@ const _SIMULATION_TEAM: String = ""
 @onready var _learn_panel_res: Resource = preload("res://assets/materials/main_menu/main_menu_learn_panel.tres")
 @onready var _learn_panel_txt: Label = get_node("user_interface/body/simulate_panel/learn_panel/learn_text")
 @onready var _learn_panel_desc: Label = get_node("user_interface/body/simulate_panel/learn_panel/learn_desc_text")
+
+@onready var _learn_editor_button: Button = get_node("user_interface/body/simulate_panel/learn_panel/editor_button")
 
 # Simulate interface.
 @onready var _sim_panel_res: Resource = preload("res://assets/materials/main_menu/main_menu_simulate_panel.tres")
@@ -162,15 +167,11 @@ func _on_theme_button_pressed() -> void:
 
 # Signal from button to go to simulation.
 func _on_simulate_button_pressed():
-	# Change the button to "Loading..." for user experience.
-	_simulate_btn.disabled = true
-	_simulate_btn.text = "Loading..."
-	
-	# Creates a timer for 3s so to make sure the player know that its "changing the scene".
-	await get_tree().create_timer(Configuration.LOADING_TIME).timeout
-	
-	# Change the scene.
-	get_tree().change_scene_to_file(_SIMULATION_SCN_FILE)
+	_load_scene(_simulate_btn, _SIMULATION_SCN_FILE)
+
+# Signal from button to go to the code editor.
+func _on_editor_button_pressed():
+	_load_scene(_learn_editor_button, _CODING_AREA_SCN_FILE)
 
 # Signal from button to open a website of the source code.
 func _on_about_github_pressed():
@@ -181,3 +182,17 @@ func _on_about_github_pressed():
 func _on_about_the_team_pressed():
 	# Use "OS.shell_open()" to open website.
 	OS.shell_open(_SIMULATION_TEAM)
+
+# ******************************************************************************
+# Simualate loading.
+func _load_scene(_button: Node, _scn: String) -> void:
+	# Change the button to "Loading..." for user experience.
+	_button.disabled = true
+	_button.text = "Loading..."
+	
+	# Creates a timer for 3s so to make sure the player know that its "changing the scene".
+	await get_tree().create_timer(Configuration.LOADING_TIME).timeout
+	
+	# Change the scene.
+	get_tree().change_scene_to_file(_scn)
+

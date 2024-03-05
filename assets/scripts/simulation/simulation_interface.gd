@@ -76,6 +76,7 @@ func _input(_event) -> void:
 	if _event is InputEventKey:
 		if _event.keycode == Configuration.interface_keys.values()[0] and _event.pressed:
 			_animate_pause_menu()
+			_manage_pause()
 			
 			# Manages simulation nodes / objects.
 			_manage_simulation()
@@ -122,11 +123,19 @@ func _animate_pause_menu() -> void:
 	_anim_menu_opacity.tween_property(_pause_menu, "modulate:a", _final_color,  _COLOR_DURATION * 1.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	_anim_menu_pos.tween_property(_pause_menu, "position", _final_pos, _POS_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 
+# Manage pause of tree.
+func _manage_pause(_paused: bool = _is_paused) -> void:
+	get_tree().paused = _paused
+	_is_paused = _paused
+
 # Signal from button to go to menu.
 func _on_menu_button_pressed():
 	# Change the button to "Loading..." for user experience.
 	_pause_menu_btn.disabled = true
 	_pause_menu_btn.text = "Loading..."
+	
+	# Toggles pause of tree.
+	_manage_pause(false)
 	
 	# Creates a timer for 3s so to make sure the player know that its "changing the scene".
 	await get_tree().create_timer(Configuration.LOADING_TIME).timeout

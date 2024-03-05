@@ -41,10 +41,12 @@ extends Node3D
 @onready var simulation_engine: Node = self
 
 # Objects tree (Where you put the simulation objects)
-@onready var simulation_objects: Node = get_node("/root/simulation_map/objects")
+#@onready var simulation_objects: Node = get_node("/root/simulation_map/objects")
 
 # All calculation of positions, random generations, and debugging etc will be located here.
-var _float_step: float = 0.001
+const lerp_weight: float = 0.5
+
+const _float_step: float = 0.001
 
 # ******************************************************************************
 # VIRTUAL

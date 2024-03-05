@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://jr1yev4cgrw2"]
+
+[ext_resource type="Script" path="res://assets/scripts/coding_blocks/variables/set_variable.gd" id="1_bek7b"]
+[ext_resource type="Texture2D" uid="uid://dk1k86gv1wu1a" path="res://assets/textures/coding_blocks_textures/variables/base.png" id="1_vfn7e"]
+[ext_resource type="Texture2D" uid="uid://n7tq2vmg4pg1" path="res://assets/textures/coding_blocks_textures/variables/set_label.png" id="3_c0w3e"]
+[ext_resource type="Texture2D" uid="uid://dtmeujhnc51ao" path="res://assets/textures/coding_blocks_textures/variables/to_label.png" id="4_7dnjl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apvcg"]
+size = Vector2(128, 32)
+
+[node name="set_variable" type="Area2D"]
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_bek7b")
+
+[node name="set_variable_shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_apvcg")
+
+[node name="set_texture_texture" type="NinePatchRect" parent="."]
+offset_left = -64.0
+offset_top = -16.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_vfn7e")
+region_rect = Rect2(0, 0, 64, 16)
+patch_margin_left = 11
+patch_margin_top = 4
+patch_margin_right = 11
+patch_margin_bottom = 4
+
+[node name="set_label" type="TextureRect" parent="set_texture_texture"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -2.0
+offset_right = 12.0
+offset_bottom = 2.0
+texture = ExtResource("3_c0w3e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="to_label" type="TextureRect" parent="set_texture_texture"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.547
+anchor_top = 0.5
+anchor_right = 0.547
+anchor_bottom = 0.5
+offset_left = -4.012
+offset_top = -2.0
+offset_right = 3.988
+offset_bottom = 2.0
+texture = ExtResource("4_7dnjl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="block_place" type="Node2D" parent="."]
+position = Vector2(-50, -14)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

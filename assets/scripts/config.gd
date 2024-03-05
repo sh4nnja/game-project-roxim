@@ -50,6 +50,9 @@ extends Node
 
 # Signals // Start with the word "on".
 
+# Functions // When creating functions in Main class that will be used in Child classes, no underscore
+# before the name 'hello()'. Only put underscore in the name '_hello()' when isn't used outside main class.
+
 # ******************************************************************************
 # Supposed 'loading' time, just user experience.
 const LOADING_TIME: int = 3

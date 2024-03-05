@@ -118,7 +118,7 @@ func _animate_crosshair(_hovered: bool) -> void:
 	_crosshair_tween.play()
 
 # Register 'interactables' to be dragged when mouse event occurs.
-func _drag_interactable(_event) -> void:
+func _drag_interactable(_event: InputEvent) -> void:
 	if _event is InputEventMouseButton:
 		if is_colliding():
 			if _event.button_index == Configuration.interactor_keys.values()[3]:
@@ -152,7 +152,7 @@ func _apply_physics_interactable() -> void:
 		_interacted_object.set_linear_velocity((_interactor_pos - _interacted_object_pos) * _INTERACTED_OBJ_GRAB_SPEED)
 
 # Allows user to configure states on an interactable when selected.
-func _manage_interactable(_event) -> void:
+func _manage_interactable(_event: InputEvent) -> void:
 	# If object interacted.
 	if _interacted_object:
 		if _event is InputEventKey and _event.pressed:

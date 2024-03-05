@@ -54,6 +54,7 @@ data = PackedVector3Array(-375, 0.5, 375, 375, 0.5, 375, -375, -0.5, 375, 375, 0
 script = ExtResource("1_ilwan")
 
 [node name="user_interface" type="Control" parent="."]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,6 +110,7 @@ offset_right = -62.0
 offset_bottom = -146.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.12549, 0.705882, 0.796078, 1)
 theme_override_colors/font_pressed_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.807843, 0.909804, 1)

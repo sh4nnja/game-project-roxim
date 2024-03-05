@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt4ld3ulwj1dx"]
+
+[ext_resource type="Texture2D" uid="uid://cajtmn7i27pl" path="res://assets/textures/coding_blocks_textures/events/when_play_pressed.png" id="1_8a8e0"]
+[ext_resource type="Script" path="res://assets/scripts/coding_blocks/events/when_play_pressed.gd" id="1_n8jtu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7a1ru"]
+size = Vector2(64, 32)
+
+[node name="when_play_pressed" type="Area2D"]
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_n8jtu")
+
+[node name="play_pressed_shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7a1ru")
+
+[node name="play_pressed_texture" type="TextureRect" parent="."]
+offset_left = -32.0
+offset_top = -16.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_8a8e0")
+
+[node name="block_place" type="Node2D" parent="."]
+position = Vector2(-18, 14)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

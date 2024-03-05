@@ -1,0 +1,118 @@
+[gd_scene load_steps=13 format=3 uid="uid://dq2m360gxpy2w"]
+
+[ext_resource type="Texture2D" uid="uid://c3e3tbyneylgy" path="res://assets/textures/coding_area_textures/editor/background.png" id="1_10b8x"]
+[ext_resource type="Script" path="res://assets/scripts/coding_area/compiler_engine.gd" id="1_r2x8g"]
+[ext_resource type="Script" path="res://assets/scripts/coding_area/coding_area_interface.gd" id="1_yjsnd"]
+[ext_resource type="Texture2D" uid="uid://dbcjrtxq16vi7" path="res://assets/dev/vblox_logo/logo_flat_gray.png" id="2_bc8j3"]
+[ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="4_cnuqi"]
+[ext_resource type="Script" path="res://assets/scripts/coding_area/coding_interactor.gd" id="5_8vt2h"]
+[ext_resource type="PackedScene" uid="uid://dt4ld3ulwj1dx" path="res://assets/objects/blocks/events/when_play_pressed.tscn" id="6_j2uub"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63k0g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3tmo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htrr3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_culku"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3se1"]
+
+[node name="coding_area" type="Node2D"]
+script = ExtResource("1_r2x8g")
+
+[node name="user_interface_layer" type="CanvasLayer" parent="."]
+
+[node name="user_interface" type="Control" parent="user_interface_layer"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yjsnd")
+
+[node name="background" type="ColorRect" parent="user_interface_layer/user_interface"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0705882, 0.0705882, 0.0705882, 0)
+
+[node name="pause_menu" type="Control" parent="user_interface_layer/user_interface"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="menu_button" type="Button" parent="user_interface_layer/user_interface/pause_menu"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = -184.0
+offset_right = -62.0
+offset_bottom = -146.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.12549, 0.705882, 0.796078, 1)
+theme_override_colors/font_pressed_color = Color(0.0784314, 0.517647, 0.588235, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.807843, 0.909804, 1)
+theme_override_colors/font_focus_color = Color(0.12549, 0.705882, 0.796078, 1)
+theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
+theme_override_fonts/font = ExtResource("4_cnuqi")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_63k0g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x3tmo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_htrr3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_culku")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x3se1")
+text = "Back To Menu"
+flat = true
+alignment = 2
+
+[node name="background" type="Sprite2D" parent="."]
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("1_10b8x")
+region_enabled = true
+region_rect = Rect2(0, 0, 2160, 1440)
+
+[node name="logo" type="Sprite2D" parent="background"]
+position = Vector2(0, 8)
+scale = Vector2(0.0625, 0.0625)
+texture = ExtResource("2_bc8j3")
+
+[node name="coding_interactor" type="Camera2D" parent="."]
+position = Vector2(0, 40)
+zoom = Vector2(2.5, 2.5)
+limit_left = -4320
+limit_top = -2880
+limit_right = 4320
+limit_bottom = 2880
+limit_smoothed = true
+position_smoothing_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("5_8vt2h")
+
+[node name="coding_block_objects" type="Node2D" parent="."]
+
+[node name="when_play_pressed" parent="coding_block_objects" instance=ExtResource("6_j2uub")]
+position = Vector2(16, 8)
+
+[node name="when_play_pressed2" parent="coding_block_objects" instance=ExtResource("6_j2uub")]
+position = Vector2(16, 8)
+
+[connection signal="pressed" from="user_interface_layer/user_interface/pause_menu/menu_button" to="user_interface_layer/user_interface" method="_on_menu_button_pressed"]
