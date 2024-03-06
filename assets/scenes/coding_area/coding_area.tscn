@@ -265,6 +265,7 @@ scale = Vector2(5, 5)
 texture = ExtResource("5_w5t3d")
 region_enabled = true
 region_rect = Rect2(0, 0, 2160, 1440)
+metadata/_edit_lock_ = true
 
 [node name="logo" type="Sprite2D" parent="background"]
 position = Vector2(0, 8)
@@ -287,10 +288,10 @@ script = ExtResource("5_8vt2h")
 [node name="coding_block_objects" type="Node2D" parent="."]
 
 [node name="when_play_pressed" parent="coding_block_objects" instance=ExtResource("12_n1b8o")]
-position = Vector2(808, 424)
+position = Vector2(16, -32)
 
-[node name="set_variable" parent="coding_block_objects/when_play_pressed" instance=ExtResource("11_5stgg")]
-position = Vector2(32, 32)
+[node name="set_variable" parent="coding_block_objects" instance=ExtResource("11_5stgg")]
+position = Vector2(-168, 56)
 
 [connection signal="pressed" from="user_interface_layer/user_interface/pause_menu/menu_button" to="user_interface_layer/user_interface" method="_on_menu_button_pressed"]
 [connection signal="mouse_entered" from="user_interface_layer/user_interface/blocks_menu/blocks_panel" to="user_interface_layer/user_interface" method="_on_blocks_panel_mouse_entered"]

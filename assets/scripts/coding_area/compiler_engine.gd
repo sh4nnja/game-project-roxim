@@ -43,6 +43,9 @@ extends Node2D
 # Camera Interactor.
 var cam_block_interactor: CodingInteractor
 
+# On queue deleting.
+var block_on_queue_deleting: bool = false
+
 # Block Dictionary
 var _block_objects_dict: Dictionary = {
 	# EVENT BLOCKS
@@ -70,6 +73,10 @@ var compiler_functions: Dictionary = {
 
 # ******************************************************************************
 # CUSTOM SIGNALS AND FUNCTIONS.
+# Access interactor.
+func get_interactor() -> CodingInteractor:
+	return cam_block_interactor
+
 # Add blocks on the platform.
 func add_coding_block(_block_object_id: String, _object_manager: Node2D) -> void:
 	var _obj: Resource = load(_block_objects_dict.get(_block_object_id))
@@ -77,9 +84,24 @@ func add_coding_block(_block_object_id: String, _object_manager: Node2D) -> void
 	_object_manager.add_child(_obj_inst)
 	_obj_inst.global_position = cam_block_interactor.position
 
+# Queue blocks for deletion.
+func queued_block_for_deletion(_queue_delete: bool) -> bool:
+	var _output: bool = false
+	if get_interactor().check_interacting_blocks():
+		if _queue_delete:
+			# Change modulate for visuals.
+			get_interactor().get_interacted_block().modulate = Color.html("ff000032")
+			_output = true
+		else:
+			get_interactor().get_interacted_block().modulate = Color.html("ffffff")
+	
+	# Reminds compiler that block deleting is ongoing.
+	block_on_queue_deleting = _output
+	return _output
+
 # Remove blocks.
 func remove_coding_block(_block: CodingBlocks, _object_manager: Node2D) -> void:
 	# Clears the array for safety.
-	cam_block_interactor.interacting_blocks.clear()
+	get_interactor().interacting_blocks.clear()
 	_object_manager.remove_child(_block)
 	_block.queue_free()

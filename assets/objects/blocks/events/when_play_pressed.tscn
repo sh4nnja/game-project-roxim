@@ -6,22 +6,23 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7a1ru"]
 size = Vector2(64, 32)
 
-[node name="when_play_pressed" type="Area2D"]
+[node name="when_play_pressed" type="Area2D" groups=["Event"]]
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_n8jtu")
 
 [node name="play_pressed_shape" type="CollisionShape2D" parent="."]
+position = Vector2(32, 16)
 shape = SubResource("RectangleShape2D_7a1ru")
 
 [node name="play_pressed_texture" type="TextureRect" parent="."]
-offset_left = -32.0
-offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_8a8e0")
 
-[node name="block_place" type="Node2D" parent="."]
-position = Vector2(-18, 14)
+[node name="tail" type="Node2D" parent="."]
+position = Vector2(0, 28)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

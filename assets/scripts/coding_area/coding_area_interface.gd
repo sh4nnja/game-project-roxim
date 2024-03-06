@@ -68,7 +68,7 @@ const _POS_DURATION: float = 0.5
 # Pause manager.
 var _is_paused: bool = false
 
-# Block managing.
+# Selected Block will queued for deletion.
 var _can_delete_block: bool = false
 
 # ******************************************************************************
@@ -86,10 +86,8 @@ func _input(_event) -> void:
 			_animate_pause_menu()
 			_manage_pause()
 	elif _event is InputEventMouseButton:
-		if _event.button_index == MOUSE_BUTTON_LEFT and !_event.pressed:
-			# Check if there is currently a block interacting.
-			if _can_delete_block and CompilerEngine.cam_block_interactor.interacting_blocks.size() > 0:
-				CompilerEngine.remove_coding_block(CompilerEngine.cam_block_interactor.interacting_blocks[0], _coding_block_object)
+		if _can_delete_block and !_event.pressed:
+			CompilerEngine.remove_coding_block(CompilerEngine.get_interactor().get_interacted_block(), _coding_block_object)
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
@@ -201,10 +199,11 @@ func _on_change_variable_pressed():
 # ******************************************************************************
 # Remove current block.
 func _on_blocks_panel_mouse_entered():
-	_queue_block_for_deletion(true)
+	_can_delete_block = CompilerEngine.queued_block_for_deletion(true)
 
 func _on_blocks_panel_mouse_exited():
-	_queue_block_for_deletion(false)
+	if _is_mouse_outside_block_menu_bounds():
+		_can_delete_block = CompilerEngine.queued_block_for_deletion(false)
 
 # ******************************************************************************
 # TOOLS
@@ -217,18 +216,11 @@ func set_coding_area_background(_bg: int):
 		get_node("/root/coding_area/background").set_texture(_light_mode_bg)
 		get_node("/root/coding_area/background/logo").set_texture(_light_mode_logo)
 
-# Queue blocks for deletion.
-func _queue_block_for_deletion(_queue_delete: bool) -> void:
-	# Always check if interactor array has value for safety.
-	if CompilerEngine.cam_block_interactor.interacting_blocks.size() > 0:
-		if _queue_delete:
-			_can_delete_block = _queue_delete
-			# Change modulate for visuals.
-			CompilerEngine.cam_block_interactor.interacting_blocks[0].modulate = Color.html("ff000032")
-		else:
-			# Some weird code because apparently if you entered a control node inside the panel,
-			# it will fire exit signal. So this is put in order to make sure it will leave the area as whole 
-			# to fire the signal.
-			if !Rect2(Vector2(), _blocks_menu_background.size).has_point(get_local_mouse_position()):
-				_can_delete_block = _queue_delete
-				CompilerEngine.cam_block_interactor.interacting_blocks[0].modulate = Color.html("ffffff")
+# Some weird code because apparently if you entered a control node inside the panel,
+# it will fire exit signal. So this is put in order to make sure it will leave the area as whole 
+# to fire the signal.
+func _is_mouse_outside_block_menu_bounds() -> bool:
+	var _output: bool = false
+	if !Rect2(Vector2(), _blocks_menu_background.size).has_point(get_local_mouse_position()):
+		_output = true
+	return _output

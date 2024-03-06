@@ -54,39 +54,46 @@ class_name CodingBlocks
 # Use classes for the same script each objects you have.
 # ******************************************************************************
 
-# Interactor Node.
-var _interactor: CodingInteractor
-
-# ******************************************************************************
-# INITIATION
-func _ready() -> void:
-	# Get absolute path of Interactor.
-	_interactor = get_node("/root/coding_area/coding_interactor")
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 # Manage hover of blocks.
-func manage_hover(_block: CodingBlocks, is_hovered: bool) -> void:
-	if is_hovered and !_block.dragging_enabled:
-		# Appends and removes the block.
-		_interactor.interacting_blocks.append(_block)
-	else:
-		if !_block.dragging_enabled:
-			_interactor.interacting_blocks.erase(_block)
+func manage_hover(_block: CodingBlocks, _is_hovered: bool) -> void:
+	if !_block.dragging_enabled:
+		# Updates the current interacted blocks.
+		CompilerEngine.get_interactor().manage_hovered_blocks(_block, _is_hovered)
 
 # Manage dragging of blocks.
 func manage_dragging(_event: InputEvent) -> void:
-	# Enable drag mechanic.
-	# Have the size of the current interacting blocks in order to not have an error.
-	if _event is InputEventMouseButton and _interactor.interacting_blocks.size() > 0:
-		if _event.button_index == Configuration.interactor_keys.values()[3] and _event.pressed:
-			# Sets the block's capability to be dragged.
-			_interactor.interacting_blocks[0].dragging_enabled = true
-		else:
-			_interactor.interacting_blocks[0].dragging_enabled = false
+	# Check first if there are a block to be dragged, DUH.
+	var _block: CodingBlocks = CompilerEngine.get_interactor().get_interacted_block()
+	if _block:
+		# Enable drag mechanic.
+		# Have the size of the current interacting blocks in order to not have an error.
+		if _event is InputEventMouseButton:
+			if _event.button_index == Configuration.interactor_keys.values()[3]:
+				# Sets the block's capability to be dragged.
+				CompilerEngine.get_interactor().manage_block_selection(_event.pressed)
 	
-	# Dragging Mechanic
-	if _event is InputEventMouseMotion and _interactor.interacting_blocks.size() > 0:
-		if _interactor.interacting_blocks[0].dragging_enabled:
-			# Only drag the first element in order not to drag the other blocks.
-			_interactor.interacting_blocks[0].position = lerp(_interactor.interacting_blocks[0].position, get_global_mouse_position(), SimulationEngine.lerp_weight / 2)
+		# Dragging Mechanic.
+		if _event is InputEventMouseMotion:
+			if _block.dragging_enabled:
+				# Only drag the first element in order not to drag the other blocks.
+				_block.position = lerp(_block.position, get_global_mouse_position(), SimulationEngine.lerp_weight / 2)
+
+# ******************************************************************************
+# Manage snapping of block to another block.
+func manage_snapping(_current_block: CodingBlocks, _attaching_block: CodingBlocks) -> void:
+	# Checks what type of blocks are currently snapping with each other.
+	_check_attach_area(_current_block, _attaching_block)
+
+# Helper function that checks what kind of blocks are interacting.
+func _check_block_type(_current_block: CodingBlocks, _attaching_block: CodingBlocks) -> void:
+	pass
+
+# Helper function that checks if current block is above or below the attaching block.
+func _check_attach_area(_current_block: CodingBlocks, _attaching_block: CodingBlocks) -> bool:
+	var _output: bool = false
+	if _current_block.position.y < _attaching_block.position.y:
+		_output = true
+	return _output

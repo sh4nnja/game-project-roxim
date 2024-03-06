@@ -8,17 +8,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_apvcg"]
 size = Vector2(128, 32)
 
-[node name="set_variable" type="Area2D"]
+[node name="set_variable" type="Area2D" groups=["Variables"]]
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_bek7b")
 
 [node name="set_variable_shape" type="CollisionShape2D" parent="."]
+position = Vector2(64, 16)
 shape = SubResource("RectangleShape2D_apvcg")
 
 [node name="set_texture_texture" type="NinePatchRect" parent="."]
-offset_left = -64.0
-offset_top = -16.0
+offset_right = 64.0
+offset_bottom = 16.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_vfn7e")
 region_rect = Rect2(0, 0, 64, 16)
@@ -55,8 +56,11 @@ texture = ExtResource("4_7dnjl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="block_place" type="Node2D" parent="."]
-position = Vector2(-50, -14)
+[node name="head" type="Node2D" parent="."]
+position = Vector2(14, 2)
+
+[node name="tail" type="Node2D" parent="."]
+position = Vector2(0, 28)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

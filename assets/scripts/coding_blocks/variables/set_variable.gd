@@ -58,7 +58,7 @@ func _on_mouse_exited():
 
 # When another coding block is interacted.
 func _on_area_entered(_area: CodingBlocks):
-	pass # Replace with function body.
+	manage_snapping(self, _area)
 
 func _on_area_exited(_area: CodingBlocks):
 	pass # Replace with function body.

@@ -48,6 +48,12 @@ var _pan_enabled: bool = false
 var interacting_blocks: Array[CodingBlocks] = []
 
 # ******************************************************************************
+# INITIATION
+func _ready() -> void:
+	# Update camera position in CompilerEngine for adding new blocks.
+	CompilerEngine.cam_block_interactor = get_node("/root/coding_area/coding_interactor")
+
+# ******************************************************************************
 # INPUT EVENTS
 func _unhandled_input(_event) -> void:
 	_manage_panning(_event)
@@ -73,9 +79,6 @@ func _manage_panning(_event: InputEvent) -> void:
 	# Pan camera.
 	if _event is InputEventMouseMotion and _pan_enabled:
 		position -= _event.relative * Configuration.cam_sens / zoom
-	
-	# Update camera position in CompilerEngine for adding new blocks.
-	CompilerEngine.cam_block_interactor = self
 
 # Manage camera zoom scrolling.
 func _manage_scrolling(_event: InputEvent) -> void:
@@ -90,3 +93,40 @@ func _manage_scrolling(_event: InputEvent) -> void:
 			zoom = lerp(zoom, zoom - _cam_zoom_mult, SimulationEngine.lerp_weight)
 
 # *****************************************************************************
+# TOOLS
+# Check if interactor is currently interacting with blocks.
+func check_interacting_blocks() -> bool:
+	var _output: bool = false
+	if interacting_blocks.size() > 0:
+		_output = true
+	return _output
+
+# Get current interacted block.
+func get_interacted_block() -> CodingBlocks:
+	var _output: CodingBlocks = null
+	if check_interacting_blocks():
+		_output = interacting_blocks[0]
+	return _output
+
+# Edit what blocks are currently being interacted / hovered by the interactor.
+func manage_hovered_blocks(_blocks: CodingBlocks, _interact_block: bool) -> void:
+	if _interact_block:
+		interacting_blocks.append(_blocks)
+	else:
+		interacting_blocks.erase(_blocks)
+
+# Updates current block if being deselected or not.
+func manage_block_selection(_is_interacted: bool) -> void:
+	if check_interacting_blocks():
+		var _current_block: CodingBlocks = get_interacted_block()
+		# Sets the block's capability to be dragged.
+		_current_block.dragging_enabled = _is_interacted
+		
+		# Enable Monitoring status of current block.
+		_current_block.monitoring = _is_interacted
+		_current_block.set_collision_mask_value(1, _is_interacted)
+		
+		# Removes current block from currently interacting if not dragging anymore.
+		if !_is_interacted:
+			if !CompilerEngine.block_on_queue_deleting:
+				interacting_blocks.erase(_current_block)
