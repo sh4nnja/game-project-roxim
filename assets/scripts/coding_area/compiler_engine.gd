@@ -81,19 +81,19 @@ func get_interactor() -> CodingInteractor:
 func add_coding_block(_block_object_id: String, _object_manager: Node2D) -> void:
 	var _obj: Resource = load(_block_objects_dict.get(_block_object_id))
 	var _obj_inst: Node = _obj.instantiate()
-	_object_manager.add_child(_obj_inst)
+	_object_manager.add_child(_obj_inst, true)
 	_obj_inst.global_position = cam_block_interactor.position
 
 # Queue blocks for deletion.
 func queued_block_for_deletion(_queue_delete: bool) -> bool:
 	var _output: bool = false
-	if get_interactor().check_interacting_blocks():
+	if cam_block_interactor.check_interacting_blocks():
 		if _queue_delete:
 			# Change modulate for visuals.
-			get_interactor().get_interacted_block().modulate = Color.html("ff000032")
+			cam_block_interactor.get_interacted_block().modulate = Configuration.permission_colors.values()[1]
 			_output = true
 		else:
-			get_interactor().get_interacted_block().modulate = Color.html("ffffff")
+			cam_block_interactor.get_interacted_block().modulate = Configuration.permission_colors.values()[0]
 	
 	# Reminds compiler that block deleting is ongoing.
 	block_on_queue_deleting = _output

@@ -127,6 +127,6 @@ func manage_block_selection(_is_interacted: bool) -> void:
 		_current_block.set_collision_mask_value(1, _is_interacted)
 		
 		# Removes current block from currently interacting if not dragging anymore.
-		if !_is_interacted:
-			if !CompilerEngine.block_on_queue_deleting:
+		if not _is_interacted:
+			if not CompilerEngine.block_on_queue_deleting:
 				interacting_blocks.erase(_current_block)

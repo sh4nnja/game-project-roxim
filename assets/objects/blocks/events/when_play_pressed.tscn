@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt4ld3ulwj1dx"]
+[gd_scene load_steps=5 format=3 uid="uid://dt4ld3ulwj1dx"]
 
 [ext_resource type="Texture2D" uid="uid://cajtmn7i27pl" path="res://assets/textures/coding_blocks_textures/events/when_play_pressed.png" id="1_8a8e0"]
 [ext_resource type="Script" path="res://assets/scripts/coding_blocks/events/when_play_pressed.gd" id="1_n8jtu"]
@@ -6,7 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7a1ru"]
 size = Vector2(64, 32)
 
-[node name="when_play_pressed" type="Area2D" groups=["Event"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hofis"]
+size = Vector2(24, 16)
+
+[node name="when_play_pressed" type="Area2D"]
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_n8jtu")
@@ -21,10 +24,18 @@ offset_bottom = 16.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_8a8e0")
 
-[node name="tail" type="Node2D" parent="."]
+[node name="tail" type="Area2D" parent="." groups=["tail"]]
 position = Vector2(0, 28)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[node name="tail_shape" type="CollisionShape2D" parent="tail"]
+position = Vector2(14, 3.99978)
+rotation = 5.43022e-05
+shape = SubResource("RectangleShape2D_hofis")
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="area_entered" from="tail" to="." method="_on_tail_area_entered"]
+[connection signal="area_exited" from="tail" to="." method="_on_tail_area_exited"]

@@ -86,8 +86,9 @@ func _input(_event) -> void:
 			_animate_pause_menu()
 			_manage_pause()
 	elif _event is InputEventMouseButton:
-		if _can_delete_block and !_event.pressed:
-			CompilerEngine.remove_coding_block(CompilerEngine.get_interactor().get_interacted_block(), _coding_block_object)
+		if _can_delete_block and CompilerEngine.get_interactor().get_interacted_block():
+			if not _event.pressed:
+				CompilerEngine.remove_coding_block(CompilerEngine.get_interactor().get_interacted_block(), _coding_block_object)
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
@@ -127,7 +128,7 @@ func _animate_pause_menu() -> void:
 	const _COLOR_DURATION: float = 0.25
 	
 	# When interface is paused, tween the menu.
-	if !_is_paused:
+	if not _is_paused:
 		_is_paused = true
 		_final_color = 0.75
 		_final_pos = Vector2.ZERO
@@ -180,7 +181,7 @@ func _on_menu_button_pressed() -> void:
 
 # Signal from button to span the menu.
 func _on_span_blocks_panel_toggled(_button_pressed: bool) -> void:
-	_animate_blocks_menu(!_button_pressed)
+	_animate_blocks_menu(not _button_pressed)
 
 # ******************************************************************************
 
@@ -221,6 +222,6 @@ func set_coding_area_background(_bg: int):
 # to fire the signal.
 func _is_mouse_outside_block_menu_bounds() -> bool:
 	var _output: bool = false
-	if !Rect2(Vector2(), _blocks_menu_background.size).has_point(get_local_mouse_position()):
+	if not Rect2(Vector2(), _blocks_menu_background.size).has_point(get_local_mouse_position()):
 		_output = true
 	return _output

@@ -72,7 +72,7 @@ common/physics_ticks_per_second=144
 
 occlusion_culling/bvh_build_quality=1
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
 textures/default_filters/use_nearest_mipmap_filter=true
 textures/decals/filter=0
 textures/light_projectors/filter=0

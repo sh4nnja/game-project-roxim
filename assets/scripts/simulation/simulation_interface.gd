@@ -149,7 +149,7 @@ func _on_menu_button_pressed():
 # Manage simulation here. Physics, interaction.
 func _manage_simulation() -> void:
 	# Disables movement of camera when paused.
-	_environment_camera.cam_movement_enabled = !_is_paused
+	_environment_camera.cam_movement_enabled = not _is_paused
 
 # Display debug report on-screen.
 func _display_debug_report():

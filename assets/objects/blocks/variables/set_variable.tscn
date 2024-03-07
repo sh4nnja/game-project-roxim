@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://jr1yev4cgrw2"]
+[gd_scene load_steps=8 format=3 uid="uid://jr1yev4cgrw2"]
 
 [ext_resource type="Script" path="res://assets/scripts/coding_blocks/variables/set_variable.gd" id="1_bek7b"]
 [ext_resource type="Texture2D" uid="uid://dk1k86gv1wu1a" path="res://assets/textures/coding_blocks_textures/variables/base.png" id="1_vfn7e"]
@@ -8,7 +8,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_apvcg"]
 size = Vector2(128, 32)
 
-[node name="set_variable" type="Area2D" groups=["Variables"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o11e6"]
+size = Vector2(24, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf813"]
+size = Vector2(24, 16)
+
+[node name="set_variable" type="Area2D"]
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_bek7b")
@@ -56,13 +62,28 @@ texture = ExtResource("4_7dnjl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="head" type="Node2D" parent="."]
-position = Vector2(14, 2)
+[node name="head" type="Area2D" parent="." groups=["head"]]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
 
-[node name="tail" type="Node2D" parent="."]
+[node name="head_shape" type="CollisionShape2D" parent="head"]
+position = Vector2(14, 0)
+shape = SubResource("RectangleShape2D_o11e6")
+
+[node name="tail" type="Area2D" parent="." groups=["tail"]]
 position = Vector2(0, 28)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[node name="tail_shape" type="CollisionShape2D" parent="tail"]
+position = Vector2(14, 4)
+shape = SubResource("RectangleShape2D_gf813")
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="area_entered" from="head" to="." method="_on_head_area_entered"]
+[connection signal="area_exited" from="head" to="." method="_on_head_area_exited"]
+[connection signal="area_entered" from="tail" to="." method="_on_tail_area_entered"]
+[connection signal="area_exited" from="tail" to="." method="_on_tail_area_exited"]

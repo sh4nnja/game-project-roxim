@@ -36,11 +36,18 @@
 
 extends CodingBlocks
 
-# Block Type.
+# Block Data.
 var block_type: String = "when_play_pressed"
+
+# Connections.
+@onready var block_tail: Area2D = get_node("tail")
+
+var block_connected_tail: CodingBlocks
 
 # Enable dragging.
 var dragging_enabled: bool = false
+# Check if block can snap.
+var can_snap: int = 0
 
 # ******************************************************************************
 # INPUT EVENT
@@ -56,9 +63,9 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	manage_hover(self, false)
 
-# When another coding block is interacted.
-func _on_area_entered(_area: CodingBlocks):
-	manage_snapping(self, _area)
+# For snapping and attaching.
+func _on_tail_area_entered(_area):
+	manage_block_snapping(block_tail, _area, true)
 
-func _on_area_exited(_area: CodingBlocks):
-	pass # Replace with function body.
+func _on_tail_area_exited(_area):
+	manage_block_snapping(block_tail, _area, false)

@@ -167,7 +167,7 @@ func manage_slot_detection(_idx: int, _is_bracket_detected: bool, _detected_brac
 		_attaching_bracket_slot_pos.sort()
 	else:
 		# Checks if currect bracket is currently connected to the bracket.
-		if !_attach_bracket:
+		if not _attach_bracket:
 			_attaching_bracket_slot_pos.clear()
 			_attaching_bracket = null
 
@@ -176,7 +176,7 @@ func _manage_bracket_hover(_bracket: Brackets) -> void:
 	# This just means that if a slot has detected a possible slot.
 	# Apply 'can_attach' texture.
 	if _slot_states.has(true):
-		apply_selected_texture(!_attach_bracket, interactable_to_attach_res)
+		apply_selected_texture(not _attach_bracket, interactable_to_attach_res)
 
 # ******************************************************************************
 # Check if the force of the bracket is lower than the threshold to hold snapping
@@ -198,7 +198,7 @@ func _manage_bracket_snapping(_bracket: Brackets) ->  void:
 	# Check if there are currently brackets attempting to attach.
 	if _attaching_bracket:
 		# Check if the force of the bracket is lower than the threshold to hold snapping.
-		if _check_bracket_snap() and !_attach_bracket:
+		if _check_bracket_snap() and not _attach_bracket:
 			_snap_bracket(_bracket, _get_snap_offset())
 		else:
 			_snapped_once = false
@@ -212,7 +212,7 @@ func _get_snap_offset() -> Vector3:
 	
 	# Calculate the bracket offset.
 	# Full to full and full to partial slot logic.
-	if !_slot_states.has(false):
+	if not _slot_states.has(false):
 		# It gets the midpoint position of the first slot attached and the last slot attached.
 		# It should work at any bracket as the '_attaching_bracket_slot_pos' array can be used to get the midpoint.
 		_offset.x = (_attaching_bracket_slot_pos[0] + _attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1]) / 2
@@ -247,7 +247,7 @@ func _get_rotated_slot_pos(_pos: Vector3, _rotation_degrees: float, _pivot: Vect
 # Snaps the bracket in place.
 func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
 	if _toggle_snap:
-		if !_snapped_once:
+		if not _snapped_once:
 		# Snaps the bracket's rotation in y-axis once. 
 			_bracket.rotation_degrees.y = _attaching_bracket.rotation_degrees.y
 			_snapped_once = true
@@ -308,7 +308,7 @@ func _check_bracket_joint(_bracket_to_check: Brackets) -> bool:
 	return _output
 
 func _attach_brackets(_offset: float, _bracket: Brackets) -> void:
-	if !_check_bracket_joint(_attaching_bracket):
+	if not _check_bracket_joint(_attaching_bracket):
 		# Create the Hinge Joint Node.
 		var _joint: HingeJoint3D = HingeJoint3D.new()
 		var _joint_pos: Vector3 = Vector3.ZERO
@@ -335,18 +335,18 @@ func _attach_brackets(_offset: float, _bracket: Brackets) -> void:
 # Bracket Tools.
 # Rotate the bracket and relay its rotation to recalculate the offset.
 func rotate_bracket_snap(_invert: bool) -> void:
-	if !_toggle_snap and _slot_states.has(false):
+	if not _toggle_snap and _slot_states.has(false):
 		# Increment / Decrement the bracket's rotation.
 		bracket.angular_velocity.y += _BRACKET_SNAP_ROT_INCR if _invert else -_BRACKET_SNAP_ROT_INCR
 
 func toggle_snap() -> void:
-	if !_toggle_snap:
+	if not _toggle_snap:
 		_toggle_snap = true
 	else:
 		_toggle_snap = false
 
 func toggle_bracket_attachment() -> void:
-	if !_attach_bracket:
+	if not _attach_bracket:
 		_attach_bracket = true
 	else:
 		_attach_bracket = false

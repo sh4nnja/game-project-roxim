@@ -67,6 +67,12 @@ enum {
 	LIGHT_THEME = 2
 }
 
+enum {
+	DEFAULT = 0,
+	INVALID = 1,
+	VALID = 2
+}
+
 # Current theme of the interface.
 var current_theme: int = DARK_THEME
 
@@ -107,6 +113,14 @@ var user_themes: Dictionary = {
 		Color.html("e9e9e9"),                        
 		Color.html("474747"),                
 	]
+}
+
+# Colors for snapping, applicable, danger, etc.
+var permission_colors: Dictionary = {
+	# Code Blocks
+	"default":         Color.html("ffffff"),
+	"invalid":         Color.html("ff000032"),
+	"valid":           Color.html("00ff0032")
 }
 
 # ******************************************************************************

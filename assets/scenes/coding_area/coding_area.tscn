@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cp4p7xd5v3pb0"]
+[gd_scene load_steps=20 format=3 uid="uid://cp4p7xd5v3pb0"]
 
 [ext_resource type="Script" path="res://assets/scripts/coding_area/compiler_engine.gd" id="1_r2x8g"]
 [ext_resource type="Script" path="res://assets/scripts/coding_area/coding_area_interface.gd" id="1_yjsnd"]
@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://c3e3tbyneylgy" path="res://assets/textures/coding_area_textures/editor/background_dark.png" id="5_w5t3d"]
 [ext_resource type="Texture2D" uid="uid://cajtmn7i27pl" path="res://assets/textures/coding_blocks_textures/events/when_play_pressed.png" id="5_xiafe"]
 [ext_resource type="Texture2D" uid="uid://bhq6jrcbqxs2y" path="res://assets/textures/coding_blocks_textures/variables/change.png" id="6_3or3i"]
-[ext_resource type="PackedScene" uid="uid://jr1yev4cgrw2" path="res://assets/objects/blocks/variables/set_variable.tscn" id="11_5stgg"]
-[ext_resource type="PackedScene" uid="uid://dt4ld3ulwj1dx" path="res://assets/objects/blocks/events/when_play_pressed.tscn" id="12_n1b8o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63k0g"]
 
@@ -286,12 +284,6 @@ editor_draw_drag_margin = true
 script = ExtResource("5_8vt2h")
 
 [node name="coding_block_objects" type="Node2D" parent="."]
-
-[node name="when_play_pressed" parent="coding_block_objects" instance=ExtResource("12_n1b8o")]
-position = Vector2(16, -32)
-
-[node name="set_variable" parent="coding_block_objects" instance=ExtResource("11_5stgg")]
-position = Vector2(-168, 56)
 
 [connection signal="pressed" from="user_interface_layer/user_interface/pause_menu/menu_button" to="user_interface_layer/user_interface" method="_on_menu_button_pressed"]
 [connection signal="mouse_entered" from="user_interface_layer/user_interface/blocks_menu/blocks_panel" to="user_interface_layer/user_interface" method="_on_blocks_panel_mouse_entered"]

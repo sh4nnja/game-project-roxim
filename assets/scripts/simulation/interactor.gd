@@ -81,7 +81,7 @@ func _physics_process(_delta):
 # Detect 'interactables'.
 func _hover_and_select_interactables() -> void:
 	# Enables the hover mechanic if there's no interactable to be dragged.
-	if !_interacted_object:
+	if not _interacted_object:
 		# Check if 'interactor' is hovering or selecting 'interactables'.
 		if is_colliding() and get_collider() is RigidBody3D:
 			_curr_hovered_interactable = get_collider()

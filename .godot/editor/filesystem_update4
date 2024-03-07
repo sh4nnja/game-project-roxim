@@ -1,9 +1,5 @@
 res://assets/materials/simulation/simulation_map_env.tres
-res://assets/scenes/coding_area/coding_area.tscn
 res://assets/scenes/main_menu/main_menu.tscn
+res://assets/scenes/coding_area/coding_area.tscn
 res://assets/objects/blocks/events/when_play_pressed.tscn
 res://assets/objects/blocks/variables/set_variable.tscn
-res://assets/scripts/coding_blocks/coding_blocks.gd
-res://assets/scripts/coding_area/compiler_engine.gd
-res://assets/scripts/coding_area/coding_interactor.gd
-res://assets/scripts/coding_area/coding_area_interface.gd
