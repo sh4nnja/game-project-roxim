@@ -44,8 +44,12 @@ var block_type: String = "when_play_pressed"
 
 var block_connected_tail: CodingBlocks
 
+# Check what block we are attempting to connect to.
+var attaching_connector: Area2D
+
 # Enable dragging.
 var dragging_enabled: bool = false
+
 # Check if block can snap.
 var can_snap: int = 0
 

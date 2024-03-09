@@ -237,6 +237,16 @@ text = "
 Logical"
 horizontal_alignment = 2
 
+[node name="visual_separator" type="Label" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+theme_override_fonts/font = ExtResource("4_cnuqi")
+theme_override_font_sizes/font_size = 25
+text = "
+
+Visual"
+horizontal_alignment = 2
+
 [node name="span_blocks_panel" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel"]
 layout_mode = 1
 anchors_preset = -1

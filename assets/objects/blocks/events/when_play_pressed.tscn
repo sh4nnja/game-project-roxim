@@ -7,9 +7,9 @@
 size = Vector2(64, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hofis"]
-size = Vector2(24, 16)
+size = Vector2(12, 4)
 
-[node name="when_play_pressed" type="Area2D"]
+[node name="when_play_pressed" type="Area2D" groups=["block"]]
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_n8jtu")
@@ -31,7 +31,7 @@ collision_mask = 0
 monitoring = false
 
 [node name="tail_shape" type="CollisionShape2D" parent="tail"]
-position = Vector2(14, 3.99978)
+position = Vector2(14.0001, 2)
 rotation = 5.43022e-05
 shape = SubResource("RectangleShape2D_hofis")
 

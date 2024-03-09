@@ -46,7 +46,7 @@ const _CODING_AREA_SCN_FILE: String = "res://assets/scenes/coding_area/coding_ar
 const _SIMULATION_SOURCE_CODE: String = "https://github.com/sh4nnja/school-project-CAPSTONE-VBlox"
 
 # Portfolio Website of the capstone developers.
-const _SIMULATION_TEAM: String = ""
+const _SIMULATION_TEAM: String = "https://tinyurl.com/vblox-pilot-testing"
 
 # Main interfaces.
 @onready var _body: Control = get_node("user_interface/body")
@@ -183,6 +183,9 @@ func _on_about_the_team_pressed():
 	# Use "OS.shell_open()" to open website.
 	OS.shell_open(_SIMULATION_TEAM)
 
+# Move on to the tasks so that user can learn coding.
+
+
 # ******************************************************************************
 # Simualate loading.
 func _load_scene(_button: Node, _scn: String) -> void:
@@ -196,3 +199,7 @@ func _load_scene(_button: Node, _scn: String) -> void:
 	# Change the scene.
 	get_tree().change_scene_to_file(_scn)
 
+
+
+func _on_task_1_pressed():
+	pass # Replace with function body.
