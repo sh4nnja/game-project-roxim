@@ -78,6 +78,9 @@ const _SIMULATION_TEAM: String = "https://tinyurl.com/vblox-pilot-testing"
 @onready var _exit_button = get_node("user_interface/header/exit_button")
 @onready var _theme_button = get_node("user_interface/footer/theme_button")
 
+# Task interface.
+@onready var _tasks_separator: VBoxContainer = get_node("user_interface/body/simulate_panel/learn_panel/tasks_container/tasks_separator")
+
 # ******************************************************************************
 # INITIATION
 
@@ -86,6 +89,9 @@ func _ready() -> void:
 	# Setting the theme and animating the panel for splash.
 	_apply_theme()
 	_animate_panel()
+	
+	# Format the disabled buttons automatically.
+	_disable_task_buttons(_tasks_separator)
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
@@ -171,6 +177,7 @@ func _on_simulate_button_pressed():
 
 # Signal from button to go to the code editor.
 func _on_editor_button_pressed():
+	CompilerEngine.editor_mode = CompilerEngine.CREATIVE
 	_load_scene(_learn_editor_button, _CODING_AREA_SCN_FILE)
 
 # Signal from button to open a website of the source code.
@@ -184,10 +191,12 @@ func _on_about_the_team_pressed():
 	OS.shell_open(_SIMULATION_TEAM)
 
 # Move on to the tasks so that user can learn coding.
-
+func _on_task_1_pressed():
+	CompilerEngine.editor_mode = CompilerEngine.TASK_1
+	_load_scene(_learn_editor_button, _CODING_AREA_SCN_FILE)
 
 # ******************************************************************************
-# Simualate loading.
+# Simulate loading.
 func _load_scene(_button: Node, _scn: String) -> void:
 	# Change the button to "Loading..." for user experience.
 	_button.disabled = true
@@ -199,7 +208,10 @@ func _load_scene(_button: Node, _scn: String) -> void:
 	# Change the scene.
 	get_tree().change_scene_to_file(_scn)
 
-
-
-func _on_task_1_pressed():
-	pass # Replace with function body.
+# ******************************************************************************
+# Tools
+func _disable_task_buttons(_task_separator: VBoxContainer) -> void:
+	for _task in _task_separator.get_children():
+		if _task.disabled:
+			_task.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+			_task.get_child(0).modulate = Color.html("20b4cb32")

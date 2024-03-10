@@ -57,6 +57,7 @@ var _dark_mode_logo: Resource = load("res://assets/dev/vblox_logo/logo_flat_gray
 #@onready var _blocks_menu: Control = get_node("blocks_menu")
 @onready var _blocks_menu_background: Panel = get_node("blocks_menu/blocks_panel")
 @onready var _blocks_span_btn: TextureButton = get_node("blocks_menu/blocks_panel/span_blocks_panel")
+@onready var _blocks_separator: VBoxContainer = get_node("blocks_menu/blocks_panel/blocks_container/blocks_separator")
 
 # Labels for block groups.
 @onready var _label_events: Label = get_node("blocks_menu/blocks_panel/blocks_container/blocks_separator/events_separator")
@@ -77,6 +78,9 @@ var _can_delete_block: bool = false
 func _ready() -> void:
 	# Setting the theme and animating the panel for splash.
 	_apply_theme()
+	
+	# Format the disabled buttons automatically.
+	_disable_block_buttons(_blocks_separator)
 
 # ******************************************************************************
 # INPUT EVENTS
@@ -184,8 +188,12 @@ func _on_span_blocks_panel_toggled(_button_pressed: bool) -> void:
 	_animate_blocks_menu(not _button_pressed)
 
 # ******************************************************************************
-
 # Communicate to the Coding Compiler on what block to add.
+
+# DISPLAY
+func _on_display_visual_pressed():
+	CompilerEngine.add_coding_block("DISPLAY_display_value", _coding_block_object)
+
 # EVENTS
 func _on_when_play_pressed_pressed():
 	CompilerEngine.add_coding_block("EVENT_when_play_pressed", _coding_block_object)
@@ -195,7 +203,7 @@ func _on_set_variable_pressed():
 	CompilerEngine.add_coding_block("VARIABLE_set_variable", _coding_block_object)
 
 func _on_change_variable_pressed():
-	pass # Replace with function body.
+	CompilerEngine.add_coding_block("VARIABLE_change_variable", _coding_block_object)
 
 # ******************************************************************************
 # Remove current block.
@@ -217,11 +225,25 @@ func set_coding_area_background(_bg: int):
 		get_node("/root/coding_area/background").set_texture(_light_mode_bg)
 		get_node("/root/coding_area/background/logo").set_texture(_light_mode_logo)
 
-# Some weird code because apparently if you entered a control node inside the panel,
+# Some weird code because apparently from reddit that, if you entered a control node inside the panel,
 # it will fire exit signal. So this is put in order to make sure it will leave the area as whole 
 # to fire the signal.
 func _is_mouse_outside_block_menu_bounds() -> bool:
 	var _output: bool = false
-	if not Rect2(Vector2(), _blocks_menu_background.size).has_point(get_local_mouse_position()):
+	if not Rect2(Vector2(0, 0), _blocks_menu_background.size).has_point(get_local_mouse_position()):
 		_output = true
 	return _output
+
+# ******************************************************************************
+# Tools.
+func _disable_block_buttons(_task_separator: VBoxContainer) -> void:
+	var _idx: int = 0
+	for _task in _task_separator.get_children():
+		_idx += 1
+		if _idx > 7:
+			if _task is TextureButton:
+				_task.disabled = true
+				_task.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+			_task.modulate = Color.html("ffffff38")
+
+

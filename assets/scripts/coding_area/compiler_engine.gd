@@ -43,30 +43,48 @@ extends Node2D
 # Camera Interactor.
 var cam_block_interactor: CodingInteractor
 
+# Editor mode.
+# Tasks 1-6 or Creative 0
+enum {
+	CREATIVE = 0,
+	TASK_1 = 1,
+	TASK_2 = 2,
+	TASK_3 = 3,
+	TASK_4 = 4,
+	TASK_5 = 5,
+	TASK_6 = 6
+}
+
+var editor_mode: int = CREATIVE
+
 # On queue deleting.
 var block_on_queue_deleting: bool = false
 
 # Block Dictionary
 var _block_objects_dict: Dictionary = {
+	# VISUAL BLOCKS
+	"DISPLAY_display_value": "res://assets/objects/blocks/visual/display_visual.tscn",
+	
 	# EVENT BLOCKS
 	"EVENT_when_play_pressed": "res://assets/objects/blocks/events/when_play_pressed.tscn",
 	
 	# VARIABLE BLOCKS
-	"VARIABLE_set_variable": "res://assets/objects/blocks/variables/set_variable.tscn"
+	"VARIABLE_set_variable": "res://assets/objects/blocks/variables/set_variable.tscn",
+	"VARIABLE_change_variable": "res://assets/objects/blocks/variables/change_variable.tscn"
 }
 
 # ******************************************************************************
 # This is where the user will place the variables and values will be located. 
 var compiler_variables: Dictionary = {
-#	"my_variable": 0 
+#	"foo": 0 
 #	Can be anything.
 
 }
 
 # This is where the user will place the functions and what it does.
 var compiler_functions: Dictionary = {
-#	"my_function" : {
-#		"foo": "foo"
+#	"foo" : {
+#		"bar": "baz"
 #	}
 
 }
@@ -90,10 +108,10 @@ func queued_block_for_deletion(_queue_delete: bool) -> bool:
 	if cam_block_interactor.check_interacting_blocks():
 		if _queue_delete:
 			# Change modulate for visuals.
-			cam_block_interactor.get_interacted_block().modulate = Configuration.permission_colors.values()[1]
+			cam_block_interactor.get_interacted_block().modulate = Configuration.permission_colors.values()[Configuration.INVALID]
 			_output = true
 		else:
-			cam_block_interactor.get_interacted_block().modulate = Configuration.permission_colors.values()[0]
+			cam_block_interactor.get_interacted_block().modulate = Configuration.permission_colors.values()[Configuration.DEFAULT]
 	
 	# Reminds compiler that block deleting is ongoing.
 	block_on_queue_deleting = _output

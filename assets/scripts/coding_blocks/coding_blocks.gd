@@ -98,7 +98,7 @@ func manage_block_snapping(_current_block_area: Area2D, _attaching_block_area: A
 				if _get_block_owner(_current_block_area).block_connected_tail == _get_block_owner(_attaching_block_area):
 					_get_block_owner(_current_block_area).can_snap = Configuration.DEFAULT
 				else:
-					_get_block_owner(_current_block_area).can_snap = Configuration.INVALID
+					_get_block_owner(_current_block_area).can_snap = Configuration.DEFAULT
 		
 		# Tail to head connection.
 		elif _attaching_block_area.is_in_group("tail") and _current_block_area.is_in_group("head"):
@@ -109,7 +109,7 @@ func manage_block_snapping(_current_block_area: Area2D, _attaching_block_area: A
 				if _get_block_owner(_current_block_area).block_connected_head == _get_block_owner(_attaching_block_area):
 					_get_block_owner(_current_block_area).can_snap = Configuration.DEFAULT
 				else:
-					_get_block_owner(_current_block_area).can_snap = Configuration.INVALID
+					_get_block_owner(_current_block_area).can_snap = Configuration.DEFAULT
 		
 		# The forbidden connections.
 		elif (_attaching_block_area.is_in_group("head") and _current_block_area.is_in_group("head")) or (_attaching_block_area.is_in_group("tail") and _current_block_area.is_in_group("tail")):
@@ -134,12 +134,17 @@ func _drag_and_drop_block(_block: CodingBlocks, _event: InputEvent):
 		# Checks first if block is currently snapping.
 		if _block.can_snap == Configuration.VALID:
 			if !_event.pressed:
-				# Released the block.
+				# Attach the block.
 				_manage_attaching(_block, _block.attaching_connector, true)
 		
 		else:
 			# Sets the block's capability to be dragged.
 			CompilerEngine.get_interactor().manage_block_selection(_event.pressed)
+		
+		# Attempts to detach the block.
+		if _block.get_parent().is_in_group("block"):
+			if _event.pressed:
+				_manage_attaching(_block, _block.attaching_connector, false)
 		
 		# Enable anchors for snapping.
 		_manage_snapping_anchors(_block, _block.dragging_enabled)
@@ -173,7 +178,7 @@ func _snap_blocks(_current_block_area: Area2D, _attaching_block_area: Area2D) ->
 			# VALID
 			# Snap the block in the position.
 			_get_block_owner(_current_block_area).attaching_connector = _attaching_block_area
-			_get_block_owner(_current_block_area).position = _attaching_block_area.global_position - _current_block_area.position
+			_get_block_owner(_current_block_area).global_position = _attaching_block_area.global_position - _current_block_area.position
 			_get_block_owner(_current_block_area).dragging_enabled = false
 			
 			# Update visuals.
@@ -191,31 +196,38 @@ func _manage_attaching(_current_block: CodingBlocks, _connector: Area2D, _attach
 	if _connector:
 		var _attached_block: CodingBlocks = _get_block_owner(_current_block.attaching_connector)
 		if _attach:
+			# Change parent to the attached block so that it will be moved alongside.
+			# If current block is in group no_head, meaning it is an event block, it
+			# will be the root block.
+			if _current_block.is_in_group("no_head"):
+				_attached_block.reparent(_current_block)
+				_current_block.global_position = get_global_mouse_position() - (_current_block.get_child(0).shape.size / 2)
+				_attached_block.global_position = _current_block.block_tail.global_position
+			else:
+				_current_block.reparent(_attached_block)
+			
 			# Checks if the area is in head or tail so that it will facilitate the location.
 			# If the current block's attaching block.
 			if _current_block.attaching_connector.is_in_group("head"):
 				_attached_block.block_connected_head = _current_block
 				_current_block.block_connected_tail = _attached_block
-				
+			
 			elif _current_block.attaching_connector.is_in_group("tail"):
 				_attached_block.block_connected_tail = _current_block
 				_current_block.block_connected_head = _attached_block
-				
-			# Change parent to the attached block so that it will be moved alongside.
-			_current_block.reparent(_attached_block)
-			
+		
 		# Removes the block.
 		else:
+			# Change parent back to the editor.
+			_current_block.reparent(get_node("/root/coding_area/coding_block_objects"))
+			
 			if _current_block.attaching_connector.is_in_group("head"):
 				_attached_block.block_connected_head = null
 				_current_block.block_connected_tail = null
-				
+			
 			elif _current_block.attaching_connector.is_in_group("tail"):
-				_attached_block.block_connected_tail = null
 				_current_block.block_connected_head = null
-				
-			# Change parent back to the editor.
-			_current_block.reparent(get_node("/root/coding_area/coding_block_objects"))
+				_attached_block.block_connected_tail = null
 
 # Get the owner of the block anchor / connector.
 func _get_block_owner(_block: Area2D) -> CodingBlocks:

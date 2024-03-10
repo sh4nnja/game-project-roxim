@@ -4,3 +4,13 @@ res://assets/scenes/coding_area/coding_area.tscn
 res://assets/objects/blocks/events/when_play_pressed.tscn
 res://assets/objects/blocks/variables/set_variable.tscn
 res://assets/scripts/coding_blocks/coding_blocks.gd
+res://assets/objects/blocks/variables/change_variable.tscn
+res://assets/scripts/coding_blocks/variables/change_variable.gd
+res://assets/scripts/coding_area/compiler_engine.gd
+res://assets/scripts/coding_area/coding_area_interface.gd
+res://assets/scripts/main_menu/main_menu_interface.gd
+res://assets/scripts/interactables/brackets/brackets.gd
+res://assets/scripts/coding_blocks/events/when_play_pressed.gd
+res://assets/objects/blocks/visual/display.tscn
+res://assets/objects/blocks/visual/display_visual.tscn
+res://assets/scripts/coding_blocks/visuals/display_visual.gd

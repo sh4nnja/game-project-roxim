@@ -208,7 +208,7 @@ func _manage_bracket_snapping(_bracket: Brackets) ->  void:
 # The offset of the bracket when snapped.
 func _get_snap_offset() -> Vector3:
 	# The offset of the bracket when snapped.
-	var _offset: Vector3 = Vector3(0, 0, 0)
+	var _offset: Vector3 = Vector3.ZERO
 	
 	# Calculate the bracket offset.
 	# Full to full and full to partial slot logic.
@@ -286,7 +286,7 @@ func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
 	)
 	
 	# Reset the linear velocity of the bracket when snapping.
-	_bracket.linear_velocity = Vector3(0, 0, 0)
+	_bracket.linear_velocity = Vector3.ZERO
 
 # ******************************************************************************
 # Manage bracket attachment mechanicd.

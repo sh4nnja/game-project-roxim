@@ -1,15 +1,31 @@
-[gd_scene load_steps=20 format=3 uid="uid://cp4p7xd5v3pb0"]
+[gd_scene load_steps=36 format=3 uid="uid://cp4p7xd5v3pb0"]
 
 [ext_resource type="Script" path="res://assets/scripts/coding_area/compiler_engine.gd" id="1_r2x8g"]
 [ext_resource type="Script" path="res://assets/scripts/coding_area/coding_area_interface.gd" id="1_yjsnd"]
 [ext_resource type="Texture2D" uid="uid://dbcjrtxq16vi7" path="res://assets/dev/vblox_logo/logo_flat_gray.png" id="2_bc8j3"]
 [ext_resource type="Texture2D" uid="uid://ilx2o6n32nk5" path="res://assets/textures/coding_area_textures/editor/span_blocks.png" id="4_0nnom"]
 [ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="4_cnuqi"]
+[ext_resource type="Texture2D" uid="uid://coe42v4lqu2on" path="res://assets/textures/coding_blocks_textures/visual/display.png" id="4_e0f4p"]
 [ext_resource type="Texture2D" uid="uid://cmji2bkg8pn82" path="res://assets/textures/coding_blocks_textures/variables/set.png" id="5_5tr0d"]
 [ext_resource type="Script" path="res://assets/scripts/coding_area/coding_interactor.gd" id="5_8vt2h"]
 [ext_resource type="Texture2D" uid="uid://c3e3tbyneylgy" path="res://assets/textures/coding_area_textures/editor/background_dark.png" id="5_w5t3d"]
 [ext_resource type="Texture2D" uid="uid://cajtmn7i27pl" path="res://assets/textures/coding_blocks_textures/events/when_play_pressed.png" id="5_xiafe"]
 [ext_resource type="Texture2D" uid="uid://bhq6jrcbqxs2y" path="res://assets/textures/coding_blocks_textures/variables/change.png" id="6_3or3i"]
+[ext_resource type="Texture2D" uid="uid://s34lgoxgggqa" path="res://assets/textures/coding_blocks_textures/conditionals/if.png" id="7_nn1lq"]
+[ext_resource type="Texture2D" uid="uid://dnbdi6tfeuche" path="res://assets/textures/coding_blocks_textures/conditionals/if_then.png" id="8_725hd"]
+[ext_resource type="Texture2D" uid="uid://6hoaoom6tp16" path="res://assets/textures/coding_blocks_textures/loops/forever.png" id="9_lit64"]
+[ext_resource type="Texture2D" uid="uid://ivi7a1lf56v6" path="res://assets/textures/coding_blocks_textures/loops/repeat.png" id="10_au36e"]
+[ext_resource type="Texture2D" uid="uid://cl5vo4rh461qu" path="res://assets/textures/coding_blocks_textures/loops/repeat_until.png" id="11_jqs7r"]
+[ext_resource type="Texture2D" uid="uid://dnagp4spny83s" path="res://assets/textures/coding_blocks_textures/arithmetic/add.png" id="13_dc211"]
+[ext_resource type="Texture2D" uid="uid://ctdxqgk4lhtt0" path="res://assets/textures/coding_blocks_textures/arithmetic/subtract.png" id="14_fu3yd"]
+[ext_resource type="Texture2D" uid="uid://84fch3cv7r66" path="res://assets/textures/coding_blocks_textures/arithmetic/multiply.png" id="15_6m1vs"]
+[ext_resource type="Texture2D" uid="uid://cpkvlsxupo60w" path="res://assets/textures/coding_blocks_textures/arithmetic/divide.png" id="16_f4egj"]
+[ext_resource type="Texture2D" uid="uid://dg3c61yur5ixw" path="res://assets/textures/coding_blocks_textures/comparison/greater.png" id="17_7sxp4"]
+[ext_resource type="Texture2D" uid="uid://byfr35kv3bm2h" path="res://assets/textures/coding_blocks_textures/comparison/less.png" id="18_knfli"]
+[ext_resource type="Texture2D" uid="uid://dvol4icjb5tig" path="res://assets/textures/coding_blocks_textures/comparison/equal.png" id="19_afyds"]
+[ext_resource type="Texture2D" uid="uid://7uvgpj7buuvk" path="res://assets/textures/coding_blocks_textures/logical/and.png" id="20_ow11v"]
+[ext_resource type="Texture2D" uid="uid://b3anah1x4gdsh" path="res://assets/textures/coding_blocks_textures/logical/or.png" id="21_67nak"]
+[ext_resource type="Texture2D" uid="uid://bk27dtg40inwx" path="res://assets/textures/coding_blocks_textures/logical/not.png" id="22_8xjxa"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63k0g"]
 
@@ -148,12 +164,31 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 alignment = 1
 
+[node name="visual_separator" type="Label" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
+theme_override_fonts/font = ExtResource("4_cnuqi")
+theme_override_font_sizes/font_size = 25
+text = "
+
+Visual"
+horizontal_alignment = 2
+
+[node name="display_visual" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_e0f4p")
+stretch_mode = 5
+
 [node name="events_separator" type="Label" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
 theme_override_fonts/font = ExtResource("4_cnuqi")
 theme_override_font_sizes/font_size = 25
-text = "Events"
+text = "
+
+Events"
 horizontal_alignment = 2
 
 [node name="when_play_pressed" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
@@ -197,6 +232,20 @@ text = "
 Conditionals"
 horizontal_alignment = 2
 
+[node name="if_conditional" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_nn1lq")
+stretch_mode = 5
+
+[node name="if_then_conditional" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 176)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_725hd")
+stretch_mode = 5
+
 [node name="loops_separator" type="Label" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
@@ -206,6 +255,27 @@ text = "
 
 Loops"
 horizontal_alignment = 2
+
+[node name="forever_loop" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 112)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_lit64")
+stretch_mode = 5
+
+[node name="repeat_loop" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 112)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_au36e")
+stretch_mode = 5
+
+[node name="repeat_until_loop" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 112)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("11_jqs7r")
+stretch_mode = 5
 
 [node name="arithmetic_separator" type="Label" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
 layout_mode = 2
@@ -217,6 +287,38 @@ text = "
 Arithmetic"
 horizontal_alignment = 2
 
+[node name="add_arithmetic" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("13_dc211")
+stretch_mode = 5
+
+[node name="sub_arithmetic" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("14_fu3yd")
+stretch_mode = 5
+
+[node name="mult_arithmetic" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("15_6m1vs")
+stretch_mode = 5
+
+[node name="div_arithmetic" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("16_f4egj")
+stretch_mode = 5
+
 [node name="comparison_separator" type="Label" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
@@ -226,6 +328,30 @@ text = "
 
 Comparison"
 horizontal_alignment = 2
+
+[node name="greater_comparison" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("17_7sxp4")
+stretch_mode = 5
+
+[node name="less_comparison" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("18_knfli")
+stretch_mode = 5
+
+[node name="equal_comparison" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("19_afyds")
+stretch_mode = 5
 
 [node name="logical_separator" type="Label" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
 layout_mode = 2
@@ -237,15 +363,29 @@ text = "
 Logical"
 horizontal_alignment = 2
 
-[node name="visual_separator" type="Label" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+[node name="and_logical" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.498039, 0.498039, 0.498039, 1)
-theme_override_fonts/font = ExtResource("4_cnuqi")
-theme_override_font_sizes/font_size = 25
-text = "
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("20_ow11v")
+stretch_mode = 5
 
-Visual"
-horizontal_alignment = 2
+[node name="or_logical" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("21_67nak")
+stretch_mode = 5
+
+[node name="not_logical" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("22_8xjxa")
+stretch_mode = 5
 
 [node name="span_blocks_panel" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/blocks_panel"]
 layout_mode = 1
@@ -298,6 +438,7 @@ script = ExtResource("5_8vt2h")
 [connection signal="pressed" from="user_interface_layer/user_interface/pause_menu/menu_button" to="user_interface_layer/user_interface" method="_on_menu_button_pressed"]
 [connection signal="mouse_entered" from="user_interface_layer/user_interface/blocks_menu/blocks_panel" to="user_interface_layer/user_interface" method="_on_blocks_panel_mouse_entered"]
 [connection signal="mouse_exited" from="user_interface_layer/user_interface/blocks_menu/blocks_panel" to="user_interface_layer/user_interface" method="_on_blocks_panel_mouse_exited"]
+[connection signal="pressed" from="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator/display_visual" to="user_interface_layer/user_interface" method="_on_display_visual_pressed"]
 [connection signal="pressed" from="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator/when_play_pressed" to="user_interface_layer/user_interface" method="_on_when_play_pressed_pressed"]
 [connection signal="pressed" from="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator/set_variable" to="user_interface_layer/user_interface" method="_on_set_variable_pressed"]
 [connection signal="pressed" from="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator/change_variable" to="user_interface_layer/user_interface" method="_on_change_variable_pressed"]

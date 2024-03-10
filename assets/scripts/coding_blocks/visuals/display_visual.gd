@@ -1,5 +1,5 @@
 # ******************************************************************************
-# when_play_pressed.gd
+# display_visual.gd
 # ******************************************************************************
 #                             This file is part of
 #                      RESEARCH CAPSTONE PROJECT - VBlox
@@ -37,11 +37,13 @@
 extends CodingBlocks
 
 # Block Data.
-var block_type: String = "when_play_pressed"
+var block_type: String = "display_visual"
 
 # Connections.
+@onready var block_head: Area2D = get_node("head")
 @onready var block_tail: Area2D = get_node("tail")
 
+var block_connected_head: CodingBlocks
 var block_connected_tail: CodingBlocks
 
 # Check what block we are attempting to connect to.
@@ -51,7 +53,7 @@ var attaching_connector: Area2D
 var dragging_enabled: bool = false
 
 # Check if block can snap.
-var can_snap: int = Configuration.DEFAULT
+var can_snap: int = 0
 
 # ******************************************************************************
 # INPUT EVENT
@@ -68,6 +70,12 @@ func _on_mouse_exited():
 	manage_hover(self, false)
 
 # For snapping and attaching.
+func _on_head_area_entered(_area):
+	manage_block_snapping(block_head, _area, true)
+
+func _on_head_area_exited(_area):
+	manage_block_snapping(block_head, _area, false)
+
 func _on_tail_area_entered(_area):
 	manage_block_snapping(block_tail, _area, true)
 
