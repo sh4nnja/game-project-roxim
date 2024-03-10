@@ -121,6 +121,12 @@ func _apply_theme() -> void:
 	_blocks_menu_panel.bg_color = Configuration.user_themes.values()[Configuration.current_theme][0]
 	_blocks_menu_panel.bg_color.a = 0.39
 	_blocks_menu_background.add_theme_stylebox_override("panel", _blocks_menu_panel)
+	
+	# Adjust panel with the proper corners.
+	_blocks_menu_panel.corner_radius_top_left = 30
+	_blocks_menu_panel.corner_radius_top_right = 30
+	_blocks_menu_panel.corner_radius_bottom_left = 0
+	_blocks_menu_panel.corner_radius_bottom_right = 0
 	_compile_panel_background.add_theme_stylebox_override("panel", _blocks_menu_panel)
 	_compile_button_panel.add_theme_stylebox_override("panel", _blocks_menu_panel)
 	
