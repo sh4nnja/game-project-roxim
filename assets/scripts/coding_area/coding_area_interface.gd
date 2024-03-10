@@ -65,7 +65,8 @@ var _dark_mode_logo: Resource = load("res://assets/dev/vblox_logo/logo_flat_gray
 
 # Compiler panel.
 @onready var _compile_panel: Control = get_node("blocks_menu/compile_panel")
-@onready var _compile_button_panel: Control = get_node("blocks_menu/compile_panel/button_panel")
+@onready var _compile_panel_background: Panel = get_node("blocks_menu/compile_panel/compile_panel_background")
+@onready var _compile_button_panel: Panel = get_node("blocks_menu/compile_panel/button_panel")
 @onready var _compile_text_message: Label = get_node("blocks_menu/compile_panel/compile_panel_background/output_panel/output_text")
 
 # Default Constants for UI.
@@ -120,6 +121,8 @@ func _apply_theme() -> void:
 	_blocks_menu_panel.bg_color = Configuration.user_themes.values()[Configuration.current_theme][0]
 	_blocks_menu_panel.bg_color.a = 0.39
 	_blocks_menu_background.add_theme_stylebox_override("panel", _blocks_menu_panel)
+	_compile_panel_background.add_theme_stylebox_override("panel", _blocks_menu_panel)
+	_compile_button_panel.add_theme_stylebox_override("panel", _blocks_menu_panel)
 	
 	# Set Coding Area Background
 	set_coding_area_background(Configuration.current_theme)

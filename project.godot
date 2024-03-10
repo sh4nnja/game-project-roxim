@@ -16,6 +16,7 @@ config/features=PackedStringArray("4.1", "GL Compatibility")
 boot_splash/bg_color=Color(0.0705882, 0.0705882, 0.0705882, 1)
 boot_splash/image="res://assets/dev/vblox_logo/logo_hero.png"
 boot_splash/fullsize=false
+config/icon="res://assets/dev/vblox_logo/logo.png"
 boot_splash/minimum_display_time=2500
 
 [autoload]
@@ -28,6 +29,7 @@ CompilerEngine="*res://assets/scripts/coding_area/compiler_engine.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=4
 window/size/initial_position=Vector2i(10, 0)
 window/size/window_width_override=1024
 window/size/window_height_override=600
