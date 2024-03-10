@@ -62,6 +62,10 @@ var _is_paused: bool = false
 func _ready() -> void:
 	# Setting the theme and animating the panel for splash.
 	_apply_theme()
+	
+	# Remind user that they are accessing an ALPHA feature.
+	_animate_pause_menu()
+	_manage_pause()
 
 # ******************************************************************************
 # PHYSICS
@@ -127,6 +131,9 @@ func _animate_pause_menu() -> void:
 func _manage_pause(_paused: bool = _is_paused) -> void:
 	get_tree().paused = _paused
 	_is_paused = _paused
+	
+	# Unlocks the mouse.
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 # Signal from button to go to menu.
 func _on_menu_button_pressed():

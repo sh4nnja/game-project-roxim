@@ -102,10 +102,16 @@ var compiler_messages: Dictionary = {
 		"BLEEP BOOP... Add one block to start creating code! or I will uhm, add one myself..." + "\n"
 	],
 	
+	"no_blocks_under_play": [
+		"BEEEEEEEPPP! Currently, there are no blocks under the play block. Start by adding one?" + "\n",
+		"BZZZT! Hold on there! Can't really process play block without blocks below it!" + "\n",
+		"BLEEP BOOP... Add one block under play block to start creating code! or I will uhm, add one myself..." + "\n"
+	],
+	
 	"no_play_block": [
 		"EEP! No Play Block in the editor. Start by adding one!" + "\n", 
-		"OOOOOPS! Play Block = None. Add one to start!" + "\n",
-		"BOOP! Can't really start with no play block. Add the block with a green play button with it." + "\n"
+		"OOOOOPS! Play Block = NONE. Add one to start!" + "\n",
+		"BOOP! Can't really start with no play block... Add the block with a green play button with it." + "\n"
 	],
 	
 	"processing": [
@@ -259,9 +265,7 @@ func _execute_block_process(_play_block_process_arr: Array, _play_block_key) -> 
 				"display_visual":
 					# Checks if the variable in the thread is the same as the one in the display text.
 					# Sometimes the error is based on a space before or after the name.
-					
 					# Example " block" is not equal to "block".
-					
 					# Will not implement auto-remove of space before and after the word to introduce
 					# attention to detail and proofreading code skills, as well as basic debugging.
 					# Hashtag bug as feature lol.
@@ -292,4 +296,5 @@ func _execute_block_process(_play_block_process_arr: Array, _play_block_key) -> 
 	
 	# If there's no process yet under the thread (play block).
 	else:
-		compiler_message += "Eep Oop! \nAttach blocks under your play block to start coding!"
+		compiler_messages.get("no_blocks_under_play").shuffle()
+		compiler_message = compiler_messages.get("no_blocks_under_play")[0]

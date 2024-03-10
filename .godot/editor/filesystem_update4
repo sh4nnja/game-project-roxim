@@ -12,3 +12,7 @@ res://assets/objects/blocks/visual/display_visual.tscn
 res://assets/scenes/coding_area/coding_area.tscn
 res://assets/objects/blocks/variables/set_variable.tscn
 res://assets/scripts/coding_area/coding_area_interface.gd
+res://assets/scenes/simulation_map/simulation_map.tscn
+res://assets/scripts/simulation/interactor.gd
+res://assets/scripts/simulation/camera.gd
+res://assets/scripts/simulation/simulation_interface.gd

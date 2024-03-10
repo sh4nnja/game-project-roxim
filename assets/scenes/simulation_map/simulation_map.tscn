@@ -127,6 +127,35 @@ text = "Back To Menu"
 flat = true
 alignment = 2
 
+[node name="disclaimer" type="Label" parent="user_interface/pause_menu"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_w6nuo")
+theme_override_font_sizes/font_size = 50
+text = "You are accessing an ALPHA Feature! You will experience unexpected behaviors, guaranteed!
+
+Hey there! This section of Vblox is under HEAVY CONSTRUCTION. It is still not yet playable at the moment. It will be properly implemented in the near future. Stay tuned!
+
+All interactions inside are limited intendedly as all of them are unstable and might break!
+
+Try to break it as much as possible and send suggestions!
+
+You can check the Code Editor to get the experience though.
+
+Thanks!"
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
 [node name="environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nbaml")
 

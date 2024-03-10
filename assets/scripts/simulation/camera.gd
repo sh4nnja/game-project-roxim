@@ -99,9 +99,6 @@ func _focus_camera(_event: InputEventMouseButton) -> void:
 		elif _event.button_index == Configuration.interactor_keys.values()[2]: 
 			# Decereases max velocity when scroll wheel is moved downwards.
 			_vel_mult = clamp(_vel_mult / _CAM_VEL_MULT.x, _CAM_VEL_MULT.y, _CAM_VEL_MULT.z)
-		
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 # Look with camera using mouse motion.
 func _look_camera(_event: InputEventMouseMotion) -> void:
