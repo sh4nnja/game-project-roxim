@@ -63,6 +63,11 @@ var _dark_mode_logo: Resource = load("res://assets/dev/vblox_logo/logo_flat_gray
 @onready var _label_events: Label = get_node("blocks_menu/blocks_panel/blocks_container/blocks_separator/events_separator")
 @onready var _label_variables: Label = get_node("blocks_menu/blocks_panel/blocks_container/blocks_separator/variables_separator")
 
+# Compiler panel.
+@onready var _compile_panel: Control = get_node("blocks_menu/compile_panel")
+@onready var _compile_button_panel: Control = get_node("blocks_menu/compile_panel/button_panel")
+@onready var _compile_text_message: Label = get_node("blocks_menu/compile_panel/compile_panel_background/output_panel/output_text")
+
 # Default Constants for UI.
 const _POS_DURATION: float = 0.5
 
@@ -81,6 +86,10 @@ func _ready() -> void:
 	
 	# Format the disabled buttons automatically.
 	_disable_block_buttons(_blocks_separator)
+	
+	# Animate themes.
+	_animate_compiler_panel(false)
+	_animate_blocks_menu(false)
 
 # ******************************************************************************
 # INPUT EVENTS
@@ -93,6 +102,11 @@ func _input(_event) -> void:
 		if _can_delete_block and CompilerEngine.get_interactor().get_interacted_block():
 			if not _event.pressed:
 				CompilerEngine.remove_coding_block(CompilerEngine.get_interactor().get_interacted_block(), _coding_block_object)
+
+# ******************************************************************************
+# PHYSICS
+func _physics_process(_delta):
+	_display_compiler_message()
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
@@ -168,6 +182,23 @@ func _animate_blocks_menu(_span: bool) -> void:
 	# Play tween animations.
 	_anim_menu_pos.tween_property(_blocks_menu_background, "position", _final_pos, _POS_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 
+# Animate compiler panel.
+func _animate_compiler_panel(_span: bool):
+	# Creating tween managers.
+	var _anim_menu_pos: Tween = create_tween()
+	
+	# Create parameters for tween.
+	var _final_pos: Vector2 = _compile_panel.global_position
+	
+	# When span is enabled, tween the menu.
+	if _span:
+		_final_pos = Vector2(_compile_panel.global_position.x, (_compile_panel.get_size().y - _compile_button_panel.get_size().y))
+	else:
+		_final_pos = Vector2(_compile_panel.global_position.x, (_compile_panel.global_position.y - _compile_button_panel.get_size().y) + (_compile_panel.get_size().y - _compile_button_panel.get_size().y))
+	
+	# Play tween animations.
+	_anim_menu_pos.tween_property(_compile_panel, "position", _final_pos, _POS_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+
 # Signal from button to go to menu.
 func _on_menu_button_pressed() -> void:
 	# Change the button to "Loading..." for user experience.
@@ -215,6 +246,18 @@ func _on_blocks_panel_mouse_exited():
 		_can_delete_block = CompilerEngine.queued_block_for_deletion(false)
 
 # ******************************************************************************
+# Compiler Panel.
+func _on_compile_btn_pressed():
+	if not CompilerEngine.compiler_enabled:
+		_animate_compiler_panel(true)
+		CompilerEngine.enable_compiler(true, _coding_block_object)
+
+func _on_stop_compile_btn_pressed():
+	if CompilerEngine.compiler_enabled:
+		_animate_compiler_panel(false)
+		CompilerEngine.enable_compiler(false, null)
+
+# ******************************************************************************
 # TOOLS
 # Set background of coding area. Dirty way to do this.
 func set_coding_area_background(_bg: int):
@@ -236,14 +279,27 @@ func _is_mouse_outside_block_menu_bounds() -> bool:
 
 # ******************************************************************************
 # Tools.
+# Disables the buttons.
 func _disable_block_buttons(_task_separator: VBoxContainer) -> void:
 	var _idx: int = 0
 	for _task in _task_separator.get_children():
 		_idx += 1
-		if _idx > 7:
+		# Index distance of start to the preferred value.
+		# 7 because the others are not unlocked yet.
+		# Bad dev.
+		if _idx > 8:
 			if _task is TextureButton:
 				_task.disabled = true
 				_task.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 			_task.modulate = Color.html("ffffff38")
 
-
+# Display compiler messages.
+func _display_compiler_message() -> void:
+	# Checks if compiler is enabled.
+	if CompilerEngine.compiler_enabled:
+		_compile_text_message.text = "Compiler is on...but nothing is happening."
+		# Used so that it will not spam empty lines.
+		if CompilerEngine.compiler_message != null:
+			_compile_text_message.text = CompilerEngine.compiler_message
+	else:
+		_compile_text_message.text = "Compiler is off..."

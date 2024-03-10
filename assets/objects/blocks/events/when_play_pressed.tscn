@@ -9,7 +9,7 @@ size = Vector2(64, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hofis"]
 size = Vector2(12, 4)
 
-[node name="when_play_pressed" type="Area2D" groups=["block", "no_head"]]
+[node name="when_play_pressed" type="Area2D" groups=["block", "no_head", "play"]]
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_n8jtu")

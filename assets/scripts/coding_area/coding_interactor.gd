@@ -120,7 +120,7 @@ func manage_block_selection(_is_interacted: bool) -> void:
 	if check_interacting_blocks():
 		var _current_block: CodingBlocks = get_interacted_block()
 		# Sets the block's capability to be dragged.
-		_current_block.dragging_enabled = _is_interacted
+		_current_block.update_dragging(_is_interacted)
 		
 		# Enable Monitoring status of current block.
 		_current_block.monitoring = _is_interacted

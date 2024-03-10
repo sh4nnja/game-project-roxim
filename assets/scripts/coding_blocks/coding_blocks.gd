@@ -55,10 +55,26 @@ class_name CodingBlocks
 # ******************************************************************************
 
 # Mouse to block distance threshold in pixels in order to break snap.
-const _BLOCK_SNAP_THRESHOLD: int = 5
+const _BLOCK_SNAP_THRESHOLD: int = 1
+
+# Block offset for expanding (When putting information on the block, like variable etc.)
+const _BLOCK_EXPAND_OFFSET: int = 60
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
+
+# Manage block adjustment when value is being inputted.
+func manage_block_tex_size(_block_scale: float, _value_a: float, _value_b: float = 0, _offset: float = 0) -> float:
+	var _output: float = 0
+	_output = (_value_a + _value_b + _BLOCK_EXPAND_OFFSET + _offset) / _block_scale
+	return _output
+
+# Manage block shape adjustment when editing value.
+func manage_block_shape_size(_block_tex_size: float, _block_tex_scale: float = 2) -> float:
+	var _output: float
+	_output = (_block_tex_size * _block_tex_scale) / 2
+	return _output
+
 # Manage hover of blocks.
 func manage_hover(_block: CodingBlocks, _is_hovered: bool) -> void:
 	if not _block.dragging_enabled:
@@ -133,7 +149,7 @@ func _drag_and_drop_block(_block: CodingBlocks, _event: InputEvent):
 	if _event is InputEventMouseButton:
 		# Checks first if block is currently snapping.
 		if _block.can_snap == Configuration.VALID:
-			if !_event.pressed:
+			if not _event.pressed:
 				# Attach the block.
 				_manage_attaching(_block, _block.attaching_connector, true)
 		
@@ -156,9 +172,9 @@ func _drag_and_drop_block(_block: CodingBlocks, _event: InputEvent):
 	# Enable dragging once again whenever block previously break the snap.
 	# It takes the center position of the block then gets the distance of it from the mouse.
 	# The amount of position is based on the height minus the threshold so it works on all blocks.
-	if (_block.global_position + (_block.get_child(0).shape.size / 2)).distance_to(get_global_mouse_position()) > (_block.get_child(0).shape.size / 2).y - _BLOCK_SNAP_THRESHOLD:
+	if (_block.global_position + (_block.get_child(0).shape.size / 2)).distance_to(get_global_mouse_position()) > (_block.get_child(0).shape.size.y) - _BLOCK_SNAP_THRESHOLD:
 		if _block.can_snap == Configuration.VALID:
-			_block.dragging_enabled = true
+			_block.update_dragging(true)
 
 # Enable snapping anchors so that the blocks can detect others.
 # Useful for performance.
@@ -179,7 +195,7 @@ func _snap_blocks(_current_block_area: Area2D, _attaching_block_area: Area2D) ->
 			# Snap the block in the position.
 			_get_block_owner(_current_block_area).attaching_connector = _attaching_block_area
 			_get_block_owner(_current_block_area).global_position = _attaching_block_area.global_position - _current_block_area.position
-			_get_block_owner(_current_block_area).dragging_enabled = false
+			_get_block_owner(_current_block_area).update_dragging(false)
 			
 			# Update visuals.
 			_connection_permission(_get_block_owner(_current_block_area), Configuration.VALID)

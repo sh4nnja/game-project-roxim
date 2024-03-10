@@ -73,3 +73,9 @@ func _on_tail_area_entered(_area):
 
 func _on_tail_area_exited(_area):
 	manage_block_snapping(block_tail, _area, false)
+
+# ******************************************************************************
+# TOOLS
+# Update dragging of the block.
+func update_dragging(draggable: bool) -> void:
+	dragging_enabled = draggable

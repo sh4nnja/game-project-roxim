@@ -39,6 +39,9 @@ extends CodingBlocks
 # Block Data.
 var block_type: String = "change_variable"
 
+@onready var block_var_name: LineEdit = get_node("change_variable_texture/change_label/name")
+@onready var block_var_value: LineEdit = get_node("change_variable_texture/change_label/name/to_label/value")
+
 # Connections.
 @onready var block_head: Area2D = get_node("head")
 @onready var block_tail: Area2D = get_node("tail")
@@ -48,6 +51,10 @@ var block_connected_tail: CodingBlocks
 
 # Check what block we are attempting to connect to.
 var attaching_connector: Area2D
+
+# Block shape. For dragging.
+@onready var _block_texture: NinePatchRect = get_node("change_variable_texture")
+@onready var _block_shape: CollisionShape2D = get_node("change_variable_shape")
 
 # Enable dragging.
 var dragging_enabled: bool = false
@@ -68,6 +75,7 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	manage_hover(self, false)
+	_remove_focus()
 
 # For snapping and attaching.
 func _on_head_area_entered(_area):
@@ -81,3 +89,37 @@ func _on_tail_area_entered(_area):
 
 func _on_tail_area_exited(_area):
 	manage_block_snapping(block_tail, _area, false)
+
+# For changing the value and name.
+func _on_name_text_changed(_new_text):
+	_adjust_block()
+
+func _on_value_text_changed(_new_text):
+	_adjust_block()
+
+# ******************************************************************************
+# TOOLS
+# Get the variables' data.
+func get_block_data() -> Dictionary:
+	return {
+		block_var_name: block_var_value 
+	}
+
+# Update dragging of the block.
+func update_dragging(draggable: bool) -> void:
+	dragging_enabled = draggable
+	
+	# Update text fields so that it will not be selected when dragging.
+	block_var_name.editable = not dragging_enabled
+	block_var_value.editable = not dragging_enabled
+
+# Removes focus on all text when mouse is outside the block.
+func _remove_focus() -> void:
+	block_var_name.release_focus()
+	block_var_value.release_focus()
+
+# Adjust block's position and size based on text.
+func _adjust_block() -> void:
+	_block_texture.size.x = manage_block_tex_size(_block_texture.scale.x, block_var_name.size.x, block_var_value.size.x, 10)
+	_block_shape.position.x = manage_block_shape_size(_block_texture.size.x)
+	_block_shape.shape.size.x = manage_block_shape_size(_block_texture.size.x, 4)

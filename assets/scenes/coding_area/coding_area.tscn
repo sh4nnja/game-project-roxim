@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cp4p7xd5v3pb0"]
+[gd_scene load_steps=46 format=3 uid="uid://cp4p7xd5v3pb0"]
 
 [ext_resource type="Script" path="res://assets/scripts/coding_area/compiler_engine.gd" id="1_r2x8g"]
 [ext_resource type="Script" path="res://assets/scripts/coding_area/coding_area_interface.gd" id="1_yjsnd"]
@@ -26,6 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://7uvgpj7buuvk" path="res://assets/textures/coding_blocks_textures/logical/and.png" id="20_ow11v"]
 [ext_resource type="Texture2D" uid="uid://b3anah1x4gdsh" path="res://assets/textures/coding_blocks_textures/logical/or.png" id="21_67nak"]
 [ext_resource type="Texture2D" uid="uid://bk27dtg40inwx" path="res://assets/textures/coding_blocks_textures/logical/not.png" id="22_8xjxa"]
+[ext_resource type="Texture2D" uid="uid://b6xx4shro3osl" path="res://assets/textures/coding_area_textures/editor/play.png" id="24_2crka"]
+[ext_resource type="Texture2D" uid="uid://do1kf6xwx8k6b" path="res://assets/textures/coding_area_textures/editor/stop.png" id="25_0qt1t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63k0g"]
 
@@ -54,6 +56,40 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("4_0nnom")
 region = Rect2(0, 64, 32, 32)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onkfc"]
+bg_color = Color(0.0509804, 0.0509804, 0.0509804, 0.392157)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8lvl"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0.392157)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5epeq"]
+atlas = ExtResource("24_2crka")
+region = Rect2(0, 0, 9, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8ohu"]
+atlas = ExtResource("24_2crka")
+region = Rect2(0, 8, 9, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl2pf"]
+atlas = ExtResource("24_2crka")
+region = Rect2(9, 0, 9, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xap6r"]
+atlas = ExtResource("25_0qt1t")
+region = Rect2(0, 0, 9, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqbcc"]
+atlas = ExtResource("25_0qt1t")
+region = Rect2(0, 8, 9, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq7yr"]
+atlas = ExtResource("25_0qt1t")
+region = Rect2(9, 0, 9, 8)
+
 [node name="coding_area" type="Node2D"]
 script = ExtResource("1_r2x8g")
 
@@ -67,7 +103,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("1_yjsnd")
 
 [node name="pause_menu" type="Control" parent="user_interface_layer/user_interface"]
@@ -136,9 +172,9 @@ mouse_filter = 2
 [node name="blocks_panel" type="Panel" parent="user_interface_layer/user_interface/blocks_menu"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.2
+anchor_right = 0.125
 anchor_bottom = 1.0
-offset_right = -136.0
+offset_right = 8.0
 grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_k6vb6")
@@ -401,9 +437,112 @@ grow_horizontal = 0
 grow_vertical = 2
 mouse_default_cursor_shape = 10
 toggle_mode = true
+button_pressed = true
 texture_normal = SubResource("AtlasTexture_760fb")
 texture_pressed = SubResource("AtlasTexture_52rwt")
 texture_hover = SubResource("AtlasTexture_sr22b")
+stretch_mode = 5
+
+[node name="compile_panel" type="Control" parent="user_interface_layer/user_interface/blocks_menu"]
+layout_mode = 1
+anchor_left = 0.633
+anchor_top = 0.474
+anchor_right = 0.967
+anchor_bottom = 1.0
+offset_left = 0.640015
+offset_top = 0.0799561
+offset_right = -0.640137
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="compile_panel_background" type="Panel" parent="user_interface_layer/user_interface/blocks_menu/compile_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.07
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -7.76
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_onkfc")
+
+[node name="output_panel" type="Panel" parent="user_interface_layer/user_interface/blocks_menu/compile_panel/compile_panel_background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = -16.0
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_e8lvl")
+
+[node name="output_text" type="Label" parent="user_interface_layer/user_interface/blocks_menu/compile_panel/compile_panel_background/output_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_cnuqi")
+theme_override_font_sizes/font_size = 25
+text = "Compiler is off..."
+autowrap_mode = 3
+clip_text = true
+
+[node name="button_panel" type="Panel" parent="user_interface_layer/user_interface/blocks_menu/compile_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.362
+anchor_top = -0.014
+anchor_right = 0.637
+anchor_bottom = 0.056
+offset_left = 0.319992
+offset_top = -0.0479999
+offset_right = 0.319977
+offset_bottom = 0.191999
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_onkfc")
+
+[node name="compile_btn" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/compile_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.412
+anchor_top = 0.014
+anchor_right = 0.487
+anchor_bottom = 0.083
+offset_left = 0.319977
+offset_top = 0.0480018
+offset_right = 0.319977
+offset_bottom = -0.144001
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_5epeq")
+texture_pressed = SubResource("AtlasTexture_d8ohu")
+texture_hover = SubResource("AtlasTexture_dl2pf")
+stretch_mode = 5
+
+[node name="stop_compile_btn" type="TextureButton" parent="user_interface_layer/user_interface/blocks_menu/compile_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.512
+anchor_top = 0.014
+anchor_right = 0.587
+anchor_bottom = 0.083
+offset_left = 0.319977
+offset_top = 0.0479999
+offset_right = 0.320007
+offset_bottom = -0.144001
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_xap6r")
+texture_pressed = SubResource("AtlasTexture_oqbcc")
+texture_hover = SubResource("AtlasTexture_wq7yr")
 stretch_mode = 5
 
 [node name="background" type="Sprite2D" parent="."]
@@ -443,3 +582,5 @@ script = ExtResource("5_8vt2h")
 [connection signal="pressed" from="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator/set_variable" to="user_interface_layer/user_interface" method="_on_set_variable_pressed"]
 [connection signal="pressed" from="user_interface_layer/user_interface/blocks_menu/blocks_panel/blocks_container/blocks_separator/change_variable" to="user_interface_layer/user_interface" method="_on_change_variable_pressed"]
 [connection signal="toggled" from="user_interface_layer/user_interface/blocks_menu/blocks_panel/span_blocks_panel" to="user_interface_layer/user_interface" method="_on_span_blocks_panel_toggled"]
+[connection signal="pressed" from="user_interface_layer/user_interface/blocks_menu/compile_panel/compile_btn" to="user_interface_layer/user_interface" method="_on_compile_btn_pressed"]
+[connection signal="pressed" from="user_interface_layer/user_interface/blocks_menu/compile_panel/stop_compile_btn" to="user_interface_layer/user_interface" method="_on_stop_compile_btn_pressed"]

@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://uwyrqkwgxklq"]
+[gd_scene load_steps=9 format=3 uid="uid://uwyrqkwgxklq"]
 
 [ext_resource type="Script" path="res://assets/scripts/coding_blocks/visuals/display_visual.gd" id="1_pntbi"]
 [ext_resource type="Texture2D" uid="uid://c85awh36wvmys" path="res://assets/textures/coding_blocks_textures/visual/display_value.png" id="2_pqldv"]
+[ext_resource type="FontFile" uid="uid://3qr0yqigfcse" path="res://assets/font/lexend/Lexend-Medium.ttf" id="3_ws42q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_apvcg"]
-size = Vector2(128, 32)
+size = Vector2(114, 32)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rx1xd"]
 load_path = "res://.godot/imported/base.png-32e5d26157ec0f8af9a7c67f2cc750de.ctex"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4834e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o11e6"]
 size = Vector2(12, 4)
@@ -21,11 +24,11 @@ monitoring = false
 script = ExtResource("1_pntbi")
 
 [node name="display_visual_shape" type="CollisionShape2D" parent="."]
-position = Vector2(64, 16)
+position = Vector2(57, 16)
 shape = SubResource("RectangleShape2D_apvcg")
 
 [node name="display_visual_texture" type="NinePatchRect" parent="."]
-offset_right = 64.0
+offset_right = 57.0
 offset_bottom = 16.0
 scale = Vector2(2, 2)
 texture = SubResource("CompressedTexture2D_rx1xd")
@@ -48,6 +51,31 @@ texture = ExtResource("2_pqldv")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="name" type="LineEdit" parent="display_visual_texture/display"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.071
+anchor_top = -0.571
+anchor_right = 1.071
+anchor_bottom = -0.571
+offset_left = 0.00899887
+offset_top = -0.00299978
+offset_right = 64.009
+offset_bottom = 27.997
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_ws42q")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4834e")
+placeholder_text = "name"
+expand_to_text_length = true
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+flat = true
+select_all_on_focus = true
+caret_blink = true
+
 [node name="head" type="Area2D" parent="." groups=["head"]]
 collision_layer = 2
 collision_mask = 0
@@ -67,11 +95,9 @@ monitoring = false
 position = Vector2(14, 2)
 shape = SubResource("RectangleShape2D_gf813")
 
-[node name="display_value" type="Node2D" parent="."]
-position = Vector2(58, 0)
-
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="text_changed" from="display_visual_texture/display/name" to="." method="_on_name_text_changed"]
 [connection signal="area_entered" from="head" to="." method="_on_head_area_entered"]
 [connection signal="area_exited" from="head" to="." method="_on_head_area_exited"]
 [connection signal="area_entered" from="tail" to="." method="_on_tail_area_entered"]
