@@ -11,3 +11,5 @@ res://assets/scripts/simulation/camera.gd
 res://assets/scripts/coding_blocks/coding_blocks.gd
 res://assets/scripts/coding_area/coding_interactor.gd
 res://assets/scripts/config.gd
+res://assets/materials/simulation/simulation_map_platform.tres
+res://assets/materials/simulation/simulation_map_platform_mesh.tres

@@ -149,11 +149,8 @@ func _update_cam_movement(fDelta: float) -> void:
 	
 	# Compute modifiers' speed multiplier.
 	var _speed: float = 1.0
-	if Configuration.cam_movement_keys.values()[6][1]: 
+	if Configuration.cam_movement_keys.values()[6][1] or Configuration.cam_movement_keys.values()[7][1]: 
 		_speed *= _CAM_SPRINT_MULT
-	
-	if Configuration.cam_movement_keys.values()[7][1]: 
-		_speed *= -_CAM_SPRINT_MULT
 	
 	# Checks if we should bother translating the camera.
 	if _dir == Vector3.ZERO and _offset.length_squared() > _vel.length_squared():

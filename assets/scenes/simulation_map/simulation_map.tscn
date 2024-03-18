@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cd86vkgynmcjm"]
+[gd_scene load_steps=24 format=3 uid="uid://cd86vkgynmcjm"]
 
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_interface.gd" id="1_5eupj"]
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_engine.gd" id="1_ilwan"]
@@ -7,12 +7,9 @@
 [ext_resource type="BoxMesh" uid="uid://bwda3io5v3y3m" path="res://assets/materials/simulation/simulation_map_platform_mesh.tres" id="3_yn1j6"]
 [ext_resource type="PackedScene" uid="uid://btwcn5425ye0f" path="res://assets/objects/camera/camera.tscn" id="4_y7ocw"]
 [ext_resource type="PackedScene" uid="uid://cu8da702e8ti8" path="res://assets/objects/misc/the_cube/the_cube.tscn" id="5_jvy4d"]
+[ext_resource type="Texture2D" uid="uid://coe42v4lqu2on" path="res://assets/textures/coding_blocks_textures/visual/display.png" id="5_swyhr"]
 [ext_resource type="PackedScene" uid="uid://573dhpbs8qay" path="res://assets/objects/misc/vblox_logo/vblox_logo.tscn" id="6_ind2l"]
-[ext_resource type="PackedScene" uid="uid://dj6mlh0yus1j8" path="res://assets/objects/building/brackets/5x/bracket5x.tscn" id="7_a3gyk"]
-[ext_resource type="PackedScene" uid="uid://ckh2ayfqteyor" path="res://assets/objects/building/brackets/1x/bracket1x.tscn" id="7_jkbt1"]
-[ext_resource type="PackedScene" uid="uid://t0uckwn1kwkd" path="res://assets/objects/building/brackets/4x/bracket4x.tscn" id="7_jw842"]
-[ext_resource type="PackedScene" uid="uid://dnf0wy5lwkpc" path="res://assets/objects/building/brackets/3x/bracket3x.tscn" id="7_ovtqh"]
-[ext_resource type="PackedScene" uid="uid://doa1xyi5m6hn7" path="res://assets/objects/building/brackets/2x/bracket2x.tscn" id="7_vp5t6"]
+[ext_resource type="Texture2D" uid="uid://ilx2o6n32nk5" path="res://assets/textures/coding_area_textures/editor/span_blocks.png" id="24_abp0i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_784js"]
 
@@ -23,6 +20,23 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4a42o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a4wq3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2omud"]
+bg_color = Color(0.0509804, 0.0509804, 0.0509804, 0.392157)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfib7"]
+atlas = ExtResource("24_abp0i")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnxcw"]
+atlas = ExtResource("24_abp0i")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hdds"]
+atlas = ExtResource("24_abp0i")
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_epgrl"]
 sky_top_color = Color(0.211765, 0.313726, 0.552941, 1)
@@ -140,7 +154,7 @@ offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_w6nuo")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 40
 text = "You are accessing an ALPHA Feature! You will experience unexpected behaviors, guaranteed!
 
 Hey there! This section of Vblox is under HEAVY CONSTRUCTION. It is still not yet playable at the moment. It will be properly implemented in the near future. Stay tuned!
@@ -151,10 +165,80 @@ Try to break it as much as possible and send suggestions!
 
 You can check the Code Editor to get the experience though.
 
+Press Escape to continue.
+
 Thanks!"
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
+
+[node name="interactables_menu" type="Control" parent="user_interface"]
+process_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="interactables_panel" type="Panel" parent="user_interface/interactables_menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 880.0
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_2omud")
+
+[node name="interactables_container" type="ScrollContainer" parent="user_interface/interactables_menu/interactables_panel"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.16
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="interactables_separator" type="HBoxContainer" parent="user_interface/interactables_menu/interactables_panel/interactables_container"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+
+[node name="bracket_1" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+texture_normal = ExtResource("5_swyhr")
+stretch_mode = 5
+
+[node name="span_interactables_panel" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.492
+anchor_right = 0.508
+anchor_bottom = 0.16
+offset_left = -0.640015
+offset_top = 32.0
+offset_right = 0.639954
+offset_bottom = 32.0
+grow_horizontal = 2
+rotation = -1.5708
+mouse_default_cursor_shape = 9
+toggle_mode = true
+button_pressed = true
+texture_normal = SubResource("AtlasTexture_bfib7")
+texture_pressed = SubResource("AtlasTexture_rnxcw")
+texture_hover = SubResource("AtlasTexture_8hdds")
+stretch_mode = 5
 
 [node name="environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nbaml")
@@ -182,42 +266,6 @@ cam_movement_enabled = true
 
 [node name="objects" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="bracket5x" parent="objects" instance=ExtResource("7_a3gyk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.46327, 0, 0)
-
-[node name="bracket5x2" parent="objects" instance=ExtResource("7_a3gyk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.46327, 0, -0.693364)
-
-[node name="bracket4x" parent="objects" instance=ExtResource("7_jw842")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52655, 0, 0)
-
-[node name="bracket4x2" parent="objects" instance=ExtResource("7_jw842")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52655, 0, -0.677692)
-
-[node name="bracket3x" parent="objects" instance=ExtResource("7_ovtqh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90958, 0, 0)
-
-[node name="bracket3x2" parent="objects" instance=ExtResource("7_ovtqh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90958, 0, -0.726555)
-
-[node name="bracket1x" parent="objects" instance=ExtResource("7_jkbt1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66692, 0, 0)
-
-[node name="bracket1x2" parent="objects" instance=ExtResource("7_jkbt1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66692, 0, -0.681313)
-
-[node name="bracket2x2" parent="objects" instance=ExtResource("7_vp5t6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.76002, 0, -0.723503)
-
-[node name="bracket2x" parent="objects" instance=ExtResource("7_vp5t6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75874, 0, 0)
-
-[node name="bracket2x3" parent="objects" instance=ExtResource("7_vp5t6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.759, 0, -2.501)
-
-[node name="bracket2x4" parent="objects" instance=ExtResource("7_vp5t6")]
-transform = Transform3D(0.390731, 0, 0.920505, 0, 1, 0, -0.920505, 0, 0.390731, 3.64296, 0.125, -2.67339)
 
 [node name="vblox_logo" parent="objects" instance=ExtResource("6_ind2l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0465091, 2.00359, 0)
