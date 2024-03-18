@@ -69,6 +69,31 @@ var _dark_mode_logo: Resource = load("res://assets/dev/vblox_logo/logo_flat_gray
 @onready var _compile_button_panel: Panel = get_node("blocks_menu/compile_panel/button_panel")
 @onready var _compile_text_message: Label = get_node("blocks_menu/compile_panel/compile_panel_background/output_panel/output_text")
 
+# ******************************************************************************
+# VARIABLE TUTORIAL | EDITOR INTRO & VARIABLES
+@onready var _tut_manager: Control = get_node("tutorial")
+
+@onready var _vtut_1: Polygon2D = get_node("tutorial/tutorial_open_panel")
+@onready var _vtut_2: Polygon2D = get_node("tutorial/tutorial_block_menu")
+@onready var _vtut_3: Polygon2D = get_node("tutorial/tutorial_add_block")
+@onready var _vtut_4: Polygon2D = get_node("tutorial/tutorial_event_block")
+@onready var _vtut_5: Polygon2D = get_node("tutorial/tutorial_compiler")
+@onready var _vtut_6: Polygon2D = get_node("tutorial/tutorial_comp_screen")
+@onready var _vtut_7: Polygon2D = get_node("tutorial/tutorial_editor_controls")
+@onready var _vtut_8: Polygon2D = get_node("tutorial/tutorial_add_set_var_block")
+@onready var _vtut_9: Polygon2D = get_node("tutorial/tutorial_edit_set_var")
+@onready var _vtut_10: Polygon2D = get_node("tutorial/tutorial_screen_var")
+@onready var _vtut_11: Polygon2D = get_node("tutorial/tutorial_add_disp_block")
+@onready var _vtut_12: Polygon2D = get_node("tutorial/tutorial_edit_disp")
+@onready var _vtut_13: Polygon2D = get_node("tutorial/tutorial_change_var")
+@onready var _vtut_14: Polygon2D = get_node("tutorial/tutorial_outro")
+
+var _vtut_counter: int = 1
+
+var _vtut_progress = {}
+
+# ******************************************************************************
+
 # Default Constants for UI.
 const _POS_DURATION: float = 0.5
 
@@ -91,6 +116,10 @@ func _ready() -> void:
 	# Animate themes.
 	_animate_compiler_panel(false)
 	_animate_blocks_menu(false)
+	
+	# Start Tutorial.
+	_create_tut_progress()
+	_progress_tutorial(1)
 
 # ******************************************************************************
 # INPUT EVENTS
@@ -99,6 +128,11 @@ func _input(_event) -> void:
 		if _event.keycode == Configuration.interface_keys.values()[0] and _event.pressed:
 			_animate_pause_menu()
 			_manage_pause()
+		
+		# For tutorials.
+		elif _event.keycode == Configuration.interface_keys.values()[1] and _event.pressed:
+			_handle_mb_tut()
+	
 	elif _event is InputEventMouseButton:
 		if _can_delete_block and CompilerEngine.get_interactor().get_interacted_block():
 			if not _event.pressed:
@@ -226,6 +260,14 @@ func _on_menu_button_pressed() -> void:
 # Signal from button to span the menu.
 func _on_span_blocks_panel_toggled(_button_pressed: bool) -> void:
 	_animate_blocks_menu(not _button_pressed)
+	
+	# For tutorial.
+	if _vtut_counter == 1:
+		_progress_tutorial(2)
+		
+		# Continue.
+		if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT"):
+			_progress_tutorial(3)
 
 # ******************************************************************************
 # Communicate to the Coding Compiler on what block to add.
@@ -233,17 +275,33 @@ func _on_span_blocks_panel_toggled(_button_pressed: bool) -> void:
 # DISPLAY
 func _on_display_visual_pressed():
 	CompilerEngine.add_coding_block("DISPLAY_display_value", _coding_block_object)
+	
+	# For tutorial.
+	if _vtut_counter == 11:
+		_progress_tutorial(12)
 
 # EVENTS
 func _on_when_play_pressed_pressed():
 	CompilerEngine.add_coding_block("EVENT_when_play_pressed", _coding_block_object)
+	
+	# For tutorial.
+	if _vtut_counter == 3:
+		_progress_tutorial(4)
 
 # VARIABLES
 func _on_set_variable_pressed():
 	CompilerEngine.add_coding_block("VARIABLE_set_variable", _coding_block_object)
+	
+	# For tutorial.
+	if _vtut_counter == 8:
+		_progress_tutorial(9)
 
 func _on_change_variable_pressed():
 	CompilerEngine.add_coding_block("VARIABLE_change_variable", _coding_block_object)
+	
+	# For tutorial.
+	if _vtut_counter == 13:
+		_progress_tutorial(14)
 
 # ******************************************************************************
 # Remove current block.
@@ -260,11 +318,28 @@ func _on_compile_btn_pressed():
 	if not CompilerEngine.compiler_enabled:
 		_animate_compiler_panel(true)
 		CompilerEngine.enable_compiler(true, _coding_block_object)
+	
+	# For tutorial.
+	if _vtut_counter == 5:
+		_progress_tutorial(6)
+	
+	elif _vtut_counter == -1:
+		_progress_tutorial(10)
+	
+	elif _vtut_counter == -2:
+		_progress_tutorial(13)
 
 func _on_stop_compile_btn_pressed():
 	if CompilerEngine.compiler_enabled:
 		_animate_compiler_panel(false)
 		CompilerEngine.enable_compiler(false, null)
+	
+	# For tutorial.
+	if _vtut_counter == 6:
+		_progress_tutorial(7)
+	
+	elif _vtut_counter == 10:
+		_progress_tutorial(11)
 
 # ******************************************************************************
 # TOOLS
@@ -296,7 +371,7 @@ func _disable_block_buttons(_task_separator: VBoxContainer) -> void:
 		# Index distance of start to the preferred value.
 		# 7 because the others are not unlocked yet.
 		# Bad dev.
-		if _idx > 8:
+		if _idx > 7:
 			if _task is TextureButton:
 				_task.disabled = true
 				_task.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
@@ -312,3 +387,70 @@ func _display_compiler_message() -> void:
 			_compile_text_message.text = CompilerEngine.compiler_message
 	else:
 		_compile_text_message.text = "Compiler is off..."
+
+# ******************************************************************************
+# Tutorial.
+# Skip.
+func _on_skip_tut_btn_pressed() -> void:
+	_progress_tutorial(0)
+
+func _create_tut_progress() -> void:
+	# Updates the progress.
+	_vtut_progress = {
+		1: _vtut_1,
+		2: _vtut_2,
+		3: _vtut_3,
+		4: _vtut_4,
+		5: _vtut_5,
+		6: _vtut_6,
+		7: _vtut_7,
+		8: _vtut_8,
+		9: _vtut_9,
+		10: _vtut_10,
+		11: _vtut_11,
+		12: _vtut_12,
+		13: _vtut_13,
+		14: _vtut_14
+	}
+
+# Handle mouse button events on tutorials.
+func _handle_mb_tut() -> void:
+	# Continue when mouse pressed.
+	if _vtut_counter == 2:
+		_progress_tutorial(3)
+	
+	elif _vtut_counter == 4:
+		_progress_tutorial(5)
+	
+	elif _vtut_counter == 7:
+		_progress_tutorial(8)
+	
+	elif _vtut_counter == 9:
+		# -1 because it will wait for an action to occur. Increment to negative if persists.
+		# 0 will be used if no more tutorials.
+		_progress_tutorial(-1)
+	
+	elif _vtut_counter == 12:
+		_progress_tutorial(-2)
+	
+	elif _vtut_counter == 14:
+		_progress_tutorial(0)
+
+# Adjusts the visibility of states, depending on the progress.
+func _progress_tutorial(_curr_phase: int) -> void:
+	# Updates the phase.
+	_vtut_counter = _curr_phase
+	
+	# Sets the visibility of phases.
+	if _vtut_progress.has(_vtut_counter):
+		for _phase in _vtut_progress.keys():
+			_vtut_progress.values()[_phase - 1].set_visible(_phase == _vtut_counter)
+	else:
+		# If visibility has been set to 0, meaning no more tutorial phase.
+		if _vtut_counter == 0:
+			_tut_manager.set_visible(false)
+		else:
+			for _phase in _vtut_progress.keys():
+				_vtut_progress.values()[_phase - 1].set_visible(false)
+
+

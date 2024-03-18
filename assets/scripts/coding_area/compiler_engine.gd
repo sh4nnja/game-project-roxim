@@ -87,9 +87,7 @@ var compiler_data: Dictionary = {
 #		"variables": {
 #			name: value,
 #			name: value
-#		}
-#		
-#		
+#		}	
 #	}
 }
 
@@ -97,21 +95,21 @@ var compiler_data: Dictionary = {
 # Compiler Messages.
 var compiler_messages: Dictionary = {
 	"no_blocks": [
-		"BEEEEEEEPPP! Currently, there are no blocks in the editor. Start by adding one?" + "\n",
-		"BZZZT! Hold on there! The editor seems to be lacking ESSENTIAL building blocks!" + "\n",
-		"BLEEP BOOP... Add one block to start creating code! or I will uhm, add one myself..." + "\n"
+		"BEEEEEEEPPP! Currently, there are no blocks in the editor. Start by adding one? Reopen the compiler after adding one." + "\n",
+		"BZZZT! Hold on there! The editor seems to be lacking ESSENTIAL building blocks! Reopen the compiler after adding one." + "\n",
+		"BLEEP BOOP... Add one block to start creating code! or I will uhm, add one myself...Reopen the compiler after adding one." + "\n"
 	],
 	
 	"no_blocks_under_play": [
-		"BEEEEEEEPPP! Currently, there are no blocks under the play block. Start by adding one?" + "\n",
-		"BZZZT! Hold on there! Can't really process play block without blocks below it!" + "\n",
-		"BLEEP BOOP... Add one block under play block to start creating code! or I will uhm, add one myself..." + "\n"
+		"BEEEEEEEPPP! Currently, there are no blocks under the play block. Start by adding one? Reopen the compiler after adding one." + "\n",
+		"BZZZT! Hold on there! Can't really process play block without blocks below it! Reopen the compiler after adding one." + "\n",
+		"BLEEP BOOP... Add one block under play block to start creating code! or I will uhm, add one myself...Reopen the compiler after adding one." + "\n"
 	],
 	
 	"no_play_block": [
-		"EEP! No Play Block in the editor. Start by adding one!" + "\n", 
-		"OOOOOPS! Play Block = NONE. Add one to start!" + "\n",
-		"BOOP! Can't really start with no play block... Add the block with a green play button with it." + "\n"
+		"EEP! No Play Block in the editor. Start by adding one! Reopen the compiler after adding one." + "\n", 
+		"OOOOOPS! Play Block = NONE. Add one to start! Reopen the compiler after adding one." + "\n",
+		"BOOP! Can't really start with no play block... Add the block with a green play button with it. Reopen the compiler after adding one." + "\n"
 	],
 	
 	"processing": [
@@ -121,12 +119,11 @@ var compiler_messages: Dictionary = {
 	],
 	
 	"error": [
-		"BEEPP BOOPP...Error...Check how you named your variables." + "\n" + "\n", 
-		"BLEEPP BLEEPP BOOPP...Error. Double check your code!" + "\n" + "\n",
-		"BOOP BLEEP BEEP?...Shocks, can't run it." + "\n" + "\n"
+		"BEEPP BOOPP...Error...Check how you named your variables. Reopen the compiler after checking errors." + "\n" + "\n", 
+		"BLEEPP BLEEPP BOOPP...Error. Double check your code! Reopen the compiler after checking errors." + "\n" + "\n",
+		"BOOP BLEEP BEEP?...Shocks, can't run it. Reopen the compiler after checking errors." + "\n" + "\n"
 	]
 }
-
 # ******************************************************************************
 # CUSTOM SIGNALS AND FUNCTIONS.
 # Activate compiler.
@@ -145,8 +142,11 @@ func get_interactor() -> CodingInteractor:
 
 # Add blocks on the platform.
 func add_coding_block(_block_object_id: String, _object_manager: Node2D) -> void:
+	# Loads and creates an instances.
 	var _obj: Resource = load(_block_objects_dict.get(_block_object_id))
 	var _obj_inst: Node = _obj.instantiate()
+	
+	# Add object in the tree and sets the position.
 	_object_manager.add_child(_obj_inst, true)
 	_obj_inst.global_position = cam_block_interactor.position
 
@@ -192,7 +192,17 @@ func _manage_blocks(_block_manager: Node2D) -> void:
 			# It will have their own processes, variables and functions.
 			compiler_data[_play_block_data[0]] = {}
 			
+			# The compiling process will go as follows:
+			# -> Checking play blocks.
+			# --> If there are play blocks, move on, else, notify via compiler message.
+			# -> Iterate play block's children blocks (blocks attached to the play block).
+			# --> Update play block's process.
+			# -> Check for errors per play blocks process.
+			# -> Execute.
+			
 			# Creates the template for blocks.
+			# Each play block is a thread.
+			# Each play block (thread) has variables, functions etc.
 			_create_block_process(_play_block_data[0], compiler_data.get(_play_block_data[0]))
 			
 			# Iterates the play block data (blocks inside the play block)
@@ -200,24 +210,36 @@ func _manage_blocks(_block_manager: Node2D) -> void:
 				# Checks the block if it is not the play block itself.
 				if not _block == _play_block_data[0]:
 					# Edits the template with the right block data.
+					# It imports the processes (child block of play block).
+					# Each child of play block that is a block will be relayed as a
+					# process of the thread (play block).
 					compiler_data.get(_play_block_data[0])["process"].append(_block)
 			
 			# Executes the processes per each play block.
+			# This is where the play block will execute its processes after compiling.
 			_execute_block_process(compiler_data.get(_play_block)["process"], _play_block)
 
 # Checks if there are 'play' blocks active.
 func _get_play_blocks(_block_manager: Node2D) -> Array:
 	var _output: Array = []
+	# Checks if block manager has children blocks.
 	if _block_manager.get_children().size() > 0:
+		# Iterate the blocks inside the manager.
 		for _block in _block_manager.get_children():
+			# Checks if the block is a play block or not.
 			if !_block.is_in_group("play"):
+				# Relays no play block in the compiler message.
 				compiler_messages.get("no_play_block").shuffle()
 				compiler_message = compiler_messages.get("no_play_block")[0]
 			else:
+				# Relay to compiler that there are a process happening.
 				_output.append(_block)
 				compiler_messages.get("processing").shuffle()
 				compiler_message = compiler_messages.get("processing")[0]
+	
+	# If there are no blocks currently in the editor.
 	else:
+		# Relay no_blocks message to compiler message for console output.
 		compiler_messages.get("no_blocks").shuffle()
 		compiler_message = compiler_messages.get("no_blocks")[0]
 	
@@ -260,7 +282,7 @@ func _execute_block_process(_play_block_process_arr: Array, _play_block_key) -> 
 	if _play_block_process_arr.size() > 0:
 		for _process in _play_block_process_arr:
 			match _process.block_type:
-				# DISPLAY
+				# DISPLAY BLOCKS.
 				# Queue display of a variable or a process.
 				"display_visual":
 					# Checks if the variable in the thread is the same as the one in the display text.
@@ -272,12 +294,15 @@ func _execute_block_process(_play_block_process_arr: Array, _play_block_key) -> 
 					if compiler_data.get(_play_block_key)["variables"].has(_process.block_var_name.text):
 						compiler_message += compiler_data.get(_play_block_key)["variables"][_process.block_var_name.text] + "\n"
 					else:
+						# Relay error message on the compiler message.
 						compiler_messages.get("error").shuffle()
 						compiler_message = compiler_messages.get("error")[0]
-						compiler_message += "\"" + _process.block_var_name.text + "\" is not declared! Recheck your display block!"
+						
+						# Relay variable not declared but used error.
+						compiler_message += "\"" + _process.block_var_name.text + "\" is not declared! Recheck your display blocks!"
 				
 				# ******************************************************************
-				# VARIABLES
+				# VARIABLE BLOCKS.
 				# Store and edit the values.
 				# If the user mistyped the intended variable, it will just create another variable.
 				# If user didn't intended that, it will enforce user to check.
@@ -287,11 +312,34 @@ func _execute_block_process(_play_block_process_arr: Array, _play_block_key) -> 
 					compiler_data.get(_play_block_key)["variables"][_process.block_var_name.text] = _process.block_var_value.text
 				
 				"change_variable":
-					# Edits the data based on the key, it is technically the same from the set variable but it makes it 
-					# comprehensive to use.
+					# Edits the data based on the key, it is technically the same from 
+					# the set variable but it makes it comprehensive to use.
 					# It gets the set_variable block's text to be stored as the name and value.
 					compiler_data.get(_play_block_key)["variables"][_process.block_var_name.text] = _process.block_var_value.text
-			
+				
+				# ******************************************************************
+				# CONDITIONAL BLOCKS.
+				# Create logic by comparing things.
+				"if_conditional":
+					pass
+				
+				"if_else_conditional":
+					pass
+				
+				# ******************************************************************
+				# COMPARISON BLOCKS.
+				# Complements the conditional blocks.
+				# Checks if certain values if they are greater than, less than, or equal
+				# to another value.
+				"greater_than_comparison":
+					pass
+				
+				"less_than_comparison":
+					pass
+				
+				"equal_to_comparison":
+					pass
+				
 				# ******************************************************************
 	
 	# If there's no process yet under the thread (play block).

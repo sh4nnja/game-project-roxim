@@ -166,6 +166,7 @@ func _manage_interactable(_event: InputEvent) -> void:
 					_interacted_object.toggle_bracket_attachment()
 			
 			# If interacted object is in Computing Class.
+			
 			# If interacted object is in Motor Class.
 			# If interacted object is in Sensor Class.
 

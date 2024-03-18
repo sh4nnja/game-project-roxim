@@ -71,10 +71,8 @@ func _physics_process(_delta) -> void:
 func _manage_panning(_event: InputEvent) -> void:
 	# Enable camera panning.
 	if _event is InputEventMouseButton:
-		if _event.button_index == Configuration.interactor_keys.values()[0] and _event.pressed:
-			_pan_enabled = true
-		else:
-			_pan_enabled = false
+		if _event.button_index == Configuration.interactor_keys.values()[0]:
+			_pan_enabled = _event.pressed
 	
 	# Pan camera.
 	if _event is InputEventMouseMotion and _pan_enabled:
@@ -127,6 +125,5 @@ func manage_block_selection(_is_interacted: bool) -> void:
 		_current_block.set_collision_mask_value(1, _is_interacted)
 		
 		# Removes current block from currently interacting if not dragging anymore.
-		if not _is_interacted:
-			if not CompilerEngine.block_on_queue_deleting:
-				interacting_blocks.erase(_current_block)
+		if not _is_interacted and not CompilerEngine.block_on_queue_deleting:
+			interacting_blocks.erase(_current_block)

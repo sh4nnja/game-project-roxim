@@ -155,7 +155,8 @@ var interactor_keys: Dictionary = {
 
 # Interface keys.
 var interface_keys: Dictionary = {
-	"interface_escape/back":      KEY_ESCAPE
+	"interface_escape/back":      KEY_ESCAPE,
+	"interface_skip":             KEY_C
 }
 
 # ******************************************************************************

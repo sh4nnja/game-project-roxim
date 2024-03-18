@@ -62,16 +62,20 @@ const _BLOCK_EXPAND_OFFSET: int = 60
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
-
 # Manage block adjustment when value is being inputted.
 func manage_block_tex_size(_block_scale: float, _value_a: float, _value_b: float = 0, _offset: float = 0) -> float:
 	var _output: float = 0
+	
+	# Adds every size of the text box inside the block and expands the block texture
+	# relative to its scale.
 	_output = (_value_a + _value_b + _BLOCK_EXPAND_OFFSET + _offset) / _block_scale
 	return _output
 
 # Manage block shape adjustment when editing value.
 func manage_block_shape_size(_block_tex_size: float, _block_tex_scale: float = 2) -> float:
 	var _output: float
+	
+	# Gets the midpoint of the block and extends with the block's width / 2.
 	_output = (_block_tex_size * _block_tex_scale) / 2
 	return _output
 
@@ -88,9 +92,8 @@ func manage_dragging(_event: InputEvent) -> void:
 	if _block:
 		# Enable drag mechanic.
 		# Have the size of the current interacting blocks in order to not have an error.
-		if _event is InputEventMouseButton:
-			if _event.button_index == Configuration.interactor_keys.values()[3]:
-				_drag_and_drop_block(_block, _event)
+		if _event is InputEventMouseButton and _event.button_index == Configuration.interactor_keys.values()[3]:
+			_drag_and_drop_block(_block, _event)
 	
 		# Dragging Mechanic.
 		elif _event is InputEventMouseMotion:
@@ -113,8 +116,6 @@ func manage_block_snapping(_current_block_area: Area2D, _attaching_block_area: A
 			else:
 				if _get_block_owner(_current_block_area).block_connected_tail == _get_block_owner(_attaching_block_area):
 					_get_block_owner(_current_block_area).can_snap = Configuration.DEFAULT
-				else:
-					_get_block_owner(_current_block_area).can_snap = Configuration.DEFAULT
 		
 		# Tail to head connection.
 		elif _attaching_block_area.is_in_group("tail") and _current_block_area.is_in_group("head"):
@@ -123,8 +124,6 @@ func manage_block_snapping(_current_block_area: Area2D, _attaching_block_area: A
 				_get_block_owner(_current_block_area).can_snap = Configuration.VALID
 			else:
 				if _get_block_owner(_current_block_area).block_connected_head == _get_block_owner(_attaching_block_area):
-					_get_block_owner(_current_block_area).can_snap = Configuration.DEFAULT
-				else:
 					_get_block_owner(_current_block_area).can_snap = Configuration.DEFAULT
 		
 		# The forbidden connections.
@@ -148,19 +147,17 @@ func _drag_and_drop_block(_block: CodingBlocks, _event: InputEvent):
 	# Enable dragging on mouse select.
 	if _event is InputEventMouseButton:
 		# Checks first if block is currently snapping.
-		if _block.can_snap == Configuration.VALID:
-			if not _event.pressed:
-				# Attach the block.
-				_manage_attaching(_block, _block.attaching_connector, true)
+		if _block.can_snap == Configuration.VALID and not _event.pressed:
+			# Attach the block.
+			_manage_attaching(_block, _block.attaching_connector, true)
 		
 		else:
 			# Sets the block's capability to be dragged.
 			CompilerEngine.get_interactor().manage_block_selection(_event.pressed)
 		
 		# Attempts to detach the block.
-		if _block.get_parent().is_in_group("block"):
-			if _event.pressed:
-				_manage_attaching(_block, _block.attaching_connector, false)
+		if _block.get_parent().is_in_group("block") and _event.pressed:
+			_manage_attaching(_block, _block.attaching_connector, false)
 		
 		# Enable anchors for snapping.
 		_manage_snapping_anchors(_block, _block.dragging_enabled)

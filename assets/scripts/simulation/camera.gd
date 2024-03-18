@@ -114,14 +114,14 @@ func _move_camera(_event: InputEventKey) -> void:
 
 # Camera free-look mechanic.
 func _update_cam_free_look() -> void:
-	# Only rotates mouse if the mouse is captured
+	# Only rotates mouse if the mouse is captured.
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_mouse_pos *= Configuration.cam_sens
 		var _yaw: float = _mouse_pos.x
 		var _pitch: float = _mouse_pos.y
 		_mouse_pos = Vector2.ZERO
 		
-		# Prevents camera from looking up/down too far
+		# Prevents camera from looking up/down too far.
 		_pitch = clamp(_pitch, -120 - _total_pitch, 65 - _total_pitch)
 		_total_pitch += _pitch
 		
@@ -133,34 +133,34 @@ func _update_cam_free_look() -> void:
 func _update_cam_movement(fDelta: float) -> void:
 	# Computes desired direction from the key states.
 	_dir = Vector3(
-		# Key state of Right and Left
+		# Key state of Right and Left.
 		(Configuration.cam_movement_keys.values()[5][1] as float) - (Configuration.cam_movement_keys.values()[4][1] as float),
 		
-		# Key state of Down and Up
+		# Key state of Down and Up.
 		(Configuration.cam_movement_keys.values()[1][1] as float) - (Configuration.cam_movement_keys.values()[0][1] as float),
 		
-		# Key state of Back and Front
+		# Key state of Back and Front.
 		(Configuration.cam_movement_keys.values()[3][1] as float) - (Configuration.cam_movement_keys.values()[2][1] as float)
 	)
 	
-	# Computes the change in velocity due to desired direction and "drag"
-	# The "drag" is a constant acceleration on the camera to bring it's velocity to 0
+	# Computes the change in velocity due to desired direction and "drag".
+	# The "drag" is a constant acceleration on the camera to bring it's velocity to 0.
 	var _offset = _dir.normalized() * _ACCEL * _vel_mult * fDelta + _vel.normalized() * _DECEL * _vel_mult * fDelta
 	
-	# Compute modifiers' speed multiplier
+	# Compute modifiers' speed multiplier.
 	var _speed: float = 1.0
 	if Configuration.cam_movement_keys.values()[6][1]: 
 		_speed *= _CAM_SPRINT_MULT
 	
 	if Configuration.cam_movement_keys.values()[7][1]: 
-		_speed *= _CAM_SPRINT_MULT
+		_speed *= -_CAM_SPRINT_MULT
 	
-	# Checks if we should bother translating the camera
+	# Checks if we should bother translating the camera.
 	if _dir == Vector3.ZERO and _offset.length_squared() > _vel.length_squared():
 		# Sets the velocity to 0 to prevent jittering due to imperfect deceleration
 		_vel = Vector3.ZERO
 	else:
-		# Clamps speed to stay within maximum value (_vel_mult)
+		# Clamps speed to stay within maximum value (_vel_mult).
 		_vel.x = clamp(_vel.x + _offset.x, -_vel_mult, _vel_mult)
 		_vel.y = clamp(_vel.y + _offset.y, -_vel_mult, _vel_mult)
 		_vel.z = clamp(_vel.z + _offset.z, -_vel_mult, _vel_mult)
