@@ -57,7 +57,7 @@ const _INTERACTED_OBJ_GRAB_SPEED: float = 3
 
 # ******************************************************************************
 # INPUT EVENTS
-func _input(_event):
+func _unhandled_input(_event):
 	# Draggin / Moving 'interactable' mechanic.
 	_drag_interactable(_event)
 	

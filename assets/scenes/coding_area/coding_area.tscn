@@ -573,7 +573,8 @@ This serves as the tutorial on how to use the code editor.
 
 To continue, press the arrow in order to open the block menu.
 
-Can't see the text? You can make the screen fullscreen."
+Can't see the text? You can make the screen fullscreen.
+"
 vertical_alignment = 1
 autowrap_mode = 2
 
@@ -698,7 +699,6 @@ Close the compiler to continue."
 autowrap_mode = 2
 
 [node name="tutorial_editor_controls" type="Polygon2D" parent="user_interface_layer/user_interface/tutorial"]
-visible = false
 color = Color(0.0196078, 0.0196078, 0.0196078, 0.686275)
 polygon = PackedVector2Array(0, 1080, 960, 1080, 960, 1024, 256, 1024, 256, 64, 1856, 64, 1856, 1016, 1624, 1016, 1624, 992, 1448, 992, 1448, 1024, 1216.76, 1024, 960, 1024, 960, 1080, 1920, 1080, 1920, 0, 199.211, 0, 0, 0)
 
@@ -725,6 +725,8 @@ Drag the block you don't want back to the block menu to delete it. This way, you
 You can exit the code editor by pressing escape.
 
 You can have custom keybinds, I already prepared it in code, just didn't implemented it yet. Lazy ahh moment.
+
+If the tutorial feels broken, feel free to press skip tutorial and restart it.
 
 Press C to continue."
 autowrap_mode = 2
@@ -854,6 +856,7 @@ Press C to continue."
 autowrap_mode = 2
 
 [node name="tutorial_change_var" type="Polygon2D" parent="user_interface_layer/user_interface/tutorial"]
+visible = false
 color = Color(0.0196078, 0.0196078, 0.0196078, 0.686275)
 polygon = PackedVector2Array(0, 1084, 1920, 1084, 1920, 0, 0, 0, 0, 528, 208, 528, 208, 600, 0, 600)
 

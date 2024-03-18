@@ -62,7 +62,7 @@ const _CAM_CLEARANCE: Vector2 = Vector2(0.6, 500)
 # ******************************************************************************
 # INPUT EVENTS
 # Mouse input logic.
-func _input(_event) -> void:
+func _unhandled_input(_event) -> void:
 	# Camera free-lock catalyst and movement speed limiter.
 	if _event is InputEventMouseButton:
 		_focus_camera(_event)

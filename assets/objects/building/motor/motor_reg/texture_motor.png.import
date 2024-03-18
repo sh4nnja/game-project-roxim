@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqrr24re6cq11"
-path.s3tc="res://.godot/imported/texture.png-9b91a50db6327a8d78518bad02a946e8.s3tc.ctex"
+uid="uid://be1hfgfkr1wbo"
+path.s3tc="res://.godot/imported/texture_motor.png-f16bd8ee3c71446524df0fc47303d940.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/dev/assets/wheel_reg/texture.png"
-dest_files=["res://.godot/imported/texture.png-9b91a50db6327a8d78518bad02a946e8.s3tc.ctex"]
+source_file="res://assets/objects/building/motor/motor_reg/texture_motor.png"
+dest_files=["res://.godot/imported/texture_motor.png-f16bd8ee3c71446524df0fc47303d940.s3tc.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cd86vkgynmcjm"]
+[gd_scene load_steps=30 format=3 uid="uid://cd86vkgynmcjm"]
 
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_interface.gd" id="1_5eupj"]
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_engine.gd" id="1_ilwan"]
@@ -6,9 +6,15 @@
 [ext_resource type="FontFile" uid="uid://b641eb41yeh4g" path="res://assets/font/lexend/Lexend-ExtraLight.ttf" id="2_w6nuo"]
 [ext_resource type="BoxMesh" uid="uid://bwda3io5v3y3m" path="res://assets/materials/simulation/simulation_map_platform_mesh.tres" id="3_yn1j6"]
 [ext_resource type="PackedScene" uid="uid://btwcn5425ye0f" path="res://assets/objects/camera/camera.tscn" id="4_y7ocw"]
+[ext_resource type="Texture2D" uid="uid://c478lrif2qpnk" path="res://assets/objects/building/brackets/5x/bracket5x.png" id="5_5xcqx"]
+[ext_resource type="Texture2D" uid="uid://8c03tynky005" path="res://assets/objects/building/wheel/wheel_reg/wheel.png" id="5_60ld5"]
+[ext_resource type="Texture2D" uid="uid://bgmjn31fr5g35" path="res://assets/objects/building/brackets/1x/bracket1x.png" id="5_cocdd"]
+[ext_resource type="Texture2D" uid="uid://cn8nylf8bq2ox" path="res://assets/objects/building/motor/motor_reg/motor.png" id="5_fm01e"]
+[ext_resource type="Texture2D" uid="uid://3iwxvrnjkdbp" path="res://assets/objects/building/brackets/3x/bracket3x.png" id="5_j1iph"]
 [ext_resource type="PackedScene" uid="uid://cu8da702e8ti8" path="res://assets/objects/misc/the_cube/the_cube.tscn" id="5_jvy4d"]
-[ext_resource type="Texture2D" uid="uid://coe42v4lqu2on" path="res://assets/textures/coding_blocks_textures/visual/display.png" id="5_swyhr"]
+[ext_resource type="Texture2D" uid="uid://divuhxd0mb711" path="res://assets/objects/building/brackets/4x/bracket4x.png" id="5_ytpaf"]
 [ext_resource type="PackedScene" uid="uid://573dhpbs8qay" path="res://assets/objects/misc/vblox_logo/vblox_logo.tscn" id="6_ind2l"]
+[ext_resource type="Texture2D" uid="uid://rqpgc4af6usc" path="res://assets/objects/building/brackets/2x/bracket2x.png" id="6_ng8rb"]
 [ext_resource type="Texture2D" uid="uid://ilx2o6n32nk5" path="res://assets/textures/coding_area_textures/editor/span_blocks.png" id="24_abp0i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_784js"]
@@ -75,6 +81,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_5eupj")
 
 [node name="debug_text" type="Label" parent="user_interface"]
@@ -99,6 +106,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.0705882, 0.0705882, 0.0705882, 0)
 
 [node name="pause_menu" type="Control" parent="user_interface"]
@@ -109,6 +117,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="menu_button" type="Button" parent="user_interface/pause_menu"]
 z_index = 2
@@ -185,11 +194,12 @@ mouse_filter = 2
 [node name="interactables_panel" type="Panel" parent="user_interface/interactables_menu"]
 layout_mode = 1
 anchors_preset = -1
+anchor_top = 0.815
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 880.0
+offset_top = -0.200073
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2omud")
 
 [node name="interactables_container" type="ScrollContainer" parent="user_interface/interactables_menu/interactables_panel"]
@@ -198,26 +208,84 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.16
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.96
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 0
+mouse_filter = 2
 mouse_force_pass_scroll_events = false
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
 
 [node name="interactables_separator" type="HBoxContainer" parent="user_interface/interactables_menu/interactables_panel/interactables_container"]
+modulate = Color(1, 1, 1, 0.219608)
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 45
 alignment = 1
 
-[node name="bracket_1" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
-custom_minimum_size = Vector2(128, 64)
+[node name="wheel_reg" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
+custom_minimum_size = Vector2(112, 96)
 layout_mode = 2
-mouse_default_cursor_shape = 2
+mouse_default_cursor_shape = 8
 disabled = true
-texture_normal = ExtResource("5_swyhr")
+texture_normal = ExtResource("5_60ld5")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="motor_reg" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
+custom_minimum_size = Vector2(112, 96)
+layout_mode = 2
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource("5_fm01e")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="bracket_5" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
+custom_minimum_size = Vector2(112, 96)
+layout_mode = 2
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource("5_5xcqx")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="bracket_4" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
+custom_minimum_size = Vector2(112, 96)
+layout_mode = 2
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource("5_ytpaf")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="bracket_3" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
+custom_minimum_size = Vector2(112, 96)
+layout_mode = 2
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource("5_j1iph")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="bracket_2" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
+custom_minimum_size = Vector2(112, 96)
+layout_mode = 2
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource("6_ng8rb")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="bracket_1" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel/interactables_container/interactables_separator"]
+custom_minimum_size = Vector2(64, 96)
+layout_mode = 2
+mouse_default_cursor_shape = 8
+disabled = true
+texture_normal = ExtResource("5_cocdd")
+ignore_texture_size = true
 stretch_mode = 5
 
 [node name="span_interactables_panel" type="TextureButton" parent="user_interface/interactables_menu/interactables_panel"]
