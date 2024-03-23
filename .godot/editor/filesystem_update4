@@ -1,8 +1,9 @@
 res://assets/materials/simulation/simulation_map_env.tres
-res://assets/scenes/main_menu/main_menu.tscn
+res://assets/scenes/coding_area/coding_area.tscn
 res://assets/materials/simulation/simulation_map_platform.tres
+res://assets/scenes/main_menu/main_menu.tscn
 res://assets/scenes/simulation_map/simulation_map.tscn
 res://assets/objects/blocks/variables/set_variable.tscn
 res://assets/objects/blocks/variables/change_variable.tscn
 res://assets/objects/blocks/visual/display_visual.tscn
-res://assets/scenes/coding_area/coding_area.tscn
+res://assets/scripts/simulation/simulation_interface.gd

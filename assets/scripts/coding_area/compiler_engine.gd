@@ -148,7 +148,7 @@ func add_coding_block(_block_object_id: String, _object_manager: Node2D) -> void
 	
 	# Add object in the tree and sets the position.
 	_object_manager.add_child(_obj_inst, true)
-	_obj_inst.global_position = cam_block_interactor.position
+	_obj_inst.set_global_position(cam_block_interactor.get_position())
 
 # Queue blocks for deletion.
 func queued_block_for_deletion(_queue_delete: bool) -> bool:
@@ -156,10 +156,10 @@ func queued_block_for_deletion(_queue_delete: bool) -> bool:
 	if cam_block_interactor.check_interacting_blocks():
 		if _queue_delete:
 			# Change modulate for visuals.
-			cam_block_interactor.get_interacted_block().modulate = Configuration.permission_colors.values()[Configuration.INVALID]
+			cam_block_interactor.get_interacted_block().set_modulate(Configuration.permission_colors.values()[Configuration.INVALID])
 			_output = true
 		else:
-			cam_block_interactor.get_interacted_block().modulate = Configuration.permission_colors.values()[Configuration.DEFAULT]
+			cam_block_interactor.get_interacted_block().set_modulate(Configuration.permission_colors.values()[Configuration.DEFAULT])
 	
 	# Reminds compiler that block deleting is ongoing.
 	block_on_queue_deleting = _output

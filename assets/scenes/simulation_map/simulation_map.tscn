@@ -3,10 +3,11 @@
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_interface.gd" id="1_5eupj"]
 [ext_resource type="Script" path="res://assets/scripts/simulation/simulation_engine.gd" id="1_ilwan"]
 [ext_resource type="FontFile" uid="uid://drcp5q6p2eycg" path="res://assets/font/lexend/Lexend-Light.ttf" id="2_uuw30"]
-[ext_resource type="FontFile" uid="uid://b641eb41yeh4g" path="res://assets/font/lexend/Lexend-ExtraLight.ttf" id="2_w6nuo"]
+[ext_resource type="FontFile" uid="uid://3qr0yqigfcse" path="res://assets/font/lexend/Lexend-Medium.ttf" id="3_c3hps"]
 [ext_resource type="BoxMesh" uid="uid://bwda3io5v3y3m" path="res://assets/materials/simulation/simulation_map_platform_mesh.tres" id="3_yn1j6"]
 [ext_resource type="PackedScene" uid="uid://btwcn5425ye0f" path="res://assets/objects/camera/camera.tscn" id="4_y7ocw"]
 [ext_resource type="Texture2D" uid="uid://c478lrif2qpnk" path="res://assets/objects/building/brackets/5x/bracket5x.png" id="5_5xcqx"]
+[ext_resource type="StyleBox" uid="uid://bnon6mb6hxeq5" path="res://assets/materials/simulation/interactables_menu_panel.tres" id="5_7rsy6"]
 [ext_resource type="Texture2D" uid="uid://8c03tynky005" path="res://assets/objects/building/wheel/wheel_reg/wheel.png" id="5_60ld5"]
 [ext_resource type="Texture2D" uid="uid://bgmjn31fr5g35" path="res://assets/objects/building/brackets/1x/bracket1x.png" id="5_cocdd"]
 [ext_resource type="Texture2D" uid="uid://cn8nylf8bq2ox" path="res://assets/objects/building/motor/motor_reg/motor.png" id="5_fm01e"]
@@ -26,11 +27,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4a42o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a4wq3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2omud"]
-bg_color = Color(0.0509804, 0.0509804, 0.0509804, 0.392157)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bfib7"]
 atlas = ExtResource("24_abp0i")
@@ -94,7 +90,7 @@ offset_top = 16.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_w6nuo")
+theme_override_fonts/font = ExtResource("3_c3hps")
 theme_override_font_sizes/font_size = 25
 text = "Debug Text"
 
@@ -162,7 +158,7 @@ offset_right = -64.0
 offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_w6nuo")
+theme_override_fonts/font = ExtResource("2_uuw30")
 theme_override_font_sizes/font_size = 40
 text = "You are accessing an ALPHA Feature! You will experience unexpected behaviors, guaranteed!
 
@@ -200,7 +196,7 @@ anchor_bottom = 1.0
 offset_top = -0.200073
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2omud")
+theme_override_styles/panel = ExtResource("5_7rsy6")
 
 [node name="interactables_container" type="ScrollContainer" parent="user_interface/interactables_menu/interactables_panel"]
 layout_direction = 3

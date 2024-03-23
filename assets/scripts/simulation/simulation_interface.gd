@@ -41,10 +41,15 @@ const _MAIN_MENU_SCN_FILE: String = "res://assets/scenes/main_menu/main_menu.tsc
 
 # Interface nodes.
 @onready var _background: ColorRect = get_node("background")
+# Interactables menu.
+@onready var _interactables_menu_panel_res: Resource = preload("res://assets/materials/simulation/interactables_menu_panel.tres")
+@onready var _interactables_menu_panel: Panel = get_node("interactables_menu/interactables_panel")
 
 # Pause menu interface nodes.
 @onready var _pause_menu: Control = get_node("pause_menu")
 @onready var _pause_menu_btn: Button = get_node("pause_menu/menu_button")
+# Disclaimer.
+@onready var _pause_men_disc_text: Label = get_node("pause_menu/disclaimer")
 
 # Virtual Environment objects.
 @onready var _environment_camera: Camera3D = get_parent().get_node("camera")
@@ -93,6 +98,13 @@ func _apply_theme() -> void:
 	# Set theme on background interfaces.
 	_background.color = Configuration.user_themes.values()[Configuration.current_theme][0]
 	_background.color.a = 0
+	
+	# Disclaimer text.
+	_pause_men_disc_text.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][6])
+	
+	# Interactables menu.
+	_interactables_menu_panel_res.bg_color = Configuration.user_themes.values()[Configuration.current_theme][0]
+	_interactables_menu_panel_res.bg_color.a = 0.15
 
 # Animate pause menu.
 func _animate_pause_menu() -> void:
