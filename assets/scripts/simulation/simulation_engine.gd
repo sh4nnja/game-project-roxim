@@ -41,55 +41,32 @@ extends Node3D
 @onready var simulation_engine: Node = self
 
 # Objects tree (Where you put the simulation objects)
-#@onready var simulation_objects: Node = get_node("/root/simulation_map/objects")
+@onready var simulation_interactor: Interactor 
+@onready var simulation_objects: Node 
 
-# All calculation of positions, random generations, and debugging etc will be located here.
-const lerp_weight: float = 0.5
-
-const _float_step: float = 0.001
-
-# ******************************************************************************
-# VIRTUAL
-func _physics_process(_delta) -> void:
-	# Simulation Engine debug report.
-	_manage_debug()
+# Interactables.
+var interactables_files: Dictionary = {
+	"bracket1x": load("res://assets/objects/building/brackets/1x/bracket1x.tscn"),
+	"bracket2x": load("res://assets/objects/building/brackets/2x/bracket2x.tscn"),
+	"bracket3x": load("res://assets/objects/building/brackets/3x/bracket3x.tscn"),
+	"bracket4x": load("res://assets/objects/building/brackets/4x/bracket4x.tscn"),
+	"bracket5x": load("res://assets/objects/building/brackets/5x/bracket5x.tscn")
+}
 
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 
-# ******************************************************************************
-# TOOLS
-func fsnap(_value: float) -> float:
-	return snappedf(_value, _float_step)
+func add_interactable(_interactable: String) -> void:
+	var _obj: Node3D = get_simulation_objects()
+	
+	# Checks if objects exist and the entry is correct.
+	if interactables_files.has(_interactable):
+		var _interactable_inst: Object = interactables_files.get(_interactable).instantiate()
+		_obj.add_child(_interactable_inst)
+		_interactable_inst.set_global_position(get_interactor().get_global_position())
 
-# ******************************************************************************
-# DEBUGGING ENGINE
-var debug_enabled: bool = true
-var _debug_report: Dictionary
+func get_simulation_objects() -> Node3D:
+	return get_node("objects")
 
-func _manage_debug() -> void:
-	manage_debug_entries("FPS", Engine.get_frames_per_second())
-
-# Return a string 'null' if variable has null value.
-func print_null_string(_check_variable) -> String:
-	var output: String
-	if _check_variable == null:
-		output = "<null>"
-	else:
-		output = _check_variable.to_string()
-	return output
-
-# Tool for appending debug values.
-func manage_debug_entries(_identifier: String, _value: Variant, _remove: bool = false) -> void:
-	if _remove:
-		_debug_report.erase(_identifier)
-	else:
-		_debug_report[_identifier] = _value
-
-# Clean the debug string for visuals.
-func debug_report() -> String:
-	var _str_debug_report: String = ""
-	if debug_enabled:
-		for _debug in _debug_report.size():
-			_str_debug_report += String("{} | {}\n").format([_debug_report.keys()[_debug], _debug_report.values()[_debug]], "{}")
-	return _str_debug_report
+func get_interactor() -> Interactor:
+	return get_node_or_null("camera/interactor/spawner")

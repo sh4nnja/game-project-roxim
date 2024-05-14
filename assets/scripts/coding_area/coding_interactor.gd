@@ -84,11 +84,11 @@ func _manage_scrolling(_event: InputEvent) -> void:
 		# Zooms camera.
 		if _event.button_index == Configuration.interactor_keys.values()[1]: 
 			# Increases zoom.
-			zoom = lerp(zoom, zoom + _cam_zoom_mult, SimulationEngine.lerp_weight)
+			zoom = lerp(zoom, zoom + _cam_zoom_mult, Configuration.lerp_weight)
 			
 		elif _event.button_index == Configuration.interactor_keys.values()[2] and zoom >= _cam_zoom_limit: 
 			# Decreases zoom.
-			zoom = lerp(zoom, zoom - _cam_zoom_mult, SimulationEngine.lerp_weight)
+			zoom = lerp(zoom, zoom - _cam_zoom_mult, Configuration.lerp_weight)
 
 # *****************************************************************************
 # TOOLS

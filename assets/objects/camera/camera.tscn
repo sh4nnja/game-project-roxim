@@ -30,3 +30,5 @@ grow_vertical = 2
 pivot_offset = Vector2(16, 16)
 texture = ExtResource("2_8pmd6")
 stretch_mode = 5
+
+[node name="spawner" type="Node3D" parent="interactor"]

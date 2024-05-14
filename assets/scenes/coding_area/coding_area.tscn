@@ -30,15 +30,15 @@
 [ext_resource type="Texture2D" uid="uid://do1kf6xwx8k6b" path="res://assets/textures/coding_area_textures/editor/stop.png" id="25_0qt1t"]
 [ext_resource type="FontFile" uid="uid://3qr0yqigfcse" path="res://assets/font/lexend/Lexend-Medium.ttf" id="26_4qg72"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63k0g"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3se1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_culku"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3tmo"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htrr3"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_culku"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3se1"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63k0g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6vb6"]
 bg_color = Color(0.0509804, 0.0509804, 0.0509804, 0.392157)
@@ -144,18 +144,18 @@ offset_bottom = -146.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_color = Color(0.12549, 0.705882, 0.796078, 1)
+theme_override_colors/font_focus_color = Color(0.12549, 0.705882, 0.796078, 1)
 theme_override_colors/font_pressed_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.807843, 0.909804, 1)
-theme_override_colors/font_focus_color = Color(0.12549, 0.705882, 0.796078, 1)
-theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_fonts/font = ExtResource("4_cnuqi")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxEmpty_63k0g")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x3se1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_culku")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_x3tmo")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_htrr3")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_culku")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_x3se1")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_63k0g")
 text = "Back To Menu"
 flat = true
 alignment = 2
@@ -927,18 +927,18 @@ grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.5, 0.5)
 mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_color = Color(0.12549, 0.705882, 0.796078, 1)
+theme_override_colors/font_focus_color = Color(0.12549, 0.705882, 0.796078, 1)
 theme_override_colors/font_pressed_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.807843, 0.909804, 1)
-theme_override_colors/font_focus_color = Color(0.12549, 0.705882, 0.796078, 1)
-theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_fonts/font = ExtResource("4_cnuqi")
 theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxEmpty_63k0g")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x3se1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_culku")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_x3tmo")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_htrr3")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_culku")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_x3se1")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_63k0g")
 text = "Skip Tutorial"
 flat = true
 alignment = 2

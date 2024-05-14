@@ -175,6 +175,6 @@ func _manage_interactable(_event: InputEvent) -> void:
 func _manage_debug() -> void:
 	# Series of ternary operators that will just display the name and if there's no name, print null.
 	@warning_ignore("incompatible_ternary")
-	SimulationEngine.manage_debug_entries("Current Hovered Object", _curr_hovered_interactable.name if _curr_hovered_interactable else _curr_hovered_interactable)
+	Configuration.manage_debug_entries("Current Hovered Object", _curr_hovered_interactable.name if _curr_hovered_interactable else _curr_hovered_interactable)
 	@warning_ignore("incompatible_ternary")
-	SimulationEngine.manage_debug_entries("Dragging Object", _interacted_object.name if _interacted_object else _interacted_object)
+	Configuration.manage_debug_entries("Dragging Object", _interacted_object.name if _interacted_object else _interacted_object)

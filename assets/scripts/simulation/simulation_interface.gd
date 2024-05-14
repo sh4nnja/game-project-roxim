@@ -43,7 +43,6 @@ const _MAIN_MENU_SCN_FILE: String = "res://assets/scenes/main_menu/main_menu.tsc
 @onready var _background: ColorRect = get_node("background")
 # Interactables menu.
 @onready var _interactables_menu_panel_res: Resource = preload("res://assets/materials/simulation/interactables_menu_panel.tres")
-@onready var _interactables_menu_panel: Panel = get_node("interactables_menu/interactables_panel")
 
 # Pause menu interface nodes.
 @onready var _pause_menu: Control = get_node("pause_menu")
@@ -100,7 +99,7 @@ func _apply_theme() -> void:
 	_background.color.a = 0
 	
 	# Disclaimer text.
-	_pause_men_disc_text.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][6])
+	_pause_men_disc_text.add_theme_color_override("font_color", Configuration.user_themes.values()[Configuration.current_theme][9])
 	
 	# Interactables menu.
 	_interactables_menu_panel_res.bg_color = Configuration.user_themes.values()[Configuration.current_theme][0]
@@ -173,4 +172,22 @@ func _manage_simulation() -> void:
 # Display debug report on-screen.
 func _display_debug_report():
 	# Prints the debug report of the simulation engine.
-	_debug_report_text.text = SimulationEngine.debug_report()
+	_debug_report_text.text = Configuration.debug_report()
+
+# ******************************************************************************
+# Interactables.
+
+func _on_bracket_1_pressed() -> void:
+	get_parent().add_interactable("bracket1x")
+
+func _on_bracket_2_pressed() -> void:
+	get_parent().add_interactable("bracket2x")
+
+func _on_bracket_3_pressed() -> void:
+	get_parent().add_interactable("bracket3x")
+
+func _on_bracket_4_pressed() -> void:
+	get_parent().add_interactable("bracket4x")
+
+func _on_bracket_5_pressed() -> void:
+	get_parent().add_interactable("bracket5x")

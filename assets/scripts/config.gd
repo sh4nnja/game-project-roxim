@@ -101,7 +101,8 @@ var user_themes: Dictionary = {
 		Color.html("191919"),                           
 		Color.html("7f7f7f"),
 		Color.html("5c5c5c"),                        
-		Color.html("979797"),               
+		Color.html("979797"),
+		Color.html("ffffff")               
 	],
 	
 	"LIGHT": [
@@ -111,7 +112,10 @@ var user_themes: Dictionary = {
 		Color.html("ffffff"),                  
 		Color.html("ffffff"),                        
 		Color.html("e9e9e9"),                        
-		Color.html("474747"),                
+		Color.html("474747"),
+		Color.html("e9e9e9"),                        
+		Color.html("474747"),
+		Color.html("ffffff")                
 	]
 }
 
@@ -162,4 +166,47 @@ var interface_keys: Dictionary = {
 # ******************************************************************************
 # FREE-CAMERA MOVEMENT CONFIGURATIONS
 # Camera sensitivity.
-var cam_sens: float = 0.25                 
+var cam_sens: float = 0.25        
+
+
+
+# ******************************************************************************
+# TOOLS
+# All calculation of positions, random generations, and debugging etc will be located here.
+const lerp_weight: float = 0.5
+const _float_step: float = 0.001
+
+func fsnap(_value: float) -> float:
+	return snappedf(_value, _float_step)
+ 
+# ******************************************************************************
+# DEBUGGING ENGINE
+var debug_enabled: bool = true
+var _debug_report: Dictionary
+
+func _manage_debug() -> void:
+	manage_debug_entries("FPS", Engine.get_frames_per_second())
+
+# Return a string 'null' if variable has null value.
+func print_null_string(_check_variable) -> String:
+	var output: String
+	if _check_variable == null:
+		output = "<null>"
+	else:
+		output = _check_variable.to_string()
+	return output
+
+# Tool for appending debug values.
+func manage_debug_entries(_identifier: String, _value: Variant, _remove: bool = false) -> void:
+	if _remove:
+		_debug_report.erase(_identifier)
+	else:
+		_debug_report[_identifier] = _value
+
+# Clean the debug string for visuals.
+func debug_report() -> String:
+	var _str_debug_report: String = ""
+	if debug_enabled:
+		for _debug in _debug_report.size():
+			_str_debug_report += String("{} | {}\n").format([_debug_report.keys()[_debug], _debug_report.values()[_debug]], "{}")
+	return _str_debug_report

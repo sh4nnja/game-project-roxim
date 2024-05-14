@@ -135,7 +135,7 @@ func initiate_brackets(_bracket: Brackets, _bracket_size: int) -> void:
 		# Checks if the slot is an Area3D.
 		if _slot is Area3D:
 			# Append '_slot' position.
-			_slot_positions.append(SimulationEngine.fsnap(_slot.transform.origin.x))
+			_slot_positions.append(Configuration.fsnap(_slot.transform.origin.x))
 			# Append false, meaning the slot is not occupied. 
 			_slot_states.append(false)
 	
@@ -162,7 +162,7 @@ func manage_slot_detection(_idx: int, _is_bracket_detected: bool, _detected_brac
 		# Sets the attaching bracket as the bracket the current bracket attempts to attach to.
 		# The Area3D parent which is the bracket.
 		_attaching_bracket = _detected_bracket.get_parent()
-		_attaching_bracket_slot_pos.append(SimulationEngine.fsnap(_detected_bracket.transform.origin.x))
+		_attaching_bracket_slot_pos.append(Configuration.fsnap(_detected_bracket.transform.origin.x))
 		# Sorts the bracket position in order to make sure that the positions are correct.
 		_attaching_bracket_slot_pos.sort()
 	else:
@@ -181,7 +181,7 @@ func _manage_bracket_hover(_bracket: Brackets) -> void:
 # ******************************************************************************
 # Check if the force of the bracket is lower than the threshold to hold snapping
 func _check_bracket_snap() -> bool:
-	return SimulationEngine.fsnap(bracket.linear_velocity.length()) < _BRACKET_SNAP_THRESHOLD
+	return Configuration.fsnap(bracket.linear_velocity.length()) < _BRACKET_SNAP_THRESHOLD
 
 # Bracket attaches into another bracket mechanic.
 func _manage_bracket_snapping(_bracket: Brackets) ->  void:
@@ -253,7 +253,7 @@ func _snap_bracket(_bracket: Brackets, _offset: Vector3) -> void:
 			_snapped_once = true
 	else:
 		# Check if the brackets doesn't have the same rotation.
-		if SimulationEngine.fsnap(_bracket.rotation_degrees.y) != SimulationEngine.fsnap(_attaching_bracket.rotation_degrees.y):
+		if Configuration.fsnap(_bracket.rotation_degrees.y) != Configuration.fsnap(_attaching_bracket.rotation_degrees.y):
 			# Apply Origin | Rotation | Transform Logic here.
 			_offset = _get_rotated_slot_pos(_offset, _bracket.rotation_degrees.y, Vector3(_attaching_bracket_slot_pos[_attaching_bracket_slot_pos.size() - 1], 0, 0))
 	

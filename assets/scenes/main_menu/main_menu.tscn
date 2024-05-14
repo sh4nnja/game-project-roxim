@@ -15,27 +15,27 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uivnt"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x6fc"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynao1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wug8c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r8ch5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tivlv"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wug8c"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynao1"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x6fc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rrexd"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onrxv"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cwdx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qkgjl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bpbfw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_olumk"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qkgjl"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cwdx"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onrxv"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -124,19 +124,19 @@ offset_right = 360.0
 offset_bottom = 305.0
 grow_vertical = 0
 tooltip_text = "Still in ALPHA!"
-mouse_default_cursor_shape = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.12549, 0.705882, 0.796078, 0.196078)
 theme_override_colors/font_color = Color(0.906493, 0.906493, 0.906493, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.92549, 0.92549, 1)
 theme_override_colors/font_pressed_color = Color(0.847059, 0.847059, 0.847059, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(0.92549, 0.92549, 0.92549, 1)
-theme_override_colors/font_disabled_color = Color(0.12549, 0.705882, 0.796078, 0.196078)
 theme_override_fonts/font = ExtResource("10_52ncp")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("4_7xo11")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uivnt")
+theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("6_wa3ml")
-theme_override_styles/disabled = ExtResource("6_wa3ml")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_uivnt")
+theme_override_styles/normal = ExtResource("4_7xo11")
 text = "Create & Simulate!"
 
 [node name="about_panel" type="Control" parent="user_interface/body/simulate_panel"]
@@ -156,18 +156,18 @@ offset_bottom = 648.0
 grow_vertical = 0
 focus_mode = 0
 mouse_default_cursor_shape = 16
+theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_color = Color(0.12549, 0.705882, 0.796078, 1)
+theme_override_colors/font_focus_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_pressed_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.807843, 0.909804, 1)
-theme_override_colors/font_focus_color = Color(0.0784314, 0.517647, 0.588235, 1)
-theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_fonts/font = ExtResource("3_gegsf")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxEmpty_7x6fc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ynao1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wug8c")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_r8ch5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_tivlv")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_wug8c")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ynao1")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7x6fc")
 text = "Know the project team"
 icon = ExtResource("8_6lwhq")
 flat = true
@@ -184,18 +184,18 @@ offset_bottom = 584.0
 grow_vertical = 0
 focus_mode = 0
 mouse_default_cursor_shape = 16
+theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_color = Color(0.12549, 0.705882, 0.796078, 1)
+theme_override_colors/font_focus_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_pressed_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.807843, 0.909804, 1)
-theme_override_colors/font_focus_color = Color(0.0784314, 0.517647, 0.588235, 1)
-theme_override_colors/font_disabled_color = Color(0.0784314, 0.517647, 0.588235, 1)
 theme_override_fonts/font = ExtResource("3_gegsf")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxEmpty_7x6fc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ynao1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wug8c")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_r8ch5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_tivlv")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_wug8c")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ynao1")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7x6fc")
 text = "Source code on Github "
 icon = ExtResource("8_6lwhq")
 flat = true
@@ -282,18 +282,18 @@ offset_right = -24.0001
 offset_bottom = -23.0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.12549, 0.705882, 0.796078, 0.196078)
 theme_override_colors/font_color = Color(0.906493, 0.906493, 0.906493, 1)
+theme_override_colors/font_focus_color = Color(0.92549, 0.92549, 0.92549, 1)
 theme_override_colors/font_pressed_color = Color(0.847059, 0.847059, 0.847059, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(0.92549, 0.92549, 0.92549, 1)
-theme_override_colors/font_disabled_color = Color(0.12549, 0.705882, 0.796078, 0.196078)
 theme_override_fonts/font = ExtResource("10_52ncp")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("4_7xo11")
+theme_override_styles/focus = ExtResource("6_wa3ml")
+theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("6_wa3ml")
-theme_override_styles/disabled = ExtResource("6_wa3ml")
-theme_override_styles/focus = ExtResource("6_wa3ml")
+theme_override_styles/normal = ExtResource("4_7xo11")
 text = "Code Editor"
 
 [node name="tasks_container" type="ScrollContainer" parent="user_interface/body/simulate_panel/learn_panel"]
@@ -318,11 +318,11 @@ theme_override_constants/separation = 15
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_default_cursor_shape = 16
-theme_override_styles/normal = ExtResource("4_7xo11")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("5_tvr58")
-theme_override_styles/disabled = ExtResource("6_wa3ml")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/normal = ExtResource("4_7xo11")
 
 [node name="label_handler" type="Control" parent="user_interface/body/simulate_panel/learn_panel/tasks_container/tasks_separator/task_1"]
 layout_mode = 1
@@ -372,11 +372,11 @@ clip_text = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_default_cursor_shape = 16
-theme_override_styles/normal = ExtResource("4_7xo11")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("5_tvr58")
-theme_override_styles/disabled = ExtResource("6_wa3ml")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/normal = ExtResource("4_7xo11")
 disabled = true
 
 [node name="label_handler" type="Control" parent="user_interface/body/simulate_panel/learn_panel/tasks_container/tasks_separator/task_2"]
@@ -427,11 +427,11 @@ clip_text = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_default_cursor_shape = 16
-theme_override_styles/normal = ExtResource("4_7xo11")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("5_tvr58")
-theme_override_styles/disabled = ExtResource("6_wa3ml")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/normal = ExtResource("4_7xo11")
 disabled = true
 
 [node name="label_handler" type="Control" parent="user_interface/body/simulate_panel/learn_panel/tasks_container/tasks_separator/task_3"]
@@ -482,11 +482,11 @@ clip_text = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_default_cursor_shape = 16
-theme_override_styles/normal = ExtResource("4_7xo11")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("5_tvr58")
-theme_override_styles/disabled = ExtResource("6_wa3ml")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/normal = ExtResource("4_7xo11")
 disabled = true
 
 [node name="label_handler" type="Control" parent="user_interface/body/simulate_panel/learn_panel/tasks_container/tasks_separator/task_4"]
@@ -537,11 +537,11 @@ clip_text = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_default_cursor_shape = 16
-theme_override_styles/normal = ExtResource("4_7xo11")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("5_tvr58")
-theme_override_styles/disabled = ExtResource("6_wa3ml")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/normal = ExtResource("4_7xo11")
 disabled = true
 
 [node name="label_handler" type="Control" parent="user_interface/body/simulate_panel/learn_panel/tasks_container/tasks_separator/task_5"]
@@ -592,11 +592,11 @@ clip_text = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_default_cursor_shape = 16
-theme_override_styles/normal = ExtResource("4_7xo11")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("5_tvr58")
-theme_override_styles/disabled = ExtResource("6_wa3ml")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_rrexd")
+theme_override_styles/normal = ExtResource("4_7xo11")
 disabled = true
 
 [node name="label_handler" type="Control" parent="user_interface/body/simulate_panel/learn_panel/tasks_container/tasks_separator/task_6"]
@@ -679,11 +679,11 @@ theme_override_colors/font_pressed_color = Color(0.109804, 0.109804, 0.109804, 1
 theme_override_colors/font_hover_color = Color(0.217101, 0.217101, 0.217101, 1)
 theme_override_fonts/font = ExtResource("2_qi2qc")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxEmpty_onrxv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1cwdx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qkgjl")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_bpbfw")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_olumk")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_qkgjl")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1cwdx")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onrxv")
 text = "x"
 flat = true
 
@@ -704,16 +704,16 @@ anchor_bottom = 1.0
 offset_top = -32.0
 offset_right = 80.0
 grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0.0745098, 0.0745098, 0.0745098, 1)
 theme_override_colors/font_color = Color(0.152941, 0.152941, 0.152941, 1)
 theme_override_colors/font_pressed_color = Color(0.109804, 0.109804, 0.109804, 1)
 theme_override_colors/font_hover_color = Color(0.217101, 0.217101, 0.217101, 1)
-theme_override_colors/font_disabled_color = Color(0.0745098, 0.0745098, 0.0745098, 1)
 theme_override_fonts/font = ExtResource("2_qi2qc")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_onrxv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1cwdx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qkgjl")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_bpbfw")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_olumk")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_qkgjl")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1cwdx")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onrxv")
 text = "DARK"
 flat = true
 

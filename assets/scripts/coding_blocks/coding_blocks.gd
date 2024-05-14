@@ -164,7 +164,7 @@ func _drag_and_drop_block(_block: CodingBlocks, _event: InputEvent):
 	
 	# Dragging mechanic.
 	if _block.dragging_enabled:
-		_block.global_position = lerp(_block.global_position, get_global_mouse_position() - (_block.get_child(0).shape.size / 2), SimulationEngine.lerp_weight / 2)
+		_block.global_position = lerp(_block.global_position, get_global_mouse_position() - (_block.get_child(0).shape.size / 2), Configuration.lerp_weight / 2)
 	
 	# Enable dragging once again whenever block previously break the snap.
 	# It takes the center position of the block then gets the distance of it from the mouse.
