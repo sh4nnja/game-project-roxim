@@ -44,11 +44,7 @@ class_name CodingBlocks
 # CodingBlocks class <- This script.
 #      -> Events class
 #           -> Start 
-#           -> When 'key' pressed
 #      -> Control class
-#
-# Current Subclass that we have:
-#      -> Events class
 #
 # Make sure that you don't DUPLICATE and REPEAT your codes across the project. PLEASE.
 # Use classes for the same script each objects you have.
@@ -57,19 +53,16 @@ class_name CodingBlocks
 # Mouse to block distance threshold in pixels in order to break snap.
 const _BLOCK_SNAP_THRESHOLD: int = 1
 
-# Block offset for expanding (When putting information on the block, like variable etc.)
-const _BLOCK_EXPAND_OFFSET: int = 60
-
 # ******************************************************************************
 # CUSTOM METHODS AND SIGNALS
 # Manage block adjustment when value is being inputted.
-func manage_block_tex_size(_block_scale: float, _value_a: float, _value_b: float = 0, _offset: float = 0) -> float:
+func manage_block_tex_size(_init_size: float, _final_size: float, _scale: float) -> float:
 	var _output: float = 0
 	
 	# Adds every size of the text box inside the block and expands the block texture
 	# relative to its scale.
-	_output = (_value_a + _value_b + _BLOCK_EXPAND_OFFSET + _offset) / _block_scale
-	return _output
+	_output = (_final_size - _init_size)
+	return _output * _scale
 
 # Manage block shape adjustment when editing value.
 func manage_block_shape_size(_block_tex_size: float, _block_tex_scale: float = 2) -> float:

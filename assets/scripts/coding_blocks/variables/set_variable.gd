@@ -62,7 +62,17 @@ var dragging_enabled: bool = false
 # Check if block can snap.
 var can_snap: int = 0
 
+# Location of initial text area size.
+var _block_init_text_size: float
+var _name_init_area_size: float 
+var _value_init_area_size: float
+
 # ******************************************************************************
+# INIT EVENT
+func _ready() -> void:
+	_get_init_text_area()
+	_adjust_block()
+
 # INPUT EVENT
 func _input(_event) -> void:
 	manage_dragging(_event)
@@ -118,9 +128,15 @@ func _remove_focus() -> void:
 	block_var_name.release_focus()
 	block_var_value.release_focus()
 
+# Get init area size.
+func _get_init_text_area() -> void:
+	_block_init_text_size = _block_texture.get_size().x
+	_name_init_area_size = block_var_name.get_size().x
+	_value_init_area_size = block_var_value.get_size().x
+
 # Adjust block's position and size based on text.
 func _adjust_block() -> void:
-	_block_texture.size.x = manage_block_tex_size(_block_texture.scale.x, block_var_name.size.x, block_var_value.size.x)
+	_block_texture.size.x = _block_init_text_size + manage_block_tex_size((_name_init_area_size + _value_init_area_size), (block_var_name.get_size().x + block_var_value.get_size().x), 0.35)
 	_block_shape.position.x = manage_block_shape_size(_block_texture.size.x)
 	_block_shape.shape.size.x = manage_block_shape_size(_block_texture.size.x, 4)
 

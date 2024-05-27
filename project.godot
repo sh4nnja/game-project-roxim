@@ -38,6 +38,18 @@ window/stretch/aspect="ignore"
 
 naming/node_name_casing=2
 
+[file_customization]
+
+folder_colors={
+"res://assets/dev/": "red",
+"res://assets/font/": "orange",
+"res://assets/materials/": "yellow",
+"res://assets/objects/": "green",
+"res://assets/scenes/": "teal",
+"res://assets/scripts/": "blue",
+"res://assets/textures/": "purple"
+}
+
 [input]
 
 MOUSE_BUTTON_LEFT={

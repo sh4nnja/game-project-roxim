@@ -137,6 +137,7 @@ theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("6_wa3ml")
 theme_override_styles/normal = ExtResource("4_7xo11")
+disabled = true
 text = "Create & Simulate!"
 
 [node name="about_panel" type="Control" parent="user_interface/body/simulate_panel"]
@@ -323,6 +324,7 @@ theme_override_styles/disabled = ExtResource("6_wa3ml")
 theme_override_styles/hover = ExtResource("5_tvr58")
 theme_override_styles/pressed = ExtResource("5_tvr58")
 theme_override_styles/normal = ExtResource("4_7xo11")
+disabled = true
 
 [node name="label_handler" type="Control" parent="user_interface/body/simulate_panel/learn_panel/tasks_container/tasks_separator/task_1"]
 layout_mode = 1
