@@ -1,0 +1,192 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkwpv2jnsnhjs"]
+
+[ext_resource type="Script" path="res://root/pseudo_root.gd" id="1_e0ydd"]
+[ext_resource type="Texture2D" uid="uid://bjm2mgw368u5y" path="res://dev_assets/branding/roxim_brandingArtboard-1-copy-6.png" id="2_385ao"]
+[ext_resource type="Texture2D" uid="uid://xn72h7flq1dt" path="res://root/assets/roxim_loader.png" id="3_x5qcl"]
+[ext_resource type="FontFile" uid="uid://cggwsfkp6qkci" path="res://game_assets/misc/fonts/garet/Garet-Book.ttf" id="4_0e4do"]
+
+[sub_resource type="Animation" id="Animation_lks0i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("description:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Loading assets"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../loading_overlay:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.960784, 0.956863, 0.960784, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xntep"]
+resource_name = "boot_splash"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("description:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.366667, 0.5, 0.633333, 0.766667, 0.9, 1.03333, 1.16667, 1.3, 1.43333, 1.56667, 1.7, 1.83333, 1.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Loading assets", "Loading assets.", "Loading assets..", "Loading assets...", "Loading assets.", "Loading assets..", "Loading assets...", "Loading assets.", "Loading assets..", "Loading assets...", "Loading assets.", "Loading assets..", "Loading assets..."]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_loading"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bi0ua"]
+resource_name = "loading_finished"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("description:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Loading finished. Have fun!"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../loading_overlay:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Color(0.960784, 0.956863, 0.960784, 1), Color(0.960784, 0.956863, 0.960784, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2nmiw"]
+_data = {
+"RESET": SubResource("Animation_lks0i"),
+"boot_splash": SubResource("Animation_xntep"),
+"loading_finished": SubResource("Animation_bi0ua")
+}
+
+[node name="pseudo_root" type="Node"]
+script = ExtResource("1_e0ydd")
+
+[node name="loading_overlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.960784, 0.956863, 0.960784, 1)
+
+[node name="formatter" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(429, 147)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = -10
+
+[node name="anim" type="AnimationPlayer" parent="formatter"]
+libraries = {
+"": SubResource("AnimationLibrary_2nmiw")
+}
+autoplay = "boot_splash"
+
+[node name="loading_progress" type="TextureProgressBar" parent="formatter"]
+custom_minimum_size = Vector2(429, 143)
+layout_mode = 2
+mouse_filter = 2
+nine_patch_stretch = true
+texture_under = ExtResource("2_385ao")
+texture_progress = ExtResource("3_x5qcl")
+tint_under = Color(1, 1, 1, 0.25098)
+
+[node name="description" type="Label" parent="formatter"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.717647, 0.717647, 0.717647, 1)
+theme_override_colors/font_outline_color = Color(0.717647, 0.717647, 0.717647, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_0e4do")
+theme_override_font_sizes/font_size = 20
+text = "Loading assets"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="scene_manager" type="Node" parent="."]

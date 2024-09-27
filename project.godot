@@ -10,81 +10,27 @@ config_version=5
 
 [application]
 
-config/name="CAPSTONE - VBlox"
-run/main_scene="res://assets/scenes/main_menu/main_menu.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
-boot_splash/bg_color=Color(0.0705882, 0.0705882, 0.0705882, 1)
-boot_splash/image="res://assets/dev/vblox_logo/logo_hero.png"
-boot_splash/fullsize=false
-config/icon="res://assets/dev/vblox_logo/logo.png"
-boot_splash/minimum_display_time=2500
-
-[autoload]
-
-Configuration="*res://assets/scripts/config.gd"
-CompilerEngine="*res://assets/scripts/coding_area/compiler_engine.gd"
+config/name="roxim vr"
+run/main_scene="res://root/pseudo_root.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/bg_color=Color(0.960784, 0.956863, 0.960784, 1)
+boot_splash/show_image=false
+boot_splash/minimum_display_time=2000
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/initial_position=Vector2i(10, 0)
-window/size/window_width_override=1024
-window/size/window_height_override=600
-window/stretch/mode="viewport"
-window/stretch/aspect="ignore"
+window/size/mode=4
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/per_pixel_transparency/allowed=true
 
 [editor]
 
+naming/node_name_num_separator=2
 naming/node_name_casing=2
-
-[file_customization]
-
-folder_colors={
-"res://assets/dev/": "red",
-"res://assets/font/": "orange",
-"res://assets/materials/": "yellow",
-"res://assets/objects/": "green",
-"res://assets/scenes/": "teal",
-"res://assets/scripts/": "blue",
-"res://assets/textures/": "purple"
-}
-
-[input]
-
-MOUSE_BUTTON_LEFT={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
-]
-}
-MOUSE_BUTTON_RIGHT={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(255, 20),"global_position":Vector2(258, 52),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
-]
-}
-MOUSE_BUTTON_WHEEL_UP={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":8,"position":Vector2(348, 11),"global_position":Vector2(351, 43),"factor":1.0,"button_index":4,"canceled":false,"pressed":true,"double_click":false,"script":null)
-]
-}
-MOUSE_BUTTON_WHEEL_DOWN={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(163, 1),"global_position":Vector2(166, 33),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
-]
-}
-
-[physics]
-
-3d/run_on_separate_thread=true
-common/physics_ticks_per_second=144
-3d/physics_engine="GodotPhysics3D"
-3d/solver/solver_iterations=32
 
 [rendering]
 
-occlusion_culling/bvh_build_quality=1
-textures/canvas_textures/default_texture_filter=0
-textures/default_filters/use_nearest_mipmap_filter=true
-textures/decals/filter=0
-textures/light_projectors/filter=0
-environment/defaults/default_environment="res://assets/materials/simulation/simulation_map_env.tres"
+environment/defaults/default_clear_color=Color(0.960784, 0.956863, 0.960784, 1)

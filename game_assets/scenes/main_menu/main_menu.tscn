@@ -1,0 +1,228 @@
+[gd_scene load_steps=19 format=3 uid="uid://waaj0stqsr63"]
+
+[ext_resource type="Script" path="res://game_assets/scenes/main_menu/main_menu.gd" id="1_ykuqw"]
+[ext_resource type="FontFile" uid="uid://bqm26rc5yytq3" path="res://game_assets/misc/fonts/mont/Mont-HeavyDEMO.otf" id="2_pj5ql"]
+[ext_resource type="FontFile" uid="uid://cggwsfkp6qkci" path="res://game_assets/misc/fonts/garet/Garet-Book.ttf" id="3_g6hol"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etlnp"]
+draw_center = false
+shadow_color = Color(0.663824, 0.663824, 0.663824, 0.0627451)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pac1e"]
+bg_color = Color(0.983539, 0.981703, 0.983537, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hgfpl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cohds"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fb60f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okids"]
+bg_color = Color(0.942708, 0.942708, 0.942708, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6g1mb"]
+bg_color = Color(0.901042, 0.901042, 0.901042, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok8tq"]
+bg_color = Color(0.215686, 0.447059, 1, 1)
+shadow_color = Color(0, 0, 0, 0.207843)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3y7tu"]
+bg_color = Color(0.215686, 0.447059, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xf4a0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jniha"]
+bg_color = Color(0, 0.294118, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y3q3p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e61qi"]
+bg_color = Color(0.104167, 0.368438, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rw352"]
+bg_color = Color(0, 0.295, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcobf"]
+bg_color = Color(0.984314, 0.980392, 0.984314, 1)
+shadow_color = Color(0.129412, 0.129412, 0.129412, 0.101961)
+shadow_size = 5
+
+[node name="m_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 8
+script = ExtResource("1_ykuqw")
+
+[node name="center_panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.12
+anchor_right = 0.85
+anchor_bottom = 0.88
+offset_top = 0.399994
+offset_bottom = -0.400085
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_etlnp")
+
+[node name="learn" type="Panel" parent="center_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.595
+anchor_bottom = 1.0
+offset_right = 0.319946
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pac1e")
+
+[node name="formatter" type="VBoxContainer" parent="center_panel/learn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 62.0
+offset_right = -56.0001
+offset_bottom = -62.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 15
+
+[node name="title" type="Label" parent="center_panel/learn/formatter"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.270588, 0.486275, 1, 1)
+theme_override_fonts/font = ExtResource("2_pj5ql")
+theme_override_font_sizes/font_size = 50
+text = "Learn"
+metadata/_edit_use_anchors_ = true
+
+[node name="description" type="Label" parent="center_panel/learn/formatter"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.304462, 0.304462, 0.304462, 1)
+theme_override_colors/font_outline_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_g6hol")
+theme_override_font_sizes/font_size = 20
+text = "Explore the exciting world of block-based coding! 
+
+Each card leads you to a lesson where you use blocks to solve challenges and advance your programming skills."
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="card_formatter" type="ScrollContainer" parent="center_panel/learn/formatter"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="card_list" type="ItemList" parent="center_panel/learn/formatter/card_formatter"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hgfpl")
+
+[node name="description_pt2" type="Label" parent="center_panel/learn/formatter"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.304462, 0.304462, 0.304462, 1)
+theme_override_colors/font_outline_color = Color(0.380392, 0.380392, 0.380392, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_g6hol")
+theme_override_font_sizes/font_size = 20
+text = "Additionally, you can just go straight to the editor and see it for yourself! Have fun!"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="code_editor" type="Button" parent="center_panel/learn/formatter"]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_hover_color = Color(0.215686, 0.447059, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.802083, 0.802083, 0.802083, 1)
+theme_override_colors/font_focus_color = Color(0.984314, 0.980392, 0.984314, 1)
+theme_override_colors/font_color = Color(0.984314, 0.980392, 0.984314, 1)
+theme_override_fonts/font = ExtResource("2_pj5ql")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cohds")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_fb60f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_okids")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6g1mb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ok8tq")
+text = "Code Editor"
+
+[node name="simulate" type="Panel" parent="center_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.595
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.319946
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3y7tu")
+
+[node name="formatter" type="VBoxContainer" parent="center_panel/simulate"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 62.0
+offset_right = -56.0001
+offset_bottom = -62.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 15
+
+[node name="title" type="Label" parent="center_panel/simulate/formatter"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.984314, 0.980392, 0.984314, 1)
+theme_override_fonts/font = ExtResource("2_pj5ql")
+theme_override_font_sizes/font_size = 50
+text = "Simulate"
+metadata/_edit_use_anchors_ = true
+
+[node name="description" type="Label" parent="center_panel/simulate/formatter"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.984314, 0.980392, 0.984314, 1)
+theme_override_colors/font_outline_color = Color(0.984314, 0.980392, 0.984314, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_g6hol")
+theme_override_font_sizes/font_size = 20
+text = "Enter a virtual world, build robots, and make them move with your code!"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="simulation_editor" type="Button" parent="center_panel/simulate/formatter"]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+mouse_default_cursor_shape = 8
+theme_override_colors/font_disabled_color = Color(0.321569, 0.521569, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.322917, 0.522656, 1, 1)
+theme_override_colors/font_focus_color = Color(0.215686, 0.447059, 1, 1)
+theme_override_colors/font_color = Color(0.215686, 0.447059, 1, 1)
+theme_override_fonts/font = ExtResource("2_pj5ql")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xf4a0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jniha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_y3q3p")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e61qi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rw352")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xcobf")
+disabled = true
+text = "Simulate"
+
+[connection signal="pressed" from="center_panel/learn/formatter/code_editor" to="." method="_on_code_editor_pressed"]
+[connection signal="pressed" from="center_panel/simulate/formatter/simulation_editor" to="." method="_on_simulation_editor_pressed"]

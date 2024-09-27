@@ -1,8 +1,8 @@
-res://assets/materials/simulation/simulation_map_env.tres
-res://assets/scenes/coding_area/coding_area.tscn
-res://assets/materials/simulation/interactables_menu_panel.tres
-res://assets/objects/blocks/variables/set_variable.tscn
+res://pseudo_root.tscn
 res://assets/scenes/main_menu/main_menu.tscn
-res://assets/objects/blocks/conditionals/if_then_conditional.tscn
-res://assets/scripts/coding_blocks/coding_blocks.gd
-res://assets/scripts/coding_blocks/variables/set_variable.gd
+res://root/pseudo_root.tscn
+res://game_assets/scenes/main_menu/main_menu.tscn
+res://root/pseudo_root.gd
+res://game_assets/scenes/main_menu/main_menu.gd
+res://game_assets/scenes/code_editor/code_editor.tscn
+res://game_assets/scenes/code_editor/code_editor.gd
