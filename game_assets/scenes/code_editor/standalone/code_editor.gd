@@ -3,3 +3,4 @@
 # This script is different from the pop up of the simulation area.
 
 extends Control
+# ---------------------------------------------------------------------------- #

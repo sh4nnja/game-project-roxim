@@ -18,7 +18,10 @@ corner_radius_top_right = 75
 corner_radius_bottom_right = 75
 corner_radius_bottom_left = 75
 
-[node name="display_block" type="LineEdit"]
+[node name="display_block" type="Node2D"]
+script = ExtResource("2_63mws")
+
+[node name="interactable" type="LineEdit" parent="."]
 custom_minimum_size = Vector2(1080, 240)
 offset_left = 784.0
 offset_top = 67.0
@@ -36,9 +39,8 @@ context_menu_enabled = false
 virtual_keyboard_enabled = false
 select_all_on_focus = true
 caret_blink = true
-script = ExtResource("2_63mws")
 
-[node name="background" type="NinePatchRect" parent="."]
+[node name="background" type="NinePatchRect" parent="interactable"]
 z_index = -1
 layout_mode = 1
 anchors_preset = -1
@@ -58,7 +60,7 @@ patch_margin_right = 103
 patch_margin_bottom = 364
 axis_stretch_horizontal = 2
 
-[node name="set" type="Label" parent="."]
+[node name="set" type="Label" parent="interactable"]
 layout_mode = 0
 offset_left = -640.0
 offset_top = 21.0
@@ -67,3 +69,7 @@ offset_bottom = 225.0
 theme_override_fonts/font = ExtResource("2_2hrhm")
 theme_override_font_sizes/font_size = 140
 text = "display"
+
+[node name="linker" type="Node2D" parent="."]
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

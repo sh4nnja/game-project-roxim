@@ -17,6 +17,11 @@ boot_splash/bg_color=Color(0.960784, 0.956863, 0.960784, 1)
 boot_splash/show_image=false
 boot_splash/minimum_display_time=2000
 
+[autoload]
+
+keybinds="*res://game_assets/global_utils/keybinds.gd"
+misc_utils="*res://game_assets/global_utils/misc.gd"
+
 [display]
 
 window/size/viewport_width=1920
