@@ -1,6 +1,5 @@
 # Manage the format of lesson and link through simulation and code editor.
 # Also home for exit / settings etc.
-
 extends Control
 
 

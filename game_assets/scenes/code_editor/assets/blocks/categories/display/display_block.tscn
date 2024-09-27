@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://bksdaafohyfvc"]
+
+[ext_resource type="Texture2D" uid="uid://cchwv5fa6njxu" path="res://game_assets/scenes/code_editor/assets/blocks/categories/display/display.png" id="1_y8m8b"]
+[ext_resource type="FontFile" uid="uid://d1g3ic00poj81" path="res://game_assets/misc/fonts/garet/Garet-Heavy.ttf" id="2_2hrhm"]
+[ext_resource type="Script" path="res://game_assets/scenes/code_editor/assets/blocks/categories/display/display_block.gd" id="2_63mws"]
+[ext_resource type="FontFile" uid="uid://cggwsfkp6qkci" path="res://game_assets/misc/fonts/garet/Garet-Book.ttf" id="3_nkk7y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uk21m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8r63l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlcg7"]
+content_margin_left = 60.0
+content_margin_right = 60.0
+bg_color = Color(0, 0.572549, 0.819608, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[node name="display_block" type="LineEdit"]
+custom_minimum_size = Vector2(1080, 240)
+offset_left = 784.0
+offset_top = 67.0
+offset_right = 1864.0
+offset_bottom = 307.0
+theme_override_fonts/font = ExtResource("3_nkk7y")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uk21m")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_8r63l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rlcg7")
+placeholder_text = "value"
+alignment = 1
+expand_to_text_length = true
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+select_all_on_focus = true
+caret_blink = true
+script = ExtResource("2_63mws")
+
+[node name="background" type="NinePatchRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -784.0
+offset_top = -187.0
+offset_right = 56.0
+offset_bottom = 262.0
+mouse_filter = 1
+texture = ExtResource("1_y8m8b")
+region_rect = Rect2(0, 0, 1920, 457)
+patch_margin_left = 1702
+patch_margin_top = 85
+patch_margin_right = 103
+patch_margin_bottom = 364
+axis_stretch_horizontal = 2
+
+[node name="set" type="Label" parent="."]
+layout_mode = 0
+offset_left = -640.0
+offset_top = 21.0
+offset_right = -39.0
+offset_bottom = 225.0
+theme_override_fonts/font = ExtResource("2_2hrhm")
+theme_override_font_sizes/font_size = 140
+text = "display"

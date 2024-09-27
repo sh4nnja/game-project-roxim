@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dkwpv2jnsnhjs"]
 
 [ext_resource type="Script" path="res://root/pseudo_root.gd" id="1_e0ydd"]
-[ext_resource type="Texture2D" uid="uid://bjm2mgw368u5y" path="res://dev_assets/branding/roxim_brandingArtboard-1-copy-6.png" id="2_385ao"]
+[ext_resource type="Texture2D" uid="uid://bjm2mgw368u5y" path="res://dev_assets/branding_files/roxim_brandingArtboard-1-copy-6.png" id="2_385ao"]
 [ext_resource type="Texture2D" uid="uid://xn72h7flq1dt" path="res://root/assets/roxim_loader.png" id="3_x5qcl"]
 [ext_resource type="FontFile" uid="uid://cggwsfkp6qkci" path="res://game_assets/misc/fonts/garet/Garet-Book.ttf" id="4_0e4do"]
 

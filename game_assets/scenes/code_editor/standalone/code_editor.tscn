@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://crfp8xub03lbp"]
 
-[ext_resource type="Script" path="res://game_assets/scenes/code_editor/code_editor.gd" id="1_n0b7w"]
+[ext_resource type="Script" path="res://game_assets/scenes/code_editor/standalone/code_editor.gd" id="1_n0b7w"]
 
 [node name="code_editor" type="Control"]
 layout_mode = 3

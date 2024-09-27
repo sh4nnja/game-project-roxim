@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6ufa2lbqwpgd"
-path="res://.godot/imported/roxim_brandingArtboard-1-copy-2.png-54e45f7058b5aadd25f51a8e81f0ff5b.ctex"
+uid="uid://dfmisdji4xhg6"
+path="res://.godot/imported/roxim_brandingArtboard-1-copy-5.png-dd428a2332af23e21fed63a1e206ba78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dev_assets/branding/roxim_brandingArtboard-1-copy-2.png"
-dest_files=["res://.godot/imported/roxim_brandingArtboard-1-copy-2.png-54e45f7058b5aadd25f51a8e81f0ff5b.ctex"]
+source_file="res://dev_assets/branding_files/roxim_brandingArtboard-1-copy-5.png"
+dest_files=["res://.godot/imported/roxim_brandingArtboard-1-copy-5.png-dd428a2332af23e21fed63a1e206ba78.ctex"]
 
 [params]
 

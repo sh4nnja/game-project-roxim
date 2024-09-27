@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfmisdji4xhg6"
-path="res://.godot/imported/roxim_brandingArtboard-1-copy-5.png-1e7e88f4c1bee06c21b17720d2e79557.ctex"
+uid="uid://dkhw78ji84yok"
+path="res://.godot/imported/variable.png-ae7e0dc9a07f22464df5d442399fdbaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dev_assets/branding/roxim_brandingArtboard-1-copy-5.png"
-dest_files=["res://.godot/imported/roxim_brandingArtboard-1-copy-5.png-1e7e88f4c1bee06c21b17720d2e79557.ctex"]
+source_file="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable.png"
+dest_files=["res://.godot/imported/variable.png-ae7e0dc9a07f22464df5d442399fdbaa.ctex"]
 
 [params]
 
