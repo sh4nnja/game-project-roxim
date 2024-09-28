@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://so40pdo0s0jk"]
+
+[ext_resource type="Script" path="res://game_assets/scenes/code_editor/utils/interface_handler.gd" id="1_pdm0h"]
+[ext_resource type="Script" path="res://game_assets/scenes/code_editor/utils/camera_handler.gd" id="1_sf3pe"]
+[ext_resource type="Script" path="res://game_assets/scenes/code_editor/utils/cam-block_handler.gd" id="2_fhlv8"]
+[ext_resource type="PackedScene" uid="uid://ddqp3wysdgdcl" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/set_variable/set_variable.tscn" id="4_nslqo"]
+
+[node name="code_editor" type="CanvasLayer"]
+
+[node name="interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_pdm0h")
+
+[node name="canvas_mask" type="SubViewportContainer" parent="."]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="canvas" type="SubViewport" parent="canvas_mask"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+physics_object_picking = true
+positional_shadow_atlas_16_bits = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="camera" type="Camera2D" parent="canvas_mask/canvas"]
+top_level = true
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("1_sf3pe")
+
+[node name="objects" type="Node2D" parent="canvas_mask/canvas"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_fhlv8")
+
+[node name="set_variable" parent="canvas_mask/canvas/objects" instance=ExtResource("4_nslqo")]

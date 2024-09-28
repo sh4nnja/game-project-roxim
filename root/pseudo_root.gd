@@ -6,4 +6,5 @@ extends Node
 
 
 func start_loading() -> void:
-	pass
+	# Change this code. 
+	get_tree().change_scene_to_file("res://game_assets/scenes/code_editor/code_editor.tscn")

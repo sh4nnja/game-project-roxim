@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b55kkwis0tuc3"]
+
+[ext_resource type="Script" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_scanner.gd" id="1_2yywg"]
+[ext_resource type="FontFile" uid="uid://cggwsfkp6qkci" path="res://game_assets/misc/fonts/garet/Garet-Book.ttf" id="1_ha5tm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4i0s8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2e43"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iscyw"]
+
+[node name="variable_scanner" type="AspectRatioContainer"]
+mouse_filter = 2
+script = ExtResource("1_2yywg")
+
+[node name="input" type="LineEdit" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ha5tm")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4i0s8")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_c2e43")
+placeholder_text = "value"
+alignment = 1
+expand_to_text_length = true
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+flat = true
+select_all_on_focus = true
+caret_blink = true
+
+[node name="scanner" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="scanner"]
+position = Vector2(226, 91)
+shape = SubResource("RectangleShape2D_iscyw")

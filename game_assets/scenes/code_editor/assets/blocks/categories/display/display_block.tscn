@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bksdaafohyfvc"]
+[gd_scene load_steps=9 format=3 uid="uid://bksdaafohyfvc"]
 
 [ext_resource type="Texture2D" uid="uid://cchwv5fa6njxu" path="res://game_assets/scenes/code_editor/assets/blocks/categories/display/display.png" id="1_y8m8b"]
 [ext_resource type="FontFile" uid="uid://d1g3ic00poj81" path="res://game_assets/misc/fonts/garet/Garet-Heavy.ttf" id="2_2hrhm"]
 [ext_resource type="Script" path="res://game_assets/scenes/code_editor/assets/blocks/categories/display/display_block.gd" id="2_63mws"]
 [ext_resource type="FontFile" uid="uid://cggwsfkp6qkci" path="res://game_assets/misc/fonts/garet/Garet-Book.ttf" id="3_nkk7y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hf7vi"]
+size = Vector2(1921, 448)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uk21m"]
 
@@ -18,10 +21,16 @@ corner_radius_top_right = 75
 corner_radius_bottom_right = 75
 corner_radius_bottom_left = 75
 
-[node name="display_block" type="Node2D"]
+[node name="display_block" type="Area2D"]
+collision_mask = 0
+monitorable = false
 script = ExtResource("2_63mws")
 
-[node name="interactable" type="LineEdit" parent="."]
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(960.5, 224)
+shape = SubResource("RectangleShape2D_hf7vi")
+
+[node name="value" type="LineEdit" parent="."]
 custom_minimum_size = Vector2(1080, 240)
 offset_left = 784.0
 offset_top = 67.0
@@ -40,7 +49,7 @@ virtual_keyboard_enabled = false
 select_all_on_focus = true
 caret_blink = true
 
-[node name="background" type="NinePatchRect" parent="interactable"]
+[node name="background" type="NinePatchRect" parent="value"]
 z_index = -1
 layout_mode = 1
 anchors_preset = -1
@@ -51,7 +60,6 @@ offset_left = -784.0
 offset_top = -187.0
 offset_right = 56.0
 offset_bottom = 262.0
-mouse_filter = 1
 texture = ExtResource("1_y8m8b")
 region_rect = Rect2(0, 0, 1920, 457)
 patch_margin_left = 1702
@@ -60,7 +68,7 @@ patch_margin_right = 103
 patch_margin_bottom = 364
 axis_stretch_horizontal = 2
 
-[node name="set" type="Label" parent="interactable"]
+[node name="set" type="Label" parent="value"]
 layout_mode = 0
 offset_left = -640.0
 offset_top = 21.0
@@ -71,5 +79,3 @@ theme_override_font_sizes/font_size = 140
 text = "display"
 
 [node name="linker" type="Node2D" parent="."]
-
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

@@ -10,4 +10,4 @@ func _on_simulation_editor_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_code_editor_pressed() -> void:
-	pass # Replace with function body.
+	pass
