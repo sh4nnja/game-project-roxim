@@ -3,6 +3,7 @@
 
 extends Node2D
 class_name CodeBlocks
+
 # ---------------------------------------------------------------------------- #
 
 # Unique properties template of the block. This will be filled by the
@@ -11,10 +12,7 @@ class_name CodeBlocks
 # Block data are the nodes being interacted and have the values needed for the
 # virtual programming, commonly they store the LineEdit node references.
 var _block_properties: Dictionary = {
-	"data": {
-		
-	},
-	
+	"data": [],
 	"metadata": {
 		"block": "",
 		"type": "",
@@ -38,10 +36,10 @@ func get_metadata() -> Dictionary:
 # Data. The block's actual data needed for virtual programming.
 # When accessing the data's values make sure to include a snippet where it 
 # gets the text inside. As the dictionary data content is an object.
-func set_data(key: Variant, value: Variant) -> void:
-	_block_properties["data"][key] = value
+func set_data(value: Array) -> void:
+	_block_properties["data"] = value
 
-func get_data() -> Dictionary:
+func get_data() -> Array:
 	return _block_properties["data"]
 
 # ---------------------------------------------------------------------------- #
@@ -55,8 +53,8 @@ func manage_mouse_interaction(disabled: bool):
 	
 	# Manage the block's interactables focus status.
 	for _interactables in get_data():
-		get_data()[_interactables].set_focus_mode(Control.FOCUS_NONE if disabled else Control.FOCUS_ALL)
-		get_data()[_interactables].set_mouse_filter(Control.MOUSE_FILTER_IGNORE if disabled else Control.MOUSE_FILTER_STOP)
+		_interactables.set_focus_mode(Control.FOCUS_NONE if disabled else Control.FOCUS_ALL)
+		_interactables.set_mouse_filter(Control.MOUSE_FILTER_IGNORE if disabled else Control.MOUSE_FILTER_STOP)
 
 # Manage the block's interactable area.
 func manage_interact_area(shape: CollisionShape2D, basis: Control) -> void:

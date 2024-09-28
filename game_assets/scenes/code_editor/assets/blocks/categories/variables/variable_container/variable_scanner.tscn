@@ -8,8 +8,9 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2e43"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iscyw"]
+size = Vector2(0, 0)
 
-[node name="variable_scanner" type="AspectRatioContainer"]
+[node name="scanner" type="AspectRatioContainer"]
 mouse_filter = 2
 script = ExtResource("1_2yywg")
 
@@ -28,11 +29,10 @@ flat = true
 select_all_on_focus = true
 caret_blink = true
 
-[node name="scanner" type="Area2D" parent="."]
+[node name="area" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
 monitorable = false
 
-[node name="shape" type="CollisionShape2D" parent="scanner"]
-position = Vector2(226, 91)
+[node name="shape" type="CollisionShape2D" parent="area"]
 shape = SubResource("RectangleShape2D_iscyw")

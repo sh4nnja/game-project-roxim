@@ -20,3 +20,11 @@ func _ready() -> void:
 	
 	# Connect signals of other nodes.
 	get_node("interactable").connect("resized", Callable(self, "manage_interact_area").bind(get_node("shape"), get_node("interactable")))
+
+# ---------------------------------------------------------------------------- #
+# Get the lineEdit object.
+func set_value(variable: Variant, value: Variant) -> void:
+	get_node("interactable").set_text(variable.get_text())
+	
+	# Set the block data.
+	set_data([variable, value])

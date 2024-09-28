@@ -101,7 +101,7 @@ size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ptuc5")
 
-[node name="variable_scanner" parent="interactable/margin/formatter/value" instance=ExtResource("4_xdgk3")]
+[node name="scanner" parent="interactable/margin/formatter/value" instance=ExtResource("4_xdgk3")]
 layout_mode = 2
 
 [node name="background" type="NinePatchRect" parent="interactable"]

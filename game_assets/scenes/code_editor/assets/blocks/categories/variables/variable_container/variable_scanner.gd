@@ -2,6 +2,15 @@
 
 extends AspectRatioContainer
 
+@onready var code_blocks: CodeBlocks = CodeBlocks.new()
+
+# ---------------------------------------------------------------------------- #
+# Initiation.
 func _ready() -> void:
-	var _code_blocks: CodeBlocks = CodeBlocks.new()
-	connect("resized", Callable(_code_blocks, "manage_interact_area").bind(get_node("scanner/shape"), get_node(".")))
+	# Import library to get the adjustment snippet.
+	connect("resized", Callable(code_blocks, "manage_interact_area").bind(get_node("area/shape"), get_node(".")))
+
+# ---------------------------------------------------------------------------- #
+# Accessor data.
+func get_line() -> LineEdit:
+	return get_node("input")

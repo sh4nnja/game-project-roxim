@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://so40pdo0s0jk"]
+[gd_scene load_steps=6 format=3 uid="uid://so40pdo0s0jk"]
 
 [ext_resource type="Script" path="res://game_assets/scenes/code_editor/utils/interface_handler.gd" id="1_pdm0h"]
 [ext_resource type="Script" path="res://game_assets/scenes/code_editor/utils/camera_handler.gd" id="1_sf3pe"]
 [ext_resource type="Script" path="res://game_assets/scenes/code_editor/utils/cam-block_handler.gd" id="2_fhlv8"]
+[ext_resource type="PackedScene" uid="uid://bksdaafohyfvc" path="res://game_assets/scenes/code_editor/assets/blocks/categories/display/display_block.tscn" id="4_ip42o"]
 [ext_resource type="PackedScene" uid="uid://ddqp3wysdgdcl" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/set_variable/set_variable.tscn" id="4_nslqo"]
 
 [node name="code_editor" type="CanvasLayer"]
@@ -16,6 +17,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_pdm0h")
+
+[node name="overlay" type="ColorRect" parent="interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.960784, 0.956863, 0.960784, 1)
 
 [node name="canvas_mask" type="SubViewportContainer" parent="."]
 clip_contents = true
@@ -31,7 +42,6 @@ disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 physics_object_picking = true
-positional_shadow_atlas_16_bits = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
@@ -44,4 +54,8 @@ script = ExtResource("1_sf3pe")
 scale = Vector2(0.5, 0.5)
 script = ExtResource("2_fhlv8")
 
+[node name="display_block" parent="canvas_mask/canvas/objects" instance=ExtResource("4_ip42o")]
+position = Vector2(0, 800)
+
 [node name="set_variable" parent="canvas_mask/canvas/objects" instance=ExtResource("4_nslqo")]
+position = Vector2(0, 300)

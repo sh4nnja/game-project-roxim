@@ -5,7 +5,7 @@ extends Camera2D
 
 # Movement.
 const _cam_zoom_mult: Vector2 = Vector2(0.10, 0.10)
-const _cam_zoom_limit: Vector2 = Vector2(0.15, 0.15)
+const _cam_zoom_limit: Vector2 = Vector2(0.15, 0.75)
 
 var cam_sens: float = 0.5    
 
@@ -47,13 +47,13 @@ func _manage_panning(_event: InputEvent) -> void:
 func _manage_scrolling(_event: InputEvent) -> void:
 	if _event is InputEventMouseButton:
 		# Zooms camera.
-		if _event.button_index == keybinds.code_editor_keys.values()[1]: 
+		if _event.button_index == keybinds.code_editor_keys.values()[1] and _target_zoom.x < _cam_zoom_limit.y: 
 			# Increases zoom.
-			_target_zoom = zoom + _cam_zoom_mult
+			_target_zoom += _cam_zoom_mult
 			
-		elif _event.button_index == keybinds.code_editor_keys.values()[2] and zoom >= _cam_zoom_limit: 
+		elif _event.button_index == keybinds.code_editor_keys.values()[2] and _target_zoom.x > _cam_zoom_limit.x: 
 			# Decreases zoom.
-			_target_zoom = zoom - _cam_zoom_mult
+			_target_zoom -= _cam_zoom_mult
 
 func _lerp_values(_delta) -> void:
 	# Lerp values for smooth movement.
