@@ -15,7 +15,7 @@ func _ready() -> void:
 	set_metadata("type", "variable_container")
 	
 	# Connect signals.
-	connect("mouse_entered", Callable(self, "on_mouse_entered"))
+	connect("input_event", Callable(self, "on_mouse_event"))
 	connect("mouse_exited", Callable(self, "on_mouse_exited"))
 	
 	# Connect signals of other nodes.

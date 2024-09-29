@@ -30,18 +30,6 @@ shape = SubResource("RectangleShape2D_hf7vi")
 offset_right = 1447.0
 offset_bottom = 449.0
 
-[node name="background" type="NinePatchRect" parent="interactable"]
-z_index = -1
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("1_y8m8b")
-region_rect = Rect2(0, 0, 1920, 457)
-patch_margin_left = 638
-patch_margin_top = 85
-patch_margin_right = 103
-patch_margin_bottom = 364
-axis_stretch_horizontal = 2
-
 [node name="margin" type="MarginContainer" parent="interactable"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -72,5 +60,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rlcg7")
 
 [node name="scanner" parent="interactable/margin/formatter/value" instance=ExtResource("4_25n7t")]
 layout_mode = 2
+
+[node name="background" type="NinePatchRect" parent="interactable"]
+z_index = -1
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("1_y8m8b")
+region_rect = Rect2(0, 0, 1920, 457)
+patch_margin_left = 638
+patch_margin_top = 85
+patch_margin_right = 103
+patch_margin_bottom = 364
+axis_stretch_horizontal = 2
 
 [node name="linker" type="Node2D" parent="."]

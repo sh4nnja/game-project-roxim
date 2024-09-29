@@ -1,10 +1,12 @@
 # Responsible for dragging, linking of code blocks.
 # Also manages if the block is being moved or attempting to select the text.
 
-extends Node2D
+extends Area2D
 class_name CodeBlocks
 
 # ---------------------------------------------------------------------------- #
+
+var _drag_handler: DragHandler = DragHandler.new()
 
 # Unique properties template of the block. This will be filled by the
 # individual blocks when inherited.
@@ -21,6 +23,11 @@ var _block_properties: Dictionary = {
 		"is_dragged": false
 	}
 }
+
+# ---------------------------------------------------------------------------- #
+func _input(_event: InputEvent) -> void:
+	if _event is InputEventMouseMotion:
+		_drag_handler.manage_dragging(get_global_mouse_position(), get_metadata().block, get_metadata().is_dragged)
 
 # ---------------------------------------------------------------------------- #
 # Update and show block properties.
@@ -47,7 +54,6 @@ func get_data() -> Array:
 # Manages the block's capability to be interacted.
 func manage_mouse_interaction(disabled: bool):
 	set_metadata("is_disabled", disabled)
-	
 	# Manage the block's mouse hover / dragging status.
 	get_metadata().block.set_pickable(!disabled)
 	
@@ -61,19 +67,24 @@ func manage_interact_area(shape: CollisionShape2D, basis: Control) -> void:
 	shape.get_shape().set_size(basis.get_size())
 	shape.set_position(basis.get_size() / 2)
 
-# Block Manager will mediate the interaction when hovering, dragging etc.
-func on_mouse_entered() -> void:
-	set_metadata("is_hovered", true)
+func on_mouse_event(_viewport: Node, _event: InputEvent, _shape: int) -> void:
+	# Address the mouse event happening.
+	if _event is InputEventMouseButton:
+		if _event.button_index == keybinds.code_editor_keys.values()[3]:
+			set_metadata("is_dragged", _event.pressed)
+			set_metadata("is_hovered", not _event.pressed)
+	
+	elif _event is InputEventMouseMotion:
+		set_metadata("is_hovered", false if get_metadata().is_dragged else true)
+		
+		# Disable interactables when dragging.
+		manage_mouse_interaction(false if get_metadata().is_dragged else true)
 
 func on_mouse_exited() -> void:
 	set_metadata("is_hovered", false)
 
 # ---------------------------------------------------------------------------- #
 # Handles block states and mechanics calling.
-# Call hover, drag, link classes.
-
-
-
-
+# Call drag, link classes.
 
 # ---------------------------------------------------------------------------- #
