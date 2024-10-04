@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bksdaafohyfvc"]
 
-[ext_resource type="Texture2D" uid="uid://cchwv5fa6njxu" path="res://game_assets/scenes/code_editor/assets/blocks/categories/display/display.png" id="1_y8m8b"]
+[ext_resource type="Texture2D" uid="uid://cinjptb88lptp" path="res://game_assets/scenes/code_editor/assets/blocks/categories/display/display.png" id="2_1vuaj"]
 [ext_resource type="FontFile" uid="uid://d1g3ic00poj81" path="res://game_assets/misc/fonts/garet/Garet-Heavy.ttf" id="2_2hrhm"]
 [ext_resource type="Script" path="res://game_assets/scenes/code_editor/assets/blocks/categories/display/display_block.gd" id="2_63mws"]
 [ext_resource type="PackedScene" uid="uid://b55kkwis0tuc3" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_scanner.tscn" id="4_25n7t"]
@@ -29,6 +29,28 @@ shape = SubResource("RectangleShape2D_hf7vi")
 [node name="interactable" type="MarginContainer" parent="."]
 offset_right = 1447.0
 offset_bottom = 449.0
+
+[node name="background" type="NinePatchRect" parent="interactable"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_1vuaj")
+region_rect = Rect2(0, 0, 1920, 457)
+patch_margin_left = 638
+patch_margin_top = 85
+patch_margin_right = 103
+patch_margin_bottom = 364
+axis_stretch_horizontal = 2
+
+[node name="background" type="NinePatchRect" parent="interactable/background"]
+layout_mode = 0
+size_flags_vertical = 0
+texture = ExtResource("2_1vuaj")
+region_rect = Rect2(0, 0, 1920, 457)
+patch_margin_left = 638
+patch_margin_top = 85
+patch_margin_right = 103
+patch_margin_bottom = 364
+axis_stretch_horizontal = 2
 
 [node name="margin" type="MarginContainer" parent="interactable"]
 layout_mode = 2
@@ -60,17 +82,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rlcg7")
 
 [node name="scanner" parent="interactable/margin/formatter/value" instance=ExtResource("4_25n7t")]
 layout_mode = 2
-
-[node name="background" type="NinePatchRect" parent="interactable"]
-z_index = -1
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("1_y8m8b")
-region_rect = Rect2(0, 0, 1920, 457)
-patch_margin_left = 638
-patch_margin_top = 85
-patch_margin_right = 103
-patch_margin_bottom = 364
-axis_stretch_horizontal = 2
 
 [node name="linker" type="Node2D" parent="."]

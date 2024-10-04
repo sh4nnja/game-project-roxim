@@ -3,7 +3,7 @@
 
 extends Node2D
 
-@onready var _camera: Camera2D = get_tree().root.get_node("code_editor/canvas_mask/canvas/camera")
+@onready var _camera: Camera2D = get_parent().get_node("camera")
 
 # ---------------------------------------------------------------------------- #
 func _ready() -> void:

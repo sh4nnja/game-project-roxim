@@ -20,14 +20,27 @@ var _block_properties: Dictionary = {
 		"type": "",
 		"is_disabled": false,
 		"is_hovered": false,
-		"is_dragged": false
+		"is_dragged": false,
+		"is_mouse_inside": false
 	}
 }
 
 # ---------------------------------------------------------------------------- #
+# Mouse events.
+# Mostly useful use-cases fixes are in here.
 func _input(_event: InputEvent) -> void:
 	if _event is InputEventMouseMotion:
 		_drag_handler.manage_dragging(get_global_mouse_position(), get_metadata().block, get_metadata().is_dragged)
+	
+	if _event is InputEventMouseButton:
+		if _event.button_index == keybinds.code_editor_keys.values()[3]:
+			# Remove block from dragging when the mouse is released and outside the block.
+			if not get_metadata().is_mouse_inside and not _event.pressed:
+				set_metadata("is_dragged", false)
+			
+			# Have the block be interacted even the mouse motion is first registered.
+			if get_metadata().is_hovered and _event.pressed:
+				set_metadata("is_dragged", true)
 
 # ---------------------------------------------------------------------------- #
 # Update and show block properties.
@@ -53,7 +66,9 @@ func get_data() -> Array:
 # Handles mouse in and out and interactions.
 # Manages the block's capability to be interacted.
 func manage_mouse_interaction(disabled: bool):
-	set_metadata("is_disabled", disabled)
+	if not get_metadata().is_hovered:
+		set_metadata("is_disabled", disabled)
+	
 	# Manage the block's mouse hover / dragging status.
 	get_metadata().block.set_pickable(!disabled)
 	
@@ -74,14 +89,18 @@ func on_mouse_event(_viewport: Node, _event: InputEvent, _shape: int) -> void:
 			set_metadata("is_dragged", _event.pressed)
 			set_metadata("is_hovered", not _event.pressed)
 	
-	elif _event is InputEventMouseMotion:
+	if _event is InputEventMouseMotion:
+		# Update hover status.
 		set_metadata("is_hovered", false if get_metadata().is_dragged else true)
 		
 		# Disable interactables when dragging.
 		manage_mouse_interaction(false if get_metadata().is_dragged else true)
+	
+	set_metadata("is_mouse_inside", true)
 
 func on_mouse_exited() -> void:
 	set_metadata("is_hovered", false)
+	set_metadata("is_mouse_inside", false)
 
 # ---------------------------------------------------------------------------- #
 # Handles block states and mechanics calling.

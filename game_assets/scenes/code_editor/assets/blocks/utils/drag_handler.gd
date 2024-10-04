@@ -4,8 +4,17 @@ extends Area2D
 class_name DragHandler
 
 # ---------------------------------------------------------------------------- #
+var _lock: bool = false
+var _offset: Vector2
 
 # Manage dragging of blocks and whenever it will be snapped and attached.
 func manage_dragging(pos: Vector2, node: CodeBlocks, is_dragging: bool) -> void:
 	if is_dragging:
-		node.set_position(lerp(node.global_position, pos - (node.get_node("shape").get_shape().get_size() / 2), misc_utils.lerp_weight / 2))
+		if not _lock:
+			_lock = true
+			_offset = pos - node.get_global_position()
+		
+		node.set_global_position(lerp(node.get_global_position(), pos - _offset, misc_utils.lerp_weight))
+	
+	else:
+		_lock = false

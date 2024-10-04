@@ -15,7 +15,7 @@ corner_radius_bottom_left = 75
 expand_margin_left = 60.0
 expand_margin_right = 60.0
 
-[node name="variable_container" type="Area2D"]
+[node name="container" type="Area2D"]
 collision_mask = 2
 monitoring = false
 script = ExtResource("2_7ou5s")

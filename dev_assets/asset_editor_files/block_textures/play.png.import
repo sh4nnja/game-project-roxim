@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wsbr5wsen5kj"
-path="res://.godot/imported/Artboard 1 copy.png-053a986fca8a1ea4a78b563eee56dbe4.ctex"
+uid="uid://de6xrmbmw3yvm"
+path="res://.godot/imported/play.png-8287a4d5ed1507108aec6a721859b4e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dev_assets/asset_editor_files/block_textures/Artboard 1 copy.png"
-dest_files=["res://.godot/imported/Artboard 1 copy.png-053a986fca8a1ea4a78b563eee56dbe4.ctex"]
+source_file="res://dev_assets/asset_editor_files/block_textures/play.png"
+dest_files=["res://.godot/imported/play.png-8287a4d5ed1507108aec6a721859b4e9.ctex"]
 
 [params]
 

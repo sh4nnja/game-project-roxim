@@ -53,10 +53,11 @@ zoom = Vector2(0.3, 0.3)
 script = ExtResource("1_sf3pe")
 
 [node name="objects" type="Node2D" parent="canvas_mask/canvas"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_fhlv8")
 
 [node name="display_block" parent="canvas_mask/canvas/objects" instance=ExtResource("4_ip42o")]
-position = Vector2(496, 870)
+position = Vector2(0, 900)
 
 [node name="set_variable" parent="canvas_mask/canvas/objects" instance=ExtResource("4_nslqo")]
 position = Vector2(0, 300)

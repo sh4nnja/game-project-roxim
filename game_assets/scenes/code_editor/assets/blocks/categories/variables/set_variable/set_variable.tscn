@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cggwsfkp6qkci" path="res://game_assets/misc/fonts/garet/Garet-Book.ttf" id="1_aifdd"]
 [ext_resource type="Script" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/set_variable/set_variable.gd" id="1_guhef"]
-[ext_resource type="Texture2D" uid="uid://dkhw78ji84yok" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable.png" id="4_hafxb"]
+[ext_resource type="Texture2D" uid="uid://c5kd1tf8ta513" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable.png" id="4_hafxb"]
 [ext_resource type="FontFile" uid="uid://d1g3ic00poj81" path="res://game_assets/misc/fonts/garet/Garet-Heavy.ttf" id="4_p41na"]
 [ext_resource type="PackedScene" uid="uid://b55kkwis0tuc3" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_scanner.tscn" id="4_xdgk3"]
 
@@ -44,6 +44,16 @@ shape = SubResource("RectangleShape2D_xxrdf")
 [node name="interactable" type="MarginContainer" parent="."]
 offset_right = 1814.0
 offset_bottom = 449.0
+
+[node name="background" type="NinePatchRect" parent="interactable"]
+layout_mode = 2
+texture = ExtResource("4_hafxb")
+region_rect = Rect2(0, 0, 1920, 457)
+patch_margin_left = 1702
+patch_margin_top = 85
+patch_margin_right = 103
+patch_margin_bottom = 364
+axis_stretch_horizontal = 2
 
 [node name="margin" type="MarginContainer" parent="interactable"]
 layout_mode = 2
@@ -103,16 +113,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ptuc5")
 
 [node name="scanner" parent="interactable/margin/formatter/value" instance=ExtResource("4_xdgk3")]
 layout_mode = 2
-
-[node name="background" type="NinePatchRect" parent="interactable"]
-z_index = -1
-layout_mode = 2
-texture = ExtResource("4_hafxb")
-region_rect = Rect2(0, 0, 1920, 457)
-patch_margin_left = 1702
-patch_margin_top = 85
-patch_margin_right = 103
-patch_margin_bottom = 364
-axis_stretch_horizontal = 2
 
 [node name="linker" type="Node2D" parent="."]
