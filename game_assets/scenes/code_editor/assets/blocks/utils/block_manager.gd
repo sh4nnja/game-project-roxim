@@ -102,6 +102,10 @@ func on_mouse_exited() -> void:
 	set_metadata("is_hovered", false)
 	set_metadata("is_mouse_inside", false)
 
+func interactable_selected() -> void:
+	set_metadata("is_dragged", false)
+	set_metadata("is_disabled", true)
+
 # ---------------------------------------------------------------------------- #
 # Handles block states and mechanics calling.
 # Call drag, link classes.

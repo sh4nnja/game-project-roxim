@@ -8,7 +8,7 @@ extends AspectRatioContainer
 # Initiation.
 func _ready() -> void:
 	# Import library to get the adjustment snippet.
-	connect("resized", Callable(code_blocks, "manage_interact_area").bind(get_node("area/shape"), get_node(".")))
+	connect("resized", Callable(code_blocks, "manage_interact_area").bind(get_node("slot/shape"), get_node(".")))
 
 # ---------------------------------------------------------------------------- #
 # Accessor data.

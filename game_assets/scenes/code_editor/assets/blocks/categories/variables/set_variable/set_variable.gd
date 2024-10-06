@@ -29,6 +29,8 @@ func _ready() -> void:
 	
 	# Connect signals of other nodes.
 	get_node("interactable").connect("resized", Callable(self, "manage_interact_area").bind(get_node("shape"), get_node("interactable")))
+	get_node("interactable/margin/formatter/variable/input").connect("focus_entered", Callable(self, "interactable_selected"))
+	get_node("interactable/margin/formatter/value/scanner/input").connect("focus_entered", Callable(self, "interactable_selected"))
 	
 	_line.connect("text_changed", Callable(self, "modify_block"))
 	_scanner.connect("text_changed", Callable(self, "modify_block"))
