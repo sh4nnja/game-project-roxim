@@ -10,8 +10,8 @@ var code_editor_keys: Dictionary = {
 	
 	"interactor_dragging":        MOUSE_BUTTON_LEFT,
 	
-	"interactor_speed_up_alt":    KEY_Q,
-	"interactor_speed_down_alt":  KEY_E,
+	"interactor_speed_up_alt":    KEY_E,
+	"interactor_speed_down_alt":  KEY_Q,
 	
 	"interactor_pan_up":          KEY_W,
 	"interactor_pan_down":        KEY_S,

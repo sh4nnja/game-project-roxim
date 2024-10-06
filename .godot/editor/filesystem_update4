@@ -5,3 +5,4 @@ res://game_assets/scenes/code_editor/assets/blocks/categories/display/display_bl
 res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_scanner.tscn
 res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_container.gd
 res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_scanner.gd
+res://game_assets/global_utils/keybinds.gd
