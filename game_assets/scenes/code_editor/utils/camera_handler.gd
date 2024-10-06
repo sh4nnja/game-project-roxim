@@ -4,8 +4,8 @@ extends Camera2D
 # ---------------------------------------------------------------------------- #
 
 # Movement.
-const _cam_zoom_mult: Vector2 = Vector2(0.10, 0.10)
-const _cam_zoom_limit: Vector2 = Vector2(0.15, 0.75)
+const _cam_zoom_mult: Vector2 = Vector2(0.01, 0.01)
+const _cam_zoom_limit: Vector2 = Vector2(0.1, 0.25)
 
 var cam_sens: float = 0.5    
 
@@ -99,7 +99,7 @@ func _manage_scrolling_alt() -> void:
 		_zoom_vector += _cam_zoom_mult
 	elif _target_zoom.x > _cam_zoom_limit.x and _key_states[keybinds.code_editor_keys.values()[5]]:
 		_zoom_vector -= _cam_zoom_mult
-	_target_zoom += _zoom_vector * cam_sens * zoom
+	_target_zoom += _zoom_vector
 
 func _lerp_values(_delta) -> void:
 	# Lerp values for smooth movement.

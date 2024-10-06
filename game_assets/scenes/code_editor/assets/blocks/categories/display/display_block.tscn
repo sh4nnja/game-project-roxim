@@ -10,7 +10,7 @@ size = Vector2(1448, 448)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlcg7"]
 content_margin_left = 60.0
-content_margin_right = 60.0
+content_margin_right = 30.0
 bg_color = Color(0, 0.572549, 0.819608, 1)
 corner_radius_top_left = 75
 corner_radius_top_right = 75
@@ -82,5 +82,3 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rlcg7")
 
 [node name="scanner" parent="interactable/margin/formatter/value" instance=ExtResource("4_25n7t")]
 layout_mode = 2
-
-[node name="linker" type="Node2D" parent="."]

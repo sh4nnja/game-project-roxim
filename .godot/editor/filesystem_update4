@@ -1,9 +1,7 @@
 res://game_assets/scenes/code_editor/code_editor.tscn
 res://game_assets/scenes/code_editor/assets/blocks/categories/variables/set_variable/set_variable.tscn
-res://game_assets/scenes/code_editor/assets/blocks/categories/display/display_block.tscn
 res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_container.tscn
+res://game_assets/scenes/code_editor/assets/blocks/categories/display/display_block.tscn
 res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_scanner.tscn
-res://game_assets/scenes/code_editor/utils/camera_handler.gd
-res://game_assets/global_utils/keybinds.gd
-res://game_assets/scenes/code_editor/assets/blocks/utils/block_manager.gd
-res://game_assets/scenes/code_editor/assets/blocks/categories/variables/set_variable/set_variable.gd
+res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_container.gd
+res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_scanner.gd

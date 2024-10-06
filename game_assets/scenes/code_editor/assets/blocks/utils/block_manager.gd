@@ -5,8 +5,9 @@ extends Area2D
 class_name CodeBlocks
 
 # ---------------------------------------------------------------------------- #
-
+# Handlers.
 var _drag_handler: DragHandler = DragHandler.new()
+var _snap_handler: SnapHandler = SnapHandler.new()
 
 # Unique properties template of the block. This will be filled by the
 # individual blocks when inherited.
@@ -47,8 +48,7 @@ func _input(_event: InputEvent) -> void:
 # Metadata. Block's technical information for linking, dragging, other status.
 # Use these functions even within the script.
 func set_metadata(key: String, value: Variant) -> void:
-	if _block_properties["metadata"].has(key):
-		_block_properties["metadata"][key] = value
+	_block_properties["metadata"][key] = value
 
 func get_metadata() -> Dictionary:
 	return _block_properties["metadata"]

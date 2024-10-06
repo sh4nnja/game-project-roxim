@@ -24,7 +24,7 @@ corner_radius_bottom_left = 75
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptuc5"]
 content_margin_left = 60.0
-content_margin_right = 60.0
+content_margin_right = 30.0
 bg_color = Color(0.988235, 0.498039, 0.2, 1)
 corner_radius_top_left = 75
 corner_radius_top_right = 75
@@ -89,7 +89,6 @@ theme_override_fonts/font = ExtResource("1_aifdd")
 theme_override_font_sizes/font_size = 120
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4i0s8")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_c2e43")
-placeholder_text = "variable"
 alignment = 1
 expand_to_text_length = true
 context_menu_enabled = false

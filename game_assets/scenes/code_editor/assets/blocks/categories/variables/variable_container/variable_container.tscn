@@ -3,9 +3,6 @@
 [ext_resource type="FontFile" uid="uid://cggwsfkp6qkci" path="res://game_assets/misc/fonts/garet/Garet-Book.ttf" id="1_cicwu"]
 [ext_resource type="Script" path="res://game_assets/scenes/code_editor/assets/blocks/categories/variables/variable_container/variable_container.gd" id="2_7ou5s"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n13kn"]
-size = Vector2(608, 240)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ntgq"]
 bg_color = Color(1, 0.528537, 0.177083, 1)
 corner_radius_top_left = 75
@@ -15,18 +12,17 @@ corner_radius_bottom_left = 75
 expand_margin_left = 60.0
 expand_margin_right = 60.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n13kn"]
+size = Vector2(608, 240)
+
 [node name="container" type="Area2D"]
 collision_mask = 2
-monitoring = false
+monitorable = false
 script = ExtResource("2_7ou5s")
-
-[node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2(248, 120)
-shape = SubResource("RectangleShape2D_n13kn")
 
 [node name="interactable" type="Label" parent="."]
 custom_minimum_size = Vector2(444, 240)
-offset_right = 447.0
+offset_right = 491.0
 offset_bottom = 240.0
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_cicwu")
@@ -35,3 +31,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7ntgq")
 text = "variable"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(248, 120)
+shape = SubResource("RectangleShape2D_n13kn")

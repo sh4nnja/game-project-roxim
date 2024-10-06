@@ -7,7 +7,8 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2e43"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iscyw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1y0s"]
+resource_local_to_scene = true
 size = Vector2(0, 0)
 
 [node name="scanner" type="AspectRatioContainer"]
@@ -20,7 +21,6 @@ theme_override_fonts/font = ExtResource("1_ha5tm")
 theme_override_font_sizes/font_size = 120
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4i0s8")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_c2e43")
-placeholder_text = "value"
 alignment = 1
 expand_to_text_length = true
 context_menu_enabled = false
@@ -32,7 +32,7 @@ caret_blink = true
 [node name="slot" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
-monitorable = false
+monitoring = false
 
 [node name="shape" type="CollisionShape2D" parent="slot"]
-shape = SubResource("RectangleShape2D_iscyw")
+shape = SubResource("RectangleShape2D_e1y0s")
