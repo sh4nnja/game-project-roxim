@@ -23,13 +23,23 @@ func _ready() -> void:
 # Else, the default value will be the used from the input.
 func occupy(mode: bool, value: Array = []) -> void:
 	_filled = mode
+	
 	_input.set_editable(not mode)
+	_input.set_placeholder(value[0].get_text() if value else "")
+	_input.set_focus_mode(Control.FOCUS_NONE if mode else Control.FOCUS_ALL)
+	_input.set_mouse_filter(Control.MOUSE_FILTER_IGNORE if mode else Control.MOUSE_FILTER_STOP)
 	
 	if mode:
 		_value = value
-		_parent_block.set_data(value)
+		_parent_block.set_data([_parent_block.get_data()[0], _value[1]])
+		
+		# Block specifics.
+		match _parent_block.get_metadata().type:
+			"set_variable":
+				_parent_block.modify_block("")
+	
 	else:
-		_value = []
+		_parent_block.set_data([get_node("input")])
 
 # ---------------------------------------------------------------------------- #
 # Accessor data.

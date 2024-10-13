@@ -60,3 +60,5 @@ position = Vector2(496, 870)
 
 [node name="set_variable" parent="canvas_mask/canvas/objects" instance=ExtResource("4_nslqo")]
 position = Vector2(0, 300)
+
+[node name="set_variable_2" parent="canvas_mask/canvas/objects" instance=ExtResource("4_nslqo")]

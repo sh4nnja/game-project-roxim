@@ -41,7 +41,7 @@ func _snap_to_scanner(scanner: Area2D) -> void:
 	if not scanner.get_parent().is_filled():
 		set_metadata("slot_detected", true)
 
-func _remove_from_scanner(scanner: Area2D) -> void:
+func _remove_from_scanner(_scanner: Area2D) -> void:
 	set_metadata("slot", null)
 	set_metadata("slot_detected", false)
 
@@ -52,52 +52,60 @@ func _block_attachment() -> void:
 
 func _block_snapping() -> void:
 	# Block snapping.
-	if get_metadata().slot_detected and get_metadata().slot:
-		var _slot: Scanner = get_metadata().slot
-		var _slot_margin: int = 30
-		if _slot != get_data()[1].get_parent() and get_metadata().is_dragged:
-			# Get the distances needed for block snapping.
-			# Have the computation needed for the blocks' distance.
-			var _dist_threshold: float = (get_node("shape").get_shape().get_size()).x / 3
-			var _block_center: Vector2 = get_global_position() + (get_node("shape").get_shape().get_size() / 2)
-			var _slot_center: Vector2 = _slot.get_global_position() + (_slot.get_size() / 2)
-			var _dist_to_slot: float = _block_center.distance_to(_slot_center)
-			
-			# Define the block's threshold for snapping and attaching.
-			if _dist_to_slot < _dist_threshold:
-				_slot.get_line().set_placeholder(get_data()[0].get_text())
+	if get_metadata().is_dragged:
+		if get_metadata().slot_detected and get_metadata().slot:
+			var _slot: Scanner = get_metadata().slot
+			var _slot_margin: int = 30
+			if _slot != get_data()[1].get_parent():
+				# Get the distances needed for block snapping.
+				# Have the computation needed for the blocks' distance.
+				var _dist_threshold: float = (get_node("shape").get_shape().get_size()).x / 3
+				var _block_center: Vector2 = get_global_position() + (get_node("shape").get_shape().get_size() / 2)
+				var _slot_center: Vector2 = _slot.get_global_position() + (_slot.get_size() / 2)
+				var _dist_to_slot: float = _block_center.distance_to(_slot_center)
 				
-				# Lerp position to the slot.
-				position.x = _slot.get_global_position().x - _slot_margin
-				position.y = _slot.get_global_position().y
+				# Define the block's threshold for snapping and attaching.
+				if _dist_to_slot < _dist_threshold:
+					_slot.get_line().set_placeholder(get_data()[0].get_text())
+					
+					# Lerp position to the slot.
+					position.x = _slot.get_global_position().x - _slot_margin
+					position.y = _slot.get_global_position().y
+					
+					# Set snapping attribute.
+					set_metadata("is_snapped", true)
 				
-				# Set snapping attribute.
-				set_metadata("is_snapped", true)
+				else:
+					_slot.get_line().set_placeholder("")
+					
+					# Set snapping attribute.
+					set_metadata("is_snapped", false)
 			
 			else:
 				_slot.get_line().set_placeholder("")
-				
-				# Set snapping attribute.
-				set_metadata("is_snapped", false)
-		
-		else:
-			_slot.get_line().set_placeholder("")
-			set_metadata("slot", null)
+				set_metadata("slot", null)
 
 func _block_attaching() -> void:
 	# Block attachment.
-	if get_metadata().is_snapped and get_metadata().is_dragged:
+	if get_metadata().is_snapped:
 		# When user drags and releases the block, it determines when the block
 		# must be attached, or else.
-		if get_metadata().slot_detected:
+		if get_metadata().slot_detected and get_metadata().slot:
+			var _slot: Scanner = get_metadata().slot
+			
 			# Attached logic.
+			if not get_metadata().is_dragged:
+				position.x = _slot.get_global_position().x - 30
+				position.y = _slot.get_global_position().y
+				
+				_slot.occupy(true, get_data())
+				
+				set_metadata("is_attached", true)
 			
-			set_metadata("is_attached", true)
-		
-		else:
-			# Removed logic.
-			
-			set_metadata("is_attached", false)
+			else:
+				# Removed logic.
+				_slot.occupy(false)
+				set_metadata("is_attached", false)
 	
 	else:
 		set_metadata("is_attached", false)

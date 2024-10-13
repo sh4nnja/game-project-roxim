@@ -42,7 +42,7 @@ func _ready() -> void:
 # Add and modify the block.
 # Will the block only once then will edit that block based on the set variable.
 func modify_block(_text: String) -> void:
-	var _empty_input: bool = _scanner.get_line().get_text() == "" or _line.get_text() == ""
+	var _empty_input: bool = (_scanner.get_line().get_text() == "") or _line.get_text() == ""
 	# Removes text when the variable name is " ".
 	if _empty_input:
 		if _reference:

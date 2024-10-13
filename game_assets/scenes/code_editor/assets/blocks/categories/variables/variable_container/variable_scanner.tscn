@@ -7,12 +7,11 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2e43"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1y0s"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn14b"]
 resource_local_to_scene = true
 size = Vector2(0, 0)
 
 [node name="scanner" type="AspectRatioContainer"]
-mouse_filter = 2
 script = ExtResource("1_2yywg")
 
 [node name="input" type="LineEdit" parent="."]
@@ -32,7 +31,8 @@ caret_blink = true
 [node name="slot" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
+input_pickable = false
 monitoring = false
 
 [node name="shape" type="CollisionShape2D" parent="slot"]
-shape = SubResource("RectangleShape2D_e1y0s")
+shape = SubResource("RectangleShape2D_pn14b")
